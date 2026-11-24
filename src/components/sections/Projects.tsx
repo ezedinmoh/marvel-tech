@@ -196,6 +196,7 @@ export function Projects() {
           onClose={() => setSelectedProject(null)}
           title={selectedProject.title}
           badge={`Project Detail · ${selectedProject.category}`}
+          closeLabel="Close & Return to Projects"
           size="5xl"
         >
           <div className="space-y-6">

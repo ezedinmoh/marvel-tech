@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { X, ArrowLeft } from 'lucide-react';
 
 interface ModalProps {
@@ -8,6 +9,7 @@ interface ModalProps {
   onClose: () => void;
   title: string;
   badge?: string;
+  closeLabel?: string;
   size?: 'md' | 'lg' | 'xl' | '2xl' | '5xl';
   children: React.ReactNode;
 }
@@ -17,26 +19,32 @@ export function Modal({
   onClose,
   title,
   badge,
+  closeLabel = 'Close & Return',
   size = '5xl',
   children,
 }: ModalProps) {
+  const [mounted, setMounted] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return;
 
-    // 1. Pause Lenis smooth scroll so outside doesn't scroll
+    // 1. Pause Lenis smooth scroll so background doesn't move
     if (typeof window !== 'undefined' && window.__lenis) {
       window.__lenis.stop();
     }
 
-    // 2. Lock body & html scroll
+    // 2. Lock body and html scroll
     const originalBodyOverflow = document.body.style.overflow;
     const originalHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = 'hidden';
     document.documentElement.style.overflow = 'hidden';
 
-    // 3. Keyboard handlers (ESC to close)
+    // 3. Escape key listener
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         e.preventDefault();
@@ -45,17 +53,16 @@ export function Modal({
     };
     window.addEventListener('keydown', handleKeyDown);
 
-    // 4. Browser Back Button integration (popstate)
+    // 4. Browser Back button integration (popstate)
     const modalHistoryState = { modalOpen: true, timestamp: Date.now() };
     window.history.pushState(modalHistoryState, '');
 
-    const handlePopState = (e: PopStateEvent) => {
+    const handlePopState = () => {
       onClose();
     };
     window.addEventListener('popstate', handlePopState);
 
     return () => {
-      // Restore Lenis smooth scroll
       if (typeof window !== 'undefined' && window.__lenis) {
         window.__lenis.start();
       }
@@ -66,7 +73,7 @@ export function Modal({
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!mounted || !isOpen) return null;
 
   const sizeClasses = {
     md: 'max-w-md',
@@ -76,24 +83,24 @@ export function Modal({
     '5xl': 'max-w-5xl',
   }[size];
 
-  return (
+  const modalContent = (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-8 pt-20 sm:pt-24 pb-8 sm:pb-12 overflow-y-auto"
       data-lenis-prevent="true"
     >
-      {/* Dimmed backdrop */}
+      {/* Dimmed backdrop covering full viewport including navbar */}
       <div
-        className="fixed inset-0 bg-black/85 backdrop-blur-md transition-opacity"
+        className="fixed inset-0 bg-black/90 backdrop-blur-xl transition-opacity duration-300"
         onClick={onClose}
         aria-hidden="true"
         data-lenis-prevent="true"
       />
 
-      {/* Modal Dialog Box */}
+      {/* Modal Dialog Box with generous breathing room from upper/lower edges */}
       <div
         ref={dialogRef}
         data-lenis-prevent="true"
-        className={`relative w-full ${sizeClasses} max-h-[92vh] flex flex-col rounded-2xl sm:rounded-3xl bg-[#080d1d] border border-white/15 shadow-[0_0_60px_rgba(0,102,255,0.3)] z-10 overflow-hidden overscroll-contain animate-in fade-in zoom-in-95 duration-200`}
+        className={`relative w-full ${sizeClasses} max-h-[82vh] my-auto flex flex-col rounded-2xl sm:rounded-3xl bg-[#080d1d] border border-white/20 shadow-[0_0_80px_rgba(0,102,255,0.35)] z-10 overflow-hidden overscroll-contain animate-in fade-in zoom-in-95 duration-200`}
       >
         {/* Sticky Modal Top Bar with explicit Back button & Close X */}
         <div className="shrink-0 flex items-center justify-between px-5 sm:px-8 py-4 sm:py-5 bg-[#060b17]/95 border-b border-white/10 gap-3 backdrop-blur-md z-20">
@@ -147,7 +154,7 @@ export function Modal({
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-slate-300 hover:text-white font-medium transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Close & Return to Projects</span>
+            <span>{closeLabel}</span>
           </button>
 
           <span className="text-[11px] font-mono text-slate-500 hidden sm:inline">
@@ -157,4 +164,6 @@ export function Modal({
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 }

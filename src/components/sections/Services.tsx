@@ -111,6 +111,8 @@ export function Services() {
           onClose={() => setSelectedService(null)}
           title={selectedService.title}
           badge={selectedService.badge || 'Engineering Capability'}
+          closeLabel="Close & Return to Services"
+          size="2xl"
         >
           <div className="space-y-6">
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
@@ -147,8 +149,16 @@ export function Services() {
               </div>
             </div>
 
-            {/* CTA in Modal */}
-            <div className="pt-4 flex justify-end">
+            {/* Action Bar in Modal */}
+            <div className="pt-4 flex flex-wrap items-center justify-between gap-3 border-t border-white/10">
+              <button
+                onClick={() => setSelectedService(null)}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-slate-300 hover:text-white text-xs font-medium transition-colors cursor-pointer"
+              >
+                <ArrowRight className="w-3.5 h-3.5 rotate-180" />
+                <span>Back to Services</span>
+              </button>
+
               <a
                 href="#contact"
                 onClick={() => setSelectedService(null)}
