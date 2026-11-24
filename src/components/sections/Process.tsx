@@ -42,7 +42,8 @@ export function Process() {
           {processStages.map((stage, idx) => (
             <Card
               key={stage.step}
-              className="p-8 flex flex-col justify-between relative group hover:border-blue-500/30"
+              style={{ transitionDelay: `${idx * 90}ms` }}
+              className="p-8 flex flex-col justify-between relative group hover:border-blue-500/30 dc-reveal"
             >
               <div>
                 <div className="flex items-center justify-between mb-6">

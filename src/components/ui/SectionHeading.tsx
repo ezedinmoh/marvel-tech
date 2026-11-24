@@ -25,14 +25,17 @@ export function SectionHeading({
   return (
     <div className={`flex flex-col ${isCenter ? 'items-center text-center' : 'items-start text-left'} mb-16 ${className}`}>
       {badge && (
-        <div className="mb-4">
+        <div className="mb-4 dc-reveal" style={{ transitionDelay: '0ms' }}>
           <Badge variant="cyan" dot={badgeDot}>
             {badge}
           </Badge>
         </div>
       )}
 
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white max-w-3xl leading-[1.15]">
+      <h2
+        className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white max-w-3xl leading-[1.15] dc-reveal"
+        style={{ transitionDelay: '100ms' }}
+      >
         {title}{' '}
         {highlight && (
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400">
@@ -42,7 +45,10 @@ export function SectionHeading({
       </h2>
 
       {subtitle && (
-        <p className="mt-4 text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed font-normal">
+        <p
+          className="mt-4 text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed font-normal dc-reveal"
+          style={{ transitionDelay: '180ms' }}
+        >
           {subtitle}
         </p>
       )}

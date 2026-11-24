@@ -95,7 +95,7 @@ export function Contact() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left Column: Direct Contact Info */}
-          <div className="lg:col-span-5 space-y-8">
+          <div className="lg:col-span-5 space-y-8 dc-reveal" data-reveal="left">
             <div>
               <h3 className="text-2xl font-bold text-white mb-2">Connect Directly</h3>
               <p className="text-sm text-slate-400 leading-relaxed">
@@ -274,7 +274,7 @@ export function Contact() {
           </div>
 
           {/* Right Column: Contact Form */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 dc-reveal" data-reveal="right" style={{ transitionDelay: '100ms' }}>
             <Card className="p-8 sm:p-10 border-white/15">
               <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                 {/* Name */}

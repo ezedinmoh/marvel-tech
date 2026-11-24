@@ -56,10 +56,11 @@ export function Services() {
 
         {/* Services Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {servicesData.map((service) => (
+          {servicesData.map((service, index) => (
             <Card
               key={service.id}
-              className="p-8 flex flex-col justify-between group cursor-pointer border-white/[0.08] hover:border-blue-500/30"
+              className="p-8 flex flex-col justify-between group cursor-pointer border-white/[0.08] hover:border-blue-500/30 dc-reveal"
+              style={{ transitionDelay: `${index * 80}ms` }}
               onClick={() => setSelectedService(service)}
             >
               <div>

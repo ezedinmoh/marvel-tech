@@ -30,13 +30,14 @@ export function Team() {
 
         {/* Team Member Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {teamData.map((member) => {
+          {teamData.map((member, index) => {
             const isBusinessLead = member.id === 'mohammed-imam';
 
             return (
               <Card
                 key={member.id}
-                className={`p-6 flex flex-col justify-between group relative overflow-hidden transition-all duration-300 ${
+                style={{ transitionDelay: `${index * 120}ms` }}
+                className={`p-6 flex flex-col justify-between group relative overflow-hidden transition-all duration-300 dc-reveal ${
                   isBusinessLead
                     ? 'border-cyan-500/40 shadow-[0_0_35px_rgba(0,166,255,0.15)] bg-gradient-to-b from-cyan-950/25 via-slate-900/90 to-[#040711] ring-1 ring-cyan-500/20'
                     : 'border-white/10 hover:border-blue-500/40'

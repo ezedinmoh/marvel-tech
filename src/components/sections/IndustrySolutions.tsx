@@ -192,7 +192,7 @@ export function IndustrySolutions() {
         </div>
 
         {/* Selected Industry Detail Card */}
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto dc-reveal" data-reveal="scale">
           <Card className="p-8 sm:p-10 border-white/15 bg-gradient-to-br from-[#080d1a] to-[#040711] shadow-2xl">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10 mb-6">
               <div className="flex items-center gap-3.5">

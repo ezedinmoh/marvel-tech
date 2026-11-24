@@ -5,6 +5,8 @@ import { Footer } from '@/components/layout/Footer';
 import { BackgroundEffects } from '@/components/ui/BackgroundEffects';
 import { FloatingSpeedDial } from '@/components/ui/FloatingSpeedDial';
 import { SmoothScroll } from '@/components/ui/SmoothScroll';
+import { MouseSpotlight } from '@/components/ui/MouseSpotlight';
+import { GlobalScrollReveal } from '@/components/ui/ScrollReveal';
 import { CommandPalette } from '@/components/ui/CommandPalette';
 import { LanguageProvider } from '@/context/LanguageContext';
 import { companyData } from '@/data/company';
@@ -69,6 +71,8 @@ export default function RootLayout({
       <body className="bg-[#040711] text-[#f8fafc] antialiased selection:bg-blue-600/30 selection:text-cyan-300 min-h-screen flex flex-col justify-between">
         <LanguageProvider>
           <SmoothScroll />
+          <MouseSpotlight />
+          <GlobalScrollReveal />
           <BackgroundEffects />
           <Navbar />
           <main className="flex-1 relative">{children}</main>

@@ -159,3 +159,46 @@ html.lenis, html.lenis body {
   animation-play-state: paused;
 }
 
+/* Digital Construct Style Scroll Reveal Architecture */
+.dc-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(6px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.8s ease;
+  will-change: opacity, transform, filter;
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.dc-reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+  filter: blur(0px);
+}
+
+.dc-reveal[data-reveal="left"] {
+  transform: translateX(-32px);
+}
+
+.dc-reveal[data-reveal="right"] {
+  transform: translateX(32px);
+}
+
+.dc-reveal[data-reveal="scale"] {
+  transform: translateY(20px) scale(0.94);
+}
+
+.dc-reveal[data-reveal="fade"] {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dc-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
+

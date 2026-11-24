@@ -52,10 +52,11 @@ export function Projects() {
 
         {/* Project Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {filteredProjects.map((project) => (
+          {filteredProjects.map((project, index) => (
             <Card
               key={project.id}
-              className="flex flex-col justify-between group border-white/10 hover:border-blue-500/35 overflow-hidden"
+              className="flex flex-col justify-between group border-white/10 hover:border-blue-500/35 overflow-hidden dc-reveal"
+              style={{ transitionDelay: `${index * 80}ms` }}
             >
               <div>
                 {/* Project Screenshot Container */}

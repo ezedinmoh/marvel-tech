@@ -45,7 +45,7 @@ export function About() {
 
         {/* Narrative Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
-          <div className="lg:col-span-7 space-y-6 text-slate-300 leading-relaxed text-base sm:text-lg">
+          <div className="lg:col-span-7 space-y-6 text-slate-300 leading-relaxed text-base sm:text-lg dc-reveal" data-reveal="left">
             <p>
               We founded <span className="text-white font-semibold">Marvel Technologies</span> to bridge the gap between ambitious product ideas and production-grade software. Too often, businesses are forced to choose between rigid, slow legacy vendors or fragmented freelancers lacking architectural consistency.
             </p>
@@ -65,7 +65,7 @@ export function About() {
             </div>
           </div>
 
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-5 dc-reveal" data-reveal="right" style={{ transitionDelay: '100ms' }}>
             <div className="p-8 rounded-3xl bg-gradient-to-br from-blue-900/20 via-[#0a0f1d] to-[#040711] border border-blue-500/20 relative overflow-hidden shadow-2xl">
               <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl pointer-events-none" />
               
@@ -84,7 +84,7 @@ export function About() {
               </blockquote>
 
               <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
-                <span>Four Founding Partners</span>
+                <span>Founding Leadership</span>
                 <span className="font-mono text-cyan-400">Marvel Technologies</span>
               </div>
             </div>
@@ -93,8 +93,12 @@ export function About() {
 
         {/* 4 Pillars Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {pillars.map((pillar) => (
-            <Card key={pillar.title} className="p-6 flex flex-col justify-between">
+          {pillars.map((pillar, idx) => (
+            <Card
+              key={pillar.title}
+              className="p-6 flex flex-col justify-between dc-reveal"
+              style={{ transitionDelay: `${idx * 80}ms` }}
+            >
               <div>
                 <div className="p-3 rounded-xl bg-white/[0.04] border border-white/10 w-fit mb-5">
                   {pillar.icon}

@@ -14,14 +14,17 @@ export function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col items-center text-center">
           {/* Tagline Badge */}
-          <div className="mb-6 animate-fade-in">
+          <div className="mb-6 dc-reveal" style={{ transitionDelay: '0ms' }}>
             <Badge variant="cyan" dot={true}>
               Marvel Technologies · Innovation Without Limits
             </Badge>
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl leading-[1.08]">
+          <h1
+            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl leading-[1.08] dc-reveal"
+            style={{ transitionDelay: '100ms' }}
+          >
             Building Next-Generation{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400">
               Digital Systems
@@ -30,12 +33,18 @@ export function Hero() {
           </h1>
 
           {/* Supporting Narrative */}
-          <p className="mt-6 text-lg sm:text-xl text-slate-300 max-w-2xl leading-relaxed font-normal">
+          <p
+            className="mt-6 text-lg sm:text-xl text-slate-300 max-w-2xl leading-relaxed font-normal dc-reveal"
+            style={{ transitionDelay: '180ms' }}
+          >
             We transform ambitious concepts into resilient digital products through modern full-stack engineering, cloud architecture, and human-centered design.
           </p>
 
           {/* Action CTAs */}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <div
+            className="mt-10 flex flex-wrap items-center justify-center gap-4 dc-reveal"
+            style={{ transitionDelay: '260ms' }}
+          >
             <Button
               href="#contact"
               size="lg"
@@ -54,7 +63,10 @@ export function Hero() {
           </div>
 
           {/* Tech Trust Metrics */}
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs font-mono text-slate-400">
+          <div
+            className="mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs font-mono text-slate-400 dc-reveal"
+            style={{ transitionDelay: '340ms' }}
+          >
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-cyan-400" />
               <span>Type-Safe Architecture</span>
@@ -70,7 +82,11 @@ export function Hero() {
           </div>
 
           {/* Interactive Technology Preview Terminal Widget */}
-          <div className="mt-16 w-full max-w-4xl mx-auto rounded-3xl bg-[#090e1c]/90 border border-white/15 p-4 sm:p-6 shadow-[0_20px_60px_-15px_rgba(0,102,255,0.3)] backdrop-blur-2xl text-left">
+          <div
+            className="mt-16 w-full max-w-4xl mx-auto rounded-3xl bg-[#090e1c]/90 border border-white/15 p-4 sm:p-6 shadow-[0_20px_60px_-15px_rgba(0,102,255,0.3)] backdrop-blur-2xl text-left dc-reveal"
+            data-reveal="scale"
+            style={{ transitionDelay: '420ms' }}
+          >
             {/* Terminal Window Header */}
             <div className="flex items-center justify-between pb-4 border-b border-white/10 text-xs font-mono">
               <div className="flex items-center gap-2">
