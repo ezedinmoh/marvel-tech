@@ -15,7 +15,7 @@ export function InteractiveSystem() {
   const activeLayer = layers.find((l) => l.id === selectedLayerId) || layers[0];
 
   return (
-    <section id="system" className="py-24 sm:py-32 relative overflow-hidden">
+    <section id="system" className="py-12 sm:py-24 lg:py-32 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badge={t('systemBadge')}
@@ -24,18 +24,18 @@ export function InteractiveSystem() {
           subtitle={t('systemSubtitle')}
         />
 
-        {/* Layer Selector Bar */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12">
+        {/* Android Segmented Layer Selector Bar */}
+        <div className="flex overflow-x-auto no-scrollbar gap-2 sm:gap-3 mb-6 sm:mb-12 py-1 px-1 -mx-4 sm:mx-0 px-4 sm:px-0 snap-x scroll-smooth justify-start sm:justify-center">
           {layers.map((layer) => {
             const isSelected = layer.id === selectedLayerId;
             return (
               <button
                 key={layer.id}
                 onClick={() => setSelectedLayerId(layer.id)}
-                className={`px-4 py-2.5 rounded-full text-xs sm:text-sm font-mono transition-all duration-200 cursor-pointer ${
+                className={`snap-center shrink-0 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-mono active:scale-95 transition-all duration-200 cursor-pointer ${
                   isSelected
                     ? 'bg-blue-600 text-white shadow-[0_0_20px_rgba(0,102,255,0.4)] border border-blue-400'
-                    : 'bg-white/[0.04] text-slate-400 hover:text-white border border-white/10 hover:border-white/20'
+                    : 'bg-white/[0.04] text-slate-300 hover:text-white border border-white/10 hover:border-white/20 active:bg-white/10'
                 }`}
               >
                 {layer.name}
@@ -45,9 +45,9 @@ export function InteractiveSystem() {
         </div>
 
         {/* Interactive Architecture Console */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
           {/* Left Details Panel */}
-          <div className="lg:col-span-6 rounded-3xl bg-[#090e1c] border border-white/15 p-6 sm:p-8 flex flex-col justify-between shadow-2xl">
+          <div className="lg:col-span-6 rounded-2xl sm:rounded-3xl bg-[#090e1c] border border-white/15 p-4 sm:p-8 flex flex-col justify-between shadow-2xl">
             <div>
               <div className="inline-block px-3 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 mb-4">
                 {activeLayer.badge}

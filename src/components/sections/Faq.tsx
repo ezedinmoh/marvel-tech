@@ -16,7 +16,7 @@ export function Faq() {
   };
 
   return (
-    <section id="faq" className="py-24 sm:py-32 relative bg-[#040711]">
+    <section id="faq" className="py-12 sm:py-24 lg:py-32 relative bg-[#040711]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badge={t('faqBadge')}
@@ -25,7 +25,7 @@ export function Faq() {
           subtitle={t('faqSubtitle')}
         />
 
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {faqList.map((item, idx) => {
             const isOpen = openIndex === idx;
 
@@ -37,12 +37,12 @@ export function Faq() {
               >
                 <button
                   onClick={() => toggle(idx)}
-                  className="w-full px-6 py-5 flex items-center justify-between gap-4 text-left font-medium text-white transition-colors"
+                  className="w-full px-4 sm:px-6 py-3.5 sm:py-5 flex items-center justify-between gap-3 sm:gap-4 text-left font-medium text-white transition-colors active:bg-white/[0.04]"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-base sm:text-lg font-bold">{item.question}</span>
+                  <span className="text-sm sm:text-base lg:text-lg font-bold">{item.question}</span>
                   <div
-                    className={`p-1 rounded-full bg-white/[0.05] text-cyan-400 transition-transform duration-200 ${
+                    className={`p-1 rounded-full bg-white/[0.05] text-cyan-400 transition-transform duration-200 shrink-0 ${
                       isOpen ? 'rotate-180 bg-blue-500/20' : ''
                     }`}
                   >
@@ -51,7 +51,7 @@ export function Faq() {
                 </button>
 
                 {isOpen && (
-                  <div className="px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-4">
+                  <div className="px-4 sm:px-6 pb-4 sm:pb-6 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-3 sm:pt-4">
                     {item.answer}
                   </div>
                 )}

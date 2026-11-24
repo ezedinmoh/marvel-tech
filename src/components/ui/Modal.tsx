@@ -96,7 +96,7 @@ export function Modal({
 
   const modalContent = (
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-5 md:p-8 overflow-hidden select-text"
+      className="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center p-0 sm:p-5 md:p-8 overflow-hidden select-text"
       data-lenis-prevent="true"
       onWheel={(e) => e.stopPropagation()}
       onTouchMove={(e) => e.stopPropagation()}
@@ -117,15 +117,18 @@ export function Modal({
         }}
       />
 
-      {/* Modal Dialog Box - Guaranteed visible height with fixed header & footer */}
+      {/* Modal Dialog Box / Android Bottom Sheet on mobile */}
       <div
         data-lenis-prevent="true"
         onWheel={(e) => e.stopPropagation()}
         onTouchMove={(e) => e.stopPropagation()}
-        className={`relative w-full ${sizeClasses} h-[88vh] max-h-[760px] flex flex-col rounded-2xl sm:rounded-3xl bg-[#080d1d] border border-white/20 shadow-[0_0_80px_rgba(0,102,255,0.4)] z-10 overflow-hidden overscroll-contain animate-in fade-in zoom-in-95 duration-200`}
+        className={`relative w-full ${sizeClasses} h-[92vh] sm:h-[88vh] sm:max-h-[760px] flex flex-col rounded-t-[28px] sm:rounded-3xl bg-[#080d1d] border-t sm:border border-white/20 shadow-[0_0_80px_rgba(0,102,255,0.4)] z-10 overflow-hidden overscroll-contain animate-in slide-in-from-bottom-8 sm:zoom-in-95 duration-200`}
       >
+        {/* Android drag handle on mobile */}
+        <div className="w-12 h-1.5 bg-white/25 rounded-full mx-auto my-2 sm:hidden shrink-0" />
+
         {/* Sticky Fixed Header */}
-        <div className="shrink-0 flex items-center justify-between px-5 sm:px-7 py-3.5 sm:py-4 bg-[#060b17] border-b border-white/10 gap-3 z-20">
+        <div className="shrink-0 flex items-center justify-between px-4 sm:px-7 py-3 sm:py-4 bg-[#060b17] border-b border-white/10 gap-3 z-20">
           <div className="flex items-center gap-3 min-w-0">
             {/* Top Back button */}
             <button

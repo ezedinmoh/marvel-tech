@@ -202,3 +202,34 @@ html.lenis, html.lenis body {
   }
 }
 
+/* Mobile Android App Feel Enhancements */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (max-width: 768px) {
+  html, body {
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Snappier mobile reveal animation timing with zero horizontal shift */
+  .dc-reveal,
+  .dc-reveal[data-reveal="left"],
+  .dc-reveal[data-reveal="right"] {
+    transform: translateY(14px);
+    filter: blur(2px);
+    transition-duration: 0.5s !important;
+  }
+}
+
+

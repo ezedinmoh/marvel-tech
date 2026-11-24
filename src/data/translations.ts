@@ -9,6 +9,7 @@ export interface TranslationDictionary {
 export const uiTranslations: Record<Language, TranslationDictionary> = {
   en: {
     // Navigation
+    navHome: 'Home',
     navAbout: 'About',
     navServices: 'Services',
     navEcosystem: 'Ecosystem',
@@ -216,6 +217,7 @@ export const uiTranslations: Record<Language, TranslationDictionary> = {
 
   am: {
     // Navigation
+    navHome: 'መነሻ',
     navAbout: 'ስለ እኛ',
     navServices: 'አገልግሎቶች',
     navEcosystem: 'ሥነ-ምህዳር',

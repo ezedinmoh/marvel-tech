@@ -23,9 +23,9 @@ export function SectionHeading({
   const isCenter = align === 'center';
 
   return (
-    <div className={`flex flex-col ${isCenter ? 'items-center text-center' : 'items-start text-left'} mb-16 ${className}`}>
+    <div className={`flex flex-col ${isCenter ? 'items-center text-center' : 'items-start text-left'} mb-8 sm:mb-12 lg:mb-16 ${className}`}>
       {badge && (
-        <div className="mb-4 dc-reveal" style={{ transitionDelay: '0ms' }}>
+        <div className="mb-2.5 sm:mb-4 dc-reveal" style={{ transitionDelay: '0ms' }}>
           <Badge variant="cyan" dot={badgeDot}>
             {badge}
           </Badge>
@@ -33,7 +33,7 @@ export function SectionHeading({
       )}
 
       <h2
-        className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white max-w-3xl leading-[1.15] dc-reveal"
+        className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white max-w-3xl leading-[1.18] sm:leading-[1.15] dc-reveal"
         style={{ transitionDelay: '100ms' }}
       >
         {title}{' '}
@@ -46,7 +46,7 @@ export function SectionHeading({
 
       {subtitle && (
         <p
-          className="mt-4 text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed font-normal dc-reveal"
+          className="mt-2.5 sm:mt-4 text-xs sm:text-base text-slate-400 max-w-2xl leading-relaxed font-normal dc-reveal"
           style={{ transitionDelay: '180ms' }}
         >
           {subtitle}

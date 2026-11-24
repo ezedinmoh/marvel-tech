@@ -32,7 +32,7 @@ export function Process() {
   };
 
   return (
-    <section id="process" className="py-24 sm:py-32 relative bg-[#040711]">
+    <section id="process" className="py-12 sm:py-24 lg:py-32 relative bg-[#040711]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badge={t('processBadge')}
@@ -42,12 +42,12 @@ export function Process() {
         />
 
         {/* 6-Stage Timeline Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 relative">
           {stages.map((stage, idx) => (
             <Card
               key={stage.step}
               style={{ transitionDelay: `${idx * 90}ms` }}
-              className="p-8 flex flex-col justify-between relative group hover:border-blue-500/30 dc-reveal"
+              className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between relative group hover:border-blue-500/30 active:scale-[0.98] transition-all dc-reveal"
             >
               <div>
                 <div className="flex items-center justify-between mb-6">

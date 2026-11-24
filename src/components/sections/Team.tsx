@@ -23,7 +23,7 @@ export function Team() {
   const members = getTeamData(language);
 
   return (
-    <section id="team" className="py-24 sm:py-32 relative bg-[#03060f]/60">
+    <section id="team" className="py-12 sm:py-24 lg:py-32 relative bg-[#03060f]/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badge={t('teamBadge')}
@@ -33,7 +33,7 @@ export function Team() {
         />
 
         {/* Team Member Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8 max-w-6xl mx-auto">
           {members.map((member, index) => {
             const isBusinessLead = member.id === 'mohammed-imam';
 
@@ -41,7 +41,7 @@ export function Team() {
               <Card
                 key={member.id}
                 style={{ transitionDelay: `${index * 120}ms` }}
-                className={`p-6 flex flex-col justify-between group relative overflow-hidden transition-all duration-300 dc-reveal ${
+                className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl flex flex-col justify-between group relative overflow-hidden transition-all duration-300 dc-reveal ${
                   isBusinessLead
                     ? 'border-cyan-500/40 shadow-[0_0_35px_rgba(0,166,255,0.15)] bg-gradient-to-b from-cyan-950/25 via-slate-900/90 to-[#040711] ring-1 ring-cyan-500/20'
                     : 'border-white/10 hover:border-blue-500/40'
@@ -50,7 +50,7 @@ export function Team() {
                 <div>
                   {/* Business Lead Accent Header Banner */}
                   {isBusinessLead && (
-                    <div className="mb-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-blue-600/30 to-cyan-500/30 border border-cyan-500/40 text-[11px] font-mono text-cyan-300">
+                    <div className="mb-3 sm:mb-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-blue-600/30 to-cyan-500/30 border border-cyan-500/40 text-[11px] font-mono text-cyan-300">
                       <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                       <span>{t('teamBusinessLeadBanner')}</span>
                     </div>
@@ -58,7 +58,7 @@ export function Team() {
 
                   {/* Avatar / Profile Visualizer */}
                   <div
-                    className={`relative w-full aspect-square rounded-2xl bg-gradient-to-br from-slate-900 via-[#0a0f1d] to-[#040711] border flex flex-col items-center justify-center mb-6 overflow-hidden transition-colors ${
+                    className={`relative w-full aspect-[4/3] sm:aspect-square rounded-xl sm:rounded-2xl bg-gradient-to-br from-slate-900 via-[#0a0f1d] to-[#040711] border flex flex-col items-center justify-center mb-4 sm:mb-6 overflow-hidden transition-colors ${
                       isBusinessLead
                         ? 'border-cyan-500/40 shadow-[0_0_20px_rgba(0,166,255,0.2)]'
                         : 'border-white/10 group-hover:border-cyan-500/30'

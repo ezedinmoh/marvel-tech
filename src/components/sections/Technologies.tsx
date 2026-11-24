@@ -62,7 +62,7 @@ export function Technologies() {
   };
 
   return (
-    <section id="tech" className="py-24 sm:py-32 relative bg-[#040711]">
+    <section id="tech" className="py-12 sm:py-24 lg:py-32 relative bg-[#040711]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badge={t('techBadge')}
@@ -72,11 +72,11 @@ export function Technologies() {
         />
 
         {/* 4 Categories */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
           {techCategories.map((category, index) => (
             <Card
               key={category.category}
-              className="p-8 dc-reveal"
+              className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl dc-reveal"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <div className="mb-6">

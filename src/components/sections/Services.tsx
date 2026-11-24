@@ -48,7 +48,7 @@ export function Services() {
   };
 
   return (
-    <section id="services" className="py-24 sm:py-32 relative bg-[#03060f]/60">
+    <section id="services" className="py-12 sm:py-24 lg:py-32 relative bg-[#03060f]/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badge={t('servicesBadge')}
@@ -58,17 +58,17 @@ export function Services() {
         />
 
         {/* Services Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
           {servicesList.map((service, index) => (
             <Card
               key={service.id}
-              className="p-8 flex flex-col justify-between group cursor-pointer border-white/[0.08] hover:border-blue-500/30 dc-reveal"
+              className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between group cursor-pointer border-white/[0.08] hover:border-blue-500/30 active:scale-[0.98] transition-all duration-200 dc-reveal"
               style={{ transitionDelay: `${index * 80}ms` }}
               onClick={() => setSelectedService(service)}
             >
               <div>
-                <div className="flex items-center justify-between mb-6">
-                  <div className="p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 group-hover:scale-110 transition-transform duration-300">
+                <div className="flex items-center justify-between mb-4 sm:mb-6">
+                  <div className="p-3 sm:p-3.5 rounded-xl sm:rounded-2xl bg-white/[0.04] border border-white/10 group-hover:scale-110 transition-transform duration-300">
                     {renderIcon(service.iconName)}
                   </div>
                   {service.badge && (
@@ -78,16 +78,16 @@ export function Services() {
                   )}
                 </div>
 
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors tracking-tight">
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 group-hover:text-cyan-300 transition-colors tracking-tight">
                   {service.title}
                 </h3>
 
-                <p className="text-sm text-slate-400 leading-relaxed mb-6">
+                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4 sm:mb-6">
                   {service.shortDescription}
                 </p>
 
                 {/* Micro Capabilities Pill Preview */}
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
                   {service.capabilities.slice(0, 3).map((cap) => (
                     <span
                       key={cap}

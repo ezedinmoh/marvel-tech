@@ -41,17 +41,17 @@ export function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 px-4 sm:px-6 py-4 transition-all duration-300 ${
-          isScrolled ? 'pt-3' : 'pt-5'
+        className={`fixed top-0 left-0 right-0 z-40 px-3 sm:px-6 transition-all duration-300 ${
+          isScrolled ? 'pt-2 sm:pt-3' : 'pt-3 sm:pt-5'
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Floating Pill Nav Container */}
+          {/* Floating Pill Nav Container / Mobile Android Top Bar */}
           <nav
-            className={`w-full flex items-center justify-between gap-4 px-4 sm:px-6 py-2.5 rounded-full border transition-all duration-300 ${
+            className={`w-full flex items-center justify-between gap-2 sm:gap-4 px-3.5 sm:px-6 py-2 sm:py-2.5 rounded-2xl sm:rounded-full border transition-all duration-300 ${
               isScrolled
-                ? 'bg-[#060b17]/85 backdrop-blur-xl border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
-                : 'bg-[#080e1e]/60 backdrop-blur-md border-white/10 shadow-lg'
+                ? 'bg-[#060b17]/90 backdrop-blur-xl border-white/15 shadow-[0_8px_25px_rgba(0,0,0,0.6)]'
+                : 'bg-[#080e1e]/75 backdrop-blur-md border-white/10 shadow-lg'
             }`}
           >
             {/* Brand Logo */}
@@ -117,20 +117,34 @@ export function Navbar() {
               </Button>
             </div>
 
-            {/* Mobile Menu Hamburger Toggle */}
-            <div className="flex lg:hidden items-center gap-2">
+            {/* Mobile Actions (Android Top Bar Style) */}
+            <div className="flex lg:hidden items-center gap-1.5">
+              {/* Mobile Search Button */}
               <button
-                onClick={toggleLanguage}
-                className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/[0.06] border border-white/10 text-xs font-semibold text-slate-300"
-                aria-label="Toggle Language"
+                onClick={() => {
+                  window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }));
+                }}
+                className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 active:scale-90 transition-all cursor-pointer"
+                aria-label="Search"
+                title="Search"
               >
-                <Languages className="w-3 h-3 text-cyan-400" />
-                <span>{language === 'en' ? 'አማ' : 'EN'}</span>
+                <Search className="w-4 h-4 text-cyan-400" />
               </button>
 
+              {/* Mobile Language Switcher */}
+              <button
+                onClick={toggleLanguage}
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-white/[0.06] active:bg-cyan-500/20 border border-white/15 text-xs font-semibold text-slate-200 active:scale-90 transition-all cursor-pointer"
+                aria-label="Toggle Language"
+              >
+                <Languages className="w-3.5 h-3.5 text-cyan-400" />
+                <span className="text-[11px]">{language === 'en' ? 'አማ' : 'EN'}</span>
+              </button>
+
+              {/* Mobile Menu Hamburger Toggle */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-full text-slate-300 hover:text-white hover:bg-white/10 transition-colors focus:outline-none"
+                className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 active:scale-90 transition-all focus:outline-none cursor-pointer"
                 aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

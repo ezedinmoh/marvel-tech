@@ -759,7 +759,7 @@ export function ConstellationEcosystem() {
   const currentData = currentSystem.timeframeData[timeframe];
 
   return (
-    <section id="ecosystem" className="py-24 sm:py-32 relative overflow-hidden bg-[#040711]">
+    <section id="ecosystem" className="py-12 sm:py-24 lg:py-32 relative overflow-hidden bg-[#040711]">
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[950px] h-[650px] bg-blue-600/10 blur-[150px] pointer-events-none rounded-full" />
 
@@ -771,8 +771,8 @@ export function ConstellationEcosystem() {
           subtitle={t('ecoSubtitle')}
         />
 
-        {/* Mobile/Tablet Quick Selector Pills */}
-        <div className="flex md:hidden flex-wrap items-center justify-center gap-2 mb-8">
+        {/* Mobile/Tablet Android Segmented Chip Carousel */}
+        <div className="flex md:hidden overflow-x-auto no-scrollbar gap-2 mb-4 py-2 px-1 -mx-4 px-4 snap-x scroll-smooth">
           {subsystems.map((sub) => {
             const isSelected = sub.id === activeSystemId;
             const metaInfo = sysMetaMap[sub.id as keyof typeof sysMetaMap];
@@ -785,10 +785,10 @@ export function ConstellationEcosystem() {
                   setActiveSystemId(sub.id);
                   setHoveredPoint(null);
                 }}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                className={`snap-center shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-semibold active:scale-95 transition-all ${
                   isSelected
-                    ? 'bg-blue-600 text-white shadow-lg border border-blue-400'
-                    : 'bg-white/[0.05] text-slate-400 border border-white/10'
+                    ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-[0_4px_16px_rgba(0,102,255,0.4)] border border-cyan-400'
+                    : 'bg-white/[0.05] text-slate-300 border border-white/10 active:bg-white/10'
                 }`}
               >
                 <span>{sub.icon}</span>
@@ -799,7 +799,7 @@ export function ConstellationEcosystem() {
         </div>
 
         {/* Constellation Container: 10 Orbiting Satellites + Central Dashboard */}
-        <div className="relative w-full max-w-6xl mx-auto min-h-[760px] lg:min-h-[840px] flex items-center justify-center pt-8 pb-12">
+        <div className="relative w-full max-w-6xl mx-auto min-h-0 md:min-h-[760px] lg:min-h-[840px] flex items-center justify-center pt-2 md:pt-8 pb-4 md:pb-12">
           {/* SVG Curved Flowing Connector Lines */}
           <svg
             className="absolute inset-0 hidden md:block size-full pointer-events-none z-0"
@@ -884,20 +884,20 @@ export function ConstellationEcosystem() {
           })}
 
           {/* Central Command Center Window */}
-          <div className="relative z-10 w-full max-w-xl lg:max-w-2xl mt-24 sm:mt-28 rounded-3xl bg-[#080d1a]/95 border border-white/15 p-5 sm:p-7 shadow-[0_30px_90px_-20px_rgba(0,102,255,0.4)] backdrop-blur-2xl transition-all duration-300">
+          <div className="relative z-10 w-full max-w-xl lg:max-w-2xl mt-2 md:mt-24 lg:mt-28 rounded-2xl sm:rounded-3xl bg-[#080d1a]/95 border border-white/15 p-4 sm:p-7 shadow-[0_30px_90px_-20px_rgba(0,102,255,0.4)] backdrop-blur-2xl transition-all duration-300">
             {/* Window Top Controls */}
-            <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-[#ff5f57] inline-block shadow-[0_0_8px_rgba(255,95,87,0.5)]" />
-                <span className="w-3 h-3 rounded-full bg-[#febc2e] inline-block shadow-[0_0_8px_rgba(254,188,46,0.5)]" />
-                <span className="w-3 h-3 rounded-full bg-[#28c840] inline-block shadow-[0_0_8px_rgba(40,200,64,0.5)]" />
-                <span className="ml-2 font-mono text-xs text-slate-400 font-medium truncate max-w-[260px] sm:max-w-none">
+            <div className="flex items-center justify-between pb-3.5 sm:pb-4 border-b border-white/10 mb-4 sm:mb-5 gap-2">
+              <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#ff5f57] inline-block shadow-[0_0_8px_rgba(255,95,87,0.5)] shrink-0" />
+                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#febc2e] inline-block shadow-[0_0_8px_rgba(254,188,46,0.5)] shrink-0" />
+                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#28c840] inline-block shadow-[0_0_8px_rgba(40,200,64,0.5)] shrink-0" />
+                <span className="ml-1 sm:ml-2 font-mono text-[11px] sm:text-xs text-slate-400 font-medium truncate max-w-[150px] sm:max-w-none">
                   {sysMetaMap[currentSystem.id as keyof typeof sysMetaMap]?.windowTitle || currentSystem.windowTitle}
                 </span>
               </div>
 
-              <div className="flex items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.06] border border-white/10 text-[11px] font-mono text-slate-300">
+              <div className="flex items-center gap-2 shrink-0">
+                <span className="inline-flex items-center gap-1.5 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md bg-white/[0.06] border border-white/10 text-[10px] sm:text-[11px] font-mono text-slate-300">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   Live Sync
                 </span>

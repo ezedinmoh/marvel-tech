@@ -81,7 +81,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 sm:py-32 relative bg-[#03060f]/90">
+    <section id="contact" className="py-12 sm:py-24 lg:py-32 relative bg-[#03060f]/90">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badge={t('contactBadge')}
@@ -90,7 +90,7 @@ export function Contact() {
           subtitle={t('contactSubtitle')}
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-12 items-start">
           {/* Left Column: Direct Contact Info */}
           <div className="lg:col-span-5 space-y-8 dc-reveal" data-reveal="left">
             <div>
@@ -272,7 +272,7 @@ export function Contact() {
 
           {/* Right Column: Contact Form */}
           <div className="lg:col-span-7 dc-reveal" data-reveal="right" style={{ transitionDelay: '100ms' }}>
-            <Card className="p-8 sm:p-10 border-white/15">
+            <Card className="p-5 sm:p-10 rounded-2xl sm:rounded-3xl border-white/15">
               <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                 {/* Name */}
                 <div>

@@ -38,7 +38,7 @@ export function IndustrySolutions() {
   const activeIndustry = industries.find((i) => i.id === activeTabId) || industries[0];
 
   return (
-    <section id="industries" className="py-24 sm:py-32 relative bg-[#03060f]/90">
+    <section id="industries" className="py-12 sm:py-24 lg:py-32 relative bg-[#03060f]/90">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badge={t('industriesBadge')}
@@ -47,18 +47,18 @@ export function IndustrySolutions() {
           subtitle={t('industriesSubtitle')}
         />
 
-        {/* Industry Pill Selector Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+        {/* Industry Android Segmented Chip Carousel */}
+        <div className="flex overflow-x-auto no-scrollbar gap-2 mb-6 sm:mb-12 py-1 px-1 -mx-4 sm:mx-0 px-4 sm:px-0 snap-x scroll-smooth justify-start sm:justify-center">
           {industries.map((ind) => {
             const isSelected = ind.id === activeTabId;
             return (
               <button
                 key={ind.id}
                 onClick={() => setActiveTabId(ind.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                className={`snap-center shrink-0 flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full text-xs font-semibold active:scale-95 transition-all cursor-pointer ${
                   isSelected
                     ? 'bg-blue-600 text-white shadow-[0_0_20px_rgba(0,102,255,0.4)] border border-blue-400'
-                    : 'bg-white/[0.04] text-slate-400 hover:text-white border border-white/10'
+                    : 'bg-white/[0.04] text-slate-300 hover:text-white border border-white/10 active:bg-white/10'
                 }`}
               >
                 <span>{ind.icon}</span>
@@ -70,7 +70,7 @@ export function IndustrySolutions() {
 
         {/* Active Industry Architecture Card */}
         <div className="max-w-4xl mx-auto dc-reveal" data-reveal="scale">
-          <Card className="p-8 sm:p-10 border-white/15 bg-gradient-to-br from-[#080d1a] to-[#040711] shadow-2xl">
+          <Card className="p-5 sm:p-10 rounded-2xl sm:rounded-3xl border-white/15 bg-gradient-to-br from-[#080d1a] to-[#040711] shadow-2xl">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10 mb-6">
               <div className="flex items-center gap-3.5">
                 <div className="p-3 rounded-2xl bg-white/[0.05] border border-white/10">

@@ -12,11 +12,11 @@ export function Hero() {
   const { language, t } = useLanguage();
 
   return (
-    <section id="hero" className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 lg:pt-48 lg:pb-36 overflow-hidden">
+    <section id="hero" className="relative pt-24 pb-12 sm:pt-40 sm:pb-28 lg:pt-48 lg:pb-36 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col items-center text-center">
           {/* Tagline Badge */}
-          <div className="mb-6 dc-reveal" style={{ transitionDelay: '0ms' }}>
+          <div className="mb-4 sm:mb-6 dc-reveal" style={{ transitionDelay: '0ms' }}>
             <Badge variant="cyan" dot={true}>
               {t('heroBadge')}
             </Badge>
@@ -24,7 +24,7 @@ export function Hero() {
 
           {/* Main Headline */}
           <h1
-            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl leading-[1.08] dc-reveal"
+            className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl leading-[1.12] sm:leading-[1.08] dc-reveal"
             style={{ transitionDelay: '100ms' }}
           >
             {t('heroTitlePrefix')}{' '}
@@ -36,7 +36,7 @@ export function Hero() {
 
           {/* Supporting Narrative */}
           <p
-            className="mt-6 text-lg sm:text-xl text-slate-300 max-w-2xl leading-relaxed font-normal dc-reveal"
+            className="mt-3.5 sm:mt-6 text-sm sm:text-lg text-slate-300 max-w-2xl leading-relaxed font-normal dc-reveal"
             style={{ transitionDelay: '180ms' }}
           >
             {t('heroSubtitle')}
@@ -44,13 +44,14 @@ export function Hero() {
 
           {/* Action CTAs */}
           <div
-            className="mt-10 flex flex-wrap items-center justify-center gap-4 dc-reveal"
+            className="mt-6 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto dc-reveal"
             style={{ transitionDelay: '260ms' }}
           >
             <Button
               href="#contact"
               size="lg"
               variant="primary"
+              className="w-full sm:w-auto active:scale-95 transition-transform"
               iconRight={<ArrowRight className="w-4 h-4" />}
             >
               {t('heroStartProject')}
@@ -59,6 +60,7 @@ export function Hero() {
               href="#projects"
               size="lg"
               variant="outline"
+              className="w-full sm:w-auto active:scale-95 transition-transform"
             >
               {t('heroExploreSolutions')}
             </Button>
@@ -66,26 +68,26 @@ export function Hero() {
 
           {/* Tech Trust Metrics */}
           <div
-            className="mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs font-mono text-slate-400 dc-reveal"
+            className="mt-6 sm:mt-12 flex flex-wrap items-center justify-center gap-2 sm:gap-10 text-[11px] sm:text-xs font-mono text-slate-400 dc-reveal"
             style={{ transitionDelay: '340ms' }}
           >
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-cyan-400" />
+            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/5 sm:border-transparent sm:bg-transparent">
+              <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400" />
               <span>{t('heroTypeSafe')}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Zap className="w-4 h-4 text-blue-400" />
+            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/5 sm:border-transparent sm:bg-transparent">
+              <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-400" />
               <span>{t('heroSubSecond')}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Activity className="w-4 h-4 text-emerald-400" />
+            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/5 sm:border-transparent sm:bg-transparent">
+              <Activity className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
               <span>{t('heroUptime')}</span>
             </div>
           </div>
 
           {/* Interactive Technology Preview Terminal Widget */}
           <div
-            className="mt-16 w-full max-w-4xl mx-auto rounded-3xl bg-[#090e1c]/90 border border-white/15 p-4 sm:p-6 shadow-[0_20px_60px_-15px_rgba(0,102,255,0.3)] backdrop-blur-2xl text-left dc-reveal"
+            className="mt-8 sm:mt-16 w-full max-w-4xl mx-auto rounded-2xl sm:rounded-3xl bg-[#090e1c]/90 border border-white/15 p-3.5 sm:p-6 shadow-[0_20px_60px_-15px_rgba(0,102,255,0.3)] backdrop-blur-2xl text-left dc-reveal"
             data-reveal="scale"
             style={{ transitionDelay: '420ms' }}
           >

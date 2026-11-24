@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { Navbar } from '@/components/layout/Navbar';
+import { AndroidBottomBar } from '@/components/layout/AndroidBottomBar';
 import { Footer } from '@/components/layout/Footer';
 import { BackgroundEffects } from '@/components/ui/BackgroundEffects';
 import { FloatingSpeedDial } from '@/components/ui/FloatingSpeedDial';
@@ -75,9 +76,10 @@ export default function RootLayout({
           <GlobalScrollReveal />
           <BackgroundEffects />
           <Navbar />
-          <main className="flex-1 relative">{children}</main>
+          <main className="flex-1 relative pb-14 sm:pb-0">{children}</main>
           <Footer />
           <FloatingSpeedDial />
+          <AndroidBottomBar />
           <CommandPalette />
         </LanguageProvider>
       </body>

@@ -102,8 +102,8 @@ export function CompaniesMarquee() {
   const marqueeItems = [...trustedCompanies, ...trustedCompanies];
 
   return (
-    <div className="w-full pt-16 pb-8 border-t border-white/5 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 text-center">
+    <div className="w-full pt-8 sm:pt-16 pb-4 sm:pb-8 border-t border-white/5 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4 sm:mb-6 text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-[11px] font-mono uppercase tracking-[0.22em] text-slate-400 mb-2">
           <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
           <span>{t('marqueeBadge')}</span>
@@ -114,17 +114,17 @@ export function CompaniesMarquee() {
       </div>
 
       {/* Infinite Scrolling Marquee Track with Left & Right Gradient Fade Masks */}
-      <div className="relative w-full overflow-hidden py-4">
+      <div className="relative w-full overflow-hidden py-3 sm:py-4">
         {/* Left & Right Ambient Fade Gradients */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-r from-[#040711] via-[#040711]/80 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-l from-[#040711] via-[#040711]/80 to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#040711] via-[#040711]/80 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#040711] via-[#040711]/80 to-transparent z-10 pointer-events-none" />
 
         {/* Continuous Ticker */}
-        <div className="animate-marquee-infinite flex items-center gap-4 sm:gap-6">
+        <div className="animate-marquee-infinite flex items-center gap-3 sm:gap-6">
           {marqueeItems.map((company, idx) => (
             <div
               key={`${company.id}-${idx}`}
-              className="group shrink-0 flex items-center gap-3 px-5 py-3 rounded-2xl bg-[#080d1a]/80 hover:bg-[#0c1428] border border-white/10 hover:border-cyan-500/40 shadow-lg hover:shadow-[0_0_25px_rgba(0,180,255,0.18)] transition-all duration-300 cursor-pointer"
+              className="group shrink-0 flex items-center gap-2.5 sm:gap-3 px-3.5 py-2.5 sm:px-5 sm:py-3 rounded-xl sm:rounded-2xl bg-[#080d1a]/80 hover:bg-[#0c1428] border border-white/10 hover:border-cyan-500/40 shadow-lg hover:shadow-[0_0_25px_rgba(0,180,255,0.18)] transition-all duration-300 cursor-pointer"
             >
               <div
                 className={`w-9 h-9 rounded-xl flex items-center justify-center bg-gradient-to-br ${company.accent} border border-white/10 group-hover:scale-110 transition-transform`}
