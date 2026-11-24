@@ -1,21 +1,64 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { useLanguage } from '@/context/LanguageContext';
 import { getInteractiveLayers } from '@/data/translations';
 import {
   Code,
+  Globe,
+  Cpu,
+  Database,
+  ShieldCheck,
 } from 'lucide-react';
 
 export function InteractiveSystem() {
   const { language, t } = useLanguage();
   const layers = getInteractiveLayers(language);
   const [selectedLayerId, setSelectedLayerId] = useState('frontend');
+  const [isHovered, setIsHovered] = useState(false);
+  const [manualPauseUntil, setManualPauseUntil] = useState<number>(0);
+
+  const handleSelectLayer = (id: string) => {
+    setSelectedLayerId(id);
+    setManualPauseUntil(Date.now() + 9000);
+  };
+
+  const layerIcons: Record<string, React.ReactNode> = {
+    frontend: <Globe className="w-4 h-4 text-cyan-400" />,
+    gateway: <Cpu className="w-4 h-4 text-blue-400" />,
+    persistence: <Database className="w-4 h-4 text-indigo-400" />,
+    security: <ShieldCheck className="w-4 h-4 text-emerald-400" />,
+  };
+
+  // Auto-cycle active architecture layer smoothly on both desktop & mobile
+  useEffect(() => {
+    if (isHovered || layers.length === 0) return;
+    const timer = setInterval(() => {
+      if (Date.now() < manualPauseUntil) return;
+      setSelectedLayerId((prevId) => {
+        const currentIndex = layers.findIndex((l) => l.id === prevId);
+        const nextIndex = (currentIndex + 1) % layers.length;
+        return layers[nextIndex].id;
+      });
+    }, 4000);
+
+    return () => clearInterval(timer);
+  }, [isHovered, manualPauseUntil, layers]);
+
   const activeLayer = layers.find((l) => l.id === selectedLayerId) || layers[0];
 
+  // Repeat 2x per half (4x total) so -50% infinite marquee covers wide desktop screens seamlessly
+  const halfTrack = [...layers, ...layers];
+  const marqueeLayers = [...halfTrack, ...halfTrack];
+
   return (
-    <section id="system" className="py-12 sm:py-24 lg:py-32 relative overflow-hidden">
+    <section
+      id="system"
+      className="py-12 sm:py-24 lg:py-32 relative overflow-hidden"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badge={t('systemBadge')}
@@ -23,29 +66,56 @@ export function InteractiveSystem() {
           highlight={t('systemHighlight')}
           subtitle={t('systemSubtitle')}
         />
+      </div>
 
-        {/* Android Segmented Layer Selector Bar */}
-        <div className="flex overflow-x-auto no-scrollbar gap-2 sm:gap-3 mb-6 sm:mb-12 py-1 px-1 -mx-4 sm:mx-0 px-4 sm:px-0 snap-x scroll-smooth justify-start sm:justify-center">
-          {layers.map((layer) => {
+      {/* Continuous Auto-Sliding Layer Selector Marquee (Desktop & Mobile) */}
+      <div className="relative w-full overflow-hidden py-3 sm:py-4 mb-6 sm:mb-10">
+        {/* Left & Right Ambient Fade Gradients */}
+        <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-28 bg-gradient-to-r from-[#040711] via-[#040711]/80 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-28 bg-gradient-to-l from-[#040711] via-[#040711]/80 to-transparent z-10 pointer-events-none" />
+
+        <div className="animate-marquee-infinite flex items-center gap-3 sm:gap-4">
+          {marqueeLayers.map((layer, idx) => {
             const isSelected = layer.id === selectedLayerId;
             return (
               <button
-                key={layer.id}
-                onClick={() => setSelectedLayerId(layer.id)}
-                className={`snap-center shrink-0 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-mono active:scale-95 transition-all duration-200 cursor-pointer ${
+                key={`${layer.id}-${idx}`}
+                onClick={() => handleSelectLayer(layer.id)}
+                className={`shrink-0 flex items-center gap-2.5 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-mono active:scale-95 transition-all duration-300 cursor-pointer ${
                   isSelected
-                    ? 'bg-blue-600 text-white shadow-[0_0_20px_rgba(0,102,255,0.4)] border border-blue-400'
-                    : 'bg-white/[0.04] text-slate-300 hover:text-white border border-white/10 hover:border-white/20 active:bg-white/10'
+                    ? 'bg-blue-600/90 text-white shadow-[0_0_24px_rgba(0,102,255,0.45)] border border-cyan-400/60 scale-[1.03]'
+                    : 'bg-[#080d1a]/85 text-slate-300 hover:text-white border border-white/10 hover:border-cyan-500/40'
                 }`}
               >
-                {layer.name}
+                <span className="p-1.5 rounded-lg bg-white/[0.06] border border-white/10 shrink-0">
+                  {layerIcons[layer.id] || <Code className="w-4 h-4 text-cyan-400" />}
+                </span>
+                <span>{layer.name}</span>
               </button>
             );
           })}
         </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Quick Progress Dots for Manual / Auto Slide Indicator */}
+        <div className="flex items-center justify-center gap-1.5 mb-5 sm:mb-7">
+          {layers.map((layer) => (
+            <button
+              key={layer.id}
+              onClick={() => handleSelectLayer(layer.id)}
+              aria-label={layer.name}
+              className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                layer.id === selectedLayerId
+                  ? 'w-7 bg-gradient-to-r from-blue-500 to-cyan-400 shadow-[0_0_10px_rgba(0,210,255,0.6)]'
+                  : 'w-2 bg-white/15 hover:bg-white/30'
+              }`}
+            />
+          ))}
+        </div>
 
         {/* Interactive Architecture Console */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
+        <div key={activeLayer.id} className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch animate-slide-fade">
           {/* Left Details Panel */}
           <div className="lg:col-span-6 rounded-2xl sm:rounded-3xl bg-[#090e1c] border border-white/15 p-4 sm:p-8 flex flex-col justify-between shadow-2xl">
             <div>

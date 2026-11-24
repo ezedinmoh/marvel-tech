@@ -76,16 +76,11 @@ export function BrandLogo({
       {/* Brand Logotype Typography */}
       {variant !== 'mark' && (
         <div className="flex flex-col shrink-0 min-w-0">
-          <div className="flex items-center gap-1 sm:gap-1.5 leading-none">
-            <span className={`font-black tracking-tight text-white uppercase ${dimensions.text}`}>
-              Marvel
-            </span>
-            <span className={`font-light tracking-wide text-cyan-400 uppercase ${dimensions.text}`}>
-              Tech
-            </span>
-          </div>
+          <span className={`font-black tracking-tight text-white uppercase leading-none ${dimensions.text}`}>
+            Marvel
+          </span>
           <span
-            className={`font-mono uppercase tracking-[0.22em] text-slate-400 font-medium mt-0.5 hidden sm:block ${dimensions.sub}`}
+            className={`font-mono uppercase tracking-[0.16em] sm:tracking-[0.22em] text-cyan-400 font-semibold mt-0.5 leading-none ${dimensions.sub}`}
           >
             Technologies
           </span>
