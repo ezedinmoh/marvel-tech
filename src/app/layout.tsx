@@ -40,6 +40,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `${companyData.name} — ${companyData.tagline}`,
     description: companyData.description,
+    creator: '@ezedinmoh',
   },
   robots: {
     index: true,

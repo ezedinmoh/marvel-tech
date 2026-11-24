@@ -108,18 +108,32 @@ export function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) 
             Get In Touch
           </Button>
 
-          <div className="space-y-2 text-xs text-slate-400 pt-2">
-            <div className="flex items-center gap-2">
+          <div className="space-y-2.5 text-xs text-slate-400 pt-2">
+            <a
+              href={`mailto:${companyData.contactEmail}`}
+              className="flex items-center gap-2 hover:text-white transition-colors"
+            >
               <Mail className="w-3.5 h-3.5 text-cyan-400" />
               <span>{companyData.contactEmail}</span>
-            </div>
-            <div className="flex items-center gap-2">
+            </a>
+            <a
+              href={`tel:${companyData.contactPhone.replace(/\s+/g, '')}`}
+              className="flex items-center gap-2 hover:text-white transition-colors"
+            >
               <Phone className="w-3.5 h-3.5 text-blue-400" />
               <span>{companyData.contactPhone}</span>
-            </div>
-            <div className="flex items-center gap-2">
+            </a>
+            <a
+              href={companyData.telegramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:text-white transition-colors"
+            >
               <Send className="w-3.5 h-3.5 text-sky-400" />
               <span>{companyData.telegramUsername}</span>
+            </a>
+            <div className="text-[11px] font-mono text-slate-500 pt-1">
+              {companyData.location}
             </div>
           </div>
         </div>

@@ -182,13 +182,49 @@ export function Contact() {
               <span className="text-xs font-mono uppercase tracking-wider text-cyan-300 font-bold block">
                 Direct Executive & Partnerships Desk:
               </span>
-              <div className="space-y-2 text-xs">
+              <div className="space-y-2.5 text-xs">
+                {/* Ezedin Mohammed - Technical Lead */}
+                <div className="flex items-center justify-between p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                  <div>
+                    <span className="font-semibold text-white block">Ezedin Mohammed</span>
+                    <span className="text-[10px] text-cyan-400 font-mono">Co-Founder & Lead Software Engineer · Kombolcha</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <a
+                      href="https://t.me/ezedinmoh"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-1.5 rounded-lg bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-colors"
+                      title="Telegram @ezedinmoh"
+                    >
+                      <Send className="w-3.5 h-3.5" />
+                    </a>
+                    <a
+                      href="tel:+251983029638"
+                      className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 transition-colors"
+                      title="Call +251 983 029 638"
+                    >
+                      <Phone className="w-3.5 h-3.5" />
+                    </a>
+                    <a
+                      href="https://github.com/ezedinmoh"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-1.5 rounded-lg bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
+                      title="GitHub @ezedinmoh"
+                    >
+                      <GithubIcon className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Mohammed Imam - Business Lead */}
                 <div className="flex items-center justify-between p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
                   <div>
                     <span className="font-semibold text-white block">Mohammed Imam</span>
                     <span className="text-[10px] text-cyan-400 font-mono">Co-Founder & Business Lead</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5">
                     <a
                       href="https://t.me/Mohamediimam"
                       target="_blank"
@@ -208,12 +244,13 @@ export function Contact() {
                   </div>
                 </div>
 
+                {/* Sudeys Ibrahim - Operations Lead */}
                 <div className="flex items-center justify-between p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
                   <div>
                     <span className="font-semibold text-white block">Sudeys Ibrahim</span>
                     <span className="text-[10px] text-slate-400 font-mono">Co-Founder & Operations Lead</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5">
                     <a
                       href="https://t.me/Ifshrmr"
                       target="_blank"

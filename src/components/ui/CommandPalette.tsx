@@ -177,6 +177,18 @@ export function CommandPalette() {
       },
     },
     {
+      id: 'act-tech-ezedin',
+      category: 'Actions',
+      title: 'Contact Ezedin Mohammed (Lead Software Engineer)',
+      subtitle: '+251 983 029 638 · Software Architecture & Systems · Kombolcha, Ethiopia',
+      icon: <Send className="w-4 h-4 text-cyan-400" />,
+      badge: 'Technical Lead',
+      action: () => {
+        setIsOpen(false);
+        window.open('https://t.me/ezedinmoh', '_blank');
+      },
+    },
+    {
       id: 'act-biz-mohammed',
       category: 'Actions',
       title: 'Contact Mohammed Imam (Business Lead)',
@@ -204,12 +216,12 @@ export function CommandPalette() {
       id: 'act-wa',
       category: 'Actions',
       title: 'Connect on WhatsApp',
-      subtitle: `${companyData.contactPhone} · Direct client messaging`,
+      subtitle: `${companyData.contactPhone} · Direct engineering inquiry`,
       icon: <MessageCircle className="w-4 h-4 text-emerald-400" />,
       badge: 'Instant Chat',
       action: () => {
         setIsOpen(false);
-        window.open(`https://wa.me/251900000000?text=Hello%20Marvel%20Technologies`, '_blank');
+        window.open(`https://wa.me/${companyData.contactPhone.replace(/[^0-9]/g, '')}?text=Hello%20Marvel%20Technologies`, '_blank');
       },
     },
 

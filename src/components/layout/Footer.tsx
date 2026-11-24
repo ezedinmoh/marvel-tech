@@ -7,7 +7,16 @@ import { companyData } from '@/data/company';
 import { servicesData } from '@/data/services';
 import { footerQuickLinks, legalLinks } from '@/data/navigation';
 import { Mail, Phone, Send, ArrowUp, Activity } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from '../ui/Icons';
+import {
+  GithubIcon,
+  LinkedinIcon,
+  TwitterXIcon,
+  InstagramIcon,
+  TikTokIcon,
+  FacebookIcon,
+  YouTubeIcon,
+  DiscordIcon,
+} from '../ui/Icons';
 
 export function Footer() {
   const scrollToTop = () => {
@@ -36,34 +45,109 @@ export function Footer() {
             </div>
 
             {/* Social Links */}
-            <div className="flex items-center gap-3 pt-2">
+            <div className="flex flex-wrap items-center gap-2 pt-2">
               <a
                 href={companyData.telegramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-white/[0.05] hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500/30 flex items-center justify-center text-slate-300 hover:text-cyan-400 transition-all"
+                className="w-8 h-8 rounded-full bg-white/[0.05] hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500/30 flex items-center justify-center text-slate-300 hover:text-cyan-400 transition-all"
                 aria-label="Telegram"
+                title="Telegram @ezedinmoh"
               >
-                <Send className="w-4 h-4" />
-              </a>
-              <a
-                href={companyData.linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-white/[0.05] hover:bg-blue-500/20 border border-white/10 hover:border-blue-500/30 flex items-center justify-center text-slate-300 hover:text-blue-400 transition-all"
-                aria-label="LinkedIn"
-              >
-                <LinkedinIcon className="w-4 h-4" />
+                <Send className="w-3.5 h-3.5" />
               </a>
               <a
                 href={companyData.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-white/[0.05] hover:bg-indigo-500/20 border border-white/10 hover:border-indigo-500/30 flex items-center justify-center text-slate-300 hover:text-indigo-400 transition-all"
+                className="w-8 h-8 rounded-full bg-white/[0.05] hover:bg-white/20 border border-white/10 hover:border-white/30 flex items-center justify-center text-slate-300 hover:text-white transition-all"
                 aria-label="GitHub"
+                title="GitHub @ezedinmoh"
               >
-                <GithubIcon className="w-4 h-4" />
+                <GithubIcon className="w-3.5 h-3.5" />
               </a>
+              <a
+                href={companyData.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-white/[0.05] hover:bg-blue-500/20 border border-white/10 hover:border-blue-500/30 flex items-center justify-center text-slate-300 hover:text-blue-400 transition-all"
+                aria-label="LinkedIn"
+                title="LinkedIn @ezedinmoh"
+              >
+                <LinkedinIcon className="w-3.5 h-3.5" />
+              </a>
+              {companyData.twitterUrl && (
+                <a
+                  href={companyData.twitterUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-white/[0.05] hover:bg-white/20 border border-white/10 hover:border-white/30 flex items-center justify-center text-slate-300 hover:text-white transition-all"
+                  aria-label="Twitter / X"
+                  title="Twitter / X @ezedinmoh"
+                >
+                  <TwitterXIcon className="w-3.5 h-3.5" />
+                </a>
+              )}
+              {companyData.instagramUrl && (
+                <a
+                  href={companyData.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-white/[0.05] hover:bg-pink-500/20 border border-white/10 hover:border-pink-500/30 flex items-center justify-center text-slate-300 hover:text-pink-400 transition-all"
+                  aria-label="Instagram"
+                  title="Instagram @ezedin__moh"
+                >
+                  <InstagramIcon className="w-3.5 h-3.5" />
+                </a>
+              )}
+              {companyData.tiktokUrl && (
+                <a
+                  href={companyData.tiktokUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-white/[0.05] hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500/30 flex items-center justify-center text-slate-300 hover:text-cyan-400 transition-all"
+                  aria-label="TikTok"
+                  title="TikTok @ezedinmoh"
+                >
+                  <TikTokIcon className="w-3.5 h-3.5" />
+                </a>
+              )}
+              {companyData.facebookUrl && (
+                <a
+                  href={companyData.facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-white/[0.05] hover:bg-blue-600/20 border border-white/10 hover:border-blue-600/30 flex items-center justify-center text-slate-300 hover:text-blue-400 transition-all"
+                  aria-label="Facebook"
+                  title="Facebook @ezedinmoh"
+                >
+                  <FacebookIcon className="w-3.5 h-3.5" />
+                </a>
+              )}
+              {companyData.youtubeUrl && (
+                <a
+                  href={companyData.youtubeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-white/[0.05] hover:bg-red-500/20 border border-white/10 hover:border-red-500/30 flex items-center justify-center text-slate-300 hover:text-red-400 transition-all"
+                  aria-label="YouTube"
+                  title="YouTube @ezedin_moh"
+                >
+                  <YouTubeIcon className="w-3.5 h-3.5" />
+                </a>
+              )}
+              {companyData.discordUrl && (
+                <a
+                  href={companyData.discordUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-white/[0.05] hover:bg-indigo-500/20 border border-white/10 hover:border-indigo-500/30 flex items-center justify-center text-slate-300 hover:text-indigo-400 transition-all"
+                  aria-label="Discord"
+                  title="Discord ezedinmoh"
+                >
+                  <DiscordIcon className="w-3.5 h-3.5" />
+                </a>
+              )}
             </div>
           </div>
 

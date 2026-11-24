@@ -23,7 +23,7 @@ export const faqData: FaqItem[] = [
     category: 'Team',
     question: 'Who will be working on our project?',
     answer:
-      'You work directly with our founding engineering team. We do not outsource your codebase to unvetted third-party contractors; our four core engineers architect and develop your product directly.',
+      'You work directly with our founding leadership team. We do not outsource your codebase to unvetted third-party contractors; our core leadership and engineering team architects and develops your product directly.',
   },
   {
     category: 'Post-Launch',

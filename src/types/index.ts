@@ -16,8 +16,14 @@ export interface CompanyInfo {
   contactPhone: string;
   telegramUsername: string;
   telegramUrl: string;
+  instagramUrl?: string;
+  tiktokUrl?: string;
+  facebookUrl?: string;
   linkedinUrl: string;
   githubUrl: string;
+  twitterUrl?: string;
+  youtubeUrl?: string;
+  discordUrl?: string;
   location: string;
   foundedYear: string;
   statusText: string;
@@ -59,6 +65,7 @@ export interface TeamMember {
   id: string;
   name: string;
   role: string;
+  location?: string;
   bio: string;
   expertise: string[];
   avatar?: string;
@@ -68,6 +75,12 @@ export interface TeamMember {
     telegram?: string;
     phone?: string;
     email?: string;
+    instagram?: string;
+    tiktok?: string;
+    facebook?: string;
+    twitter?: string;
+    youtube?: string;
+    discord?: string;
   };
   placeholderAvatar: string;
   statusBadge: string;

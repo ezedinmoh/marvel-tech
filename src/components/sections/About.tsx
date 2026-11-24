@@ -50,7 +50,7 @@ export function About() {
               We founded <span className="text-white font-semibold">Marvel Technologies</span> to bridge the gap between ambitious product ideas and production-grade software. Too often, businesses are forced to choose between rigid, slow legacy vendors or fragmented freelancers lacking architectural consistency.
             </p>
             <p className="text-slate-400 text-base">
-              As a collaborative team of four software engineers and product designers, we operate with surgical focus. We leverage modern toolchains—Next.js, React Native, TypeScript, PostgreSQL, and cloud serverless architectures—to craft systems that perform with blistering speed, scale gracefully under load, and feel exceptional to use.
+              As a collaborative founding team combining deep software architecture, business leadership, and operations execution, we operate with surgical focus. We leverage modern toolchains—Next.js, React Native, TypeScript, PostgreSQL, and cloud serverless architectures—to craft systems that perform with blistering speed, scale gracefully under load, and feel exceptional to use.
             </p>
             <div className="pt-2 flex flex-wrap gap-4 text-xs font-mono text-cyan-400">
               <span className="px-3 py-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/20">
