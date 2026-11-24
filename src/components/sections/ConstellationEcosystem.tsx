@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { SectionHeading } from '../ui/SectionHeading';
+import { CompaniesMarquee } from './CompaniesMarquee';
 import {
   Globe,
   ShoppingBag,
@@ -22,6 +23,7 @@ interface SubsystemData {
   name: string;
   icon: React.ReactNode;
   coords: { x: number; y: number };
+  target: { x: number; y: number };
   curve: { cx: number; cy: number };
   dur: string;
   delay: string;
@@ -49,9 +51,10 @@ export function ConstellationEcosystem() {
       id: 'website',
       name: 'Website',
       icon: <Globe className="w-4 h-4 text-cyan-400" />,
-      coords: { x: 8.65, y: 67.05 },
-      curve: { cx: 29.32, cy: 51 },
-      dur: '4.5s',
+      coords: { x: 9.5, y: 71 },
+      target: { x: 21.5, y: 69 },
+      curve: { cx: 15, cy: 70 },
+      dur: '4.7s',
       delay: '0.1s',
       windowTitle: 'Marvel Core · Web Platform & CMS',
       adminSubtitle: 'Live visitor traffic, edge rendering, and SEO performance.',
@@ -120,9 +123,10 @@ export function ConstellationEcosystem() {
       id: 'ecommerce',
       name: 'Ecommerce',
       icon: <ShoppingBag className="w-4 h-4 text-emerald-400" />,
-      coords: { x: 6.13, y: 48.59 },
-      curve: { cx: 28.06, cy: 44.59 },
-      dur: '5.2s',
+      coords: { x: 6.5, y: 50 },
+      target: { x: 21.5, y: 52 },
+      curve: { cx: 14, cy: 51 },
+      dur: '5.0s',
       delay: '0.4s',
       windowTitle: 'Marvel Commerce · Storefront & Orders',
       adminSubtitle: 'Real-time order pipeline, dual Stripe & Chapa settlements.',
@@ -189,9 +193,10 @@ export function ConstellationEcosystem() {
       id: 'ai-sales',
       name: 'AI Sales Agent',
       icon: <Bot className="w-4 h-4 text-cyan-300" />,
-      coords: { x: 11.48, y: 30.74 },
-      curve: { cx: 30.73, cy: 26.74 },
-      dur: '6.0s',
+      coords: { x: 10, y: 29 },
+      target: { x: 21.5, y: 36 },
+      curve: { cx: 16, cy: 32 },
+      dur: '5.5s',
       delay: '0.6s',
       windowTitle: 'Marvel Intelligence · AI Sales Agent',
       adminSubtitle: 'Autonomous lead qualification, dynamic pricing, and upsell generation.',
@@ -258,9 +263,10 @@ export function ConstellationEcosystem() {
       id: 'chatbot',
       name: 'Chatbot',
       icon: <MessageSquare className="w-4 h-4 text-blue-400" />,
-      coords: { x: 23.73, y: 16.71 },
-      curve: { cx: 36.86, cy: 12.71 },
-      dur: '4.8s',
+      coords: { x: 26, y: 13.5 },
+      target: { x: 29, y: 25.5 },
+      curve: { cx: 27, cy: 19 },
+      dur: '5.1s',
       delay: '0.9s',
       windowTitle: 'Marvel Mesh · 24/7 Smart Chatbot',
       adminSubtitle: 'Real-time Telegram, WhatsApp, and Web customer service bot.',
@@ -327,10 +333,11 @@ export function ConstellationEcosystem() {
       id: 'erp',
       name: 'ERP',
       icon: <Database className="w-4 h-4 text-cyan-400" />,
-      coords: { x: 40.69, y: 9.0 },
-      curve: { cx: 45.34, cy: 4.99 },
-      dur: '5.0s',
-      delay: '1.2s',
+      coords: { x: 43, y: 7.5 },
+      target: { x: 44, y: 25.5 },
+      curve: { cx: 43.5, cy: 16 },
+      dur: '4.2s',
+      delay: '0.1s',
       windowTitle: 'Marvel ERP · Enterprise Resource Center',
       adminSubtitle: 'Unified business system, inventory telemetry, and corporate finances.',
       timeframeData: {
@@ -396,10 +403,11 @@ export function ConstellationEcosystem() {
       id: 'mobile-app',
       name: 'Mobile App',
       icon: <Smartphone className="w-4 h-4 text-indigo-400" />,
-      coords: { x: 59.31, y: 9.0 },
-      curve: { cx: 54.65, cy: 4.99 },
-      dur: '5.8s',
-      delay: '1.5s',
+      coords: { x: 57, y: 7.5 },
+      target: { x: 56, y: 25.5 },
+      curve: { cx: 56.5, cy: 16 },
+      dur: '4.8s',
+      delay: '0.3s',
       windowTitle: 'Marvel Mobile · Cross-Platform Fleet Engine',
       adminSubtitle: 'Native iOS & Android sync, offline SQLite cache, push notification pipelines.',
       timeframeData: {
@@ -465,10 +473,11 @@ export function ConstellationEcosystem() {
       id: 'automation',
       name: 'Automation',
       icon: <Zap className="w-4 h-4 text-amber-400" />,
-      coords: { x: 76.27, y: 16.71 },
-      curve: { cx: 63.14, cy: 12.71 },
-      dur: '4.9s',
-      delay: '1.8s',
+      coords: { x: 74, y: 13.5 },
+      target: { x: 71, y: 25.5 },
+      curve: { cx: 73, cy: 19 },
+      dur: '4.6s',
+      delay: '0.2s',
       windowTitle: 'Marvel Flow · Event Orchestration',
       adminSubtitle: 'Automated invoice generation, customer notification triggers, and ETL jobs.',
       timeframeData: {
@@ -534,10 +543,11 @@ export function ConstellationEcosystem() {
       id: 'analytics',
       name: 'Analytics',
       icon: <TrendingUp className="w-4 h-4 text-emerald-400" />,
-      coords: { x: 88.52, y: 30.74 },
-      curve: { cx: 69.26, cy: 26.74 },
+      coords: { x: 90, y: 29 },
+      target: { x: 78.5, y: 36 },
+      curve: { cx: 84, cy: 32 },
       dur: '5.5s',
-      delay: '2.1s',
+      delay: '0.4s',
       windowTitle: 'Marvel Telemetry · Real-Time Analytics',
       adminSubtitle: 'Multi-tenant event analytics, user retention cohorts, and conversion tracking.',
       timeframeData: {
@@ -603,10 +613,11 @@ export function ConstellationEcosystem() {
       id: 'support',
       name: 'Customer Support',
       icon: <Headphones className="w-4 h-4 text-violet-400" />,
-      coords: { x: 93.87, y: 48.59 },
-      curve: { cx: 71.93, cy: 44.59 },
+      coords: { x: 93.5, y: 50 },
+      target: { x: 78.5, y: 52 },
+      curve: { cx: 86, cy: 51 },
       dur: '5.1s',
-      delay: '2.4s',
+      delay: '0.1s',
       windowTitle: 'Marvel Desk · Unified Client Support',
       adminSubtitle: 'Omnichannel ticket routing, SLA timers, and automated customer notifications.',
       timeframeData: {
@@ -672,10 +683,11 @@ export function ConstellationEcosystem() {
       id: 'integrations',
       name: 'Integrations',
       icon: <Cpu className="w-4 h-4 text-cyan-400" />,
-      coords: { x: 91.35, y: 67.05 },
-      curve: { cx: 70.67, cy: 51 },
+      coords: { x: 90.5, y: 71 },
+      target: { x: 78.5, y: 69 },
+      curve: { cx: 85, cy: 70 },
       dur: '4.6s',
-      delay: '2.7s',
+      delay: '0.2s',
       windowTitle: 'Marvel Gateway · Connected Integrations',
       adminSubtitle: 'Payment APIs, Telebirr, Chapa, Stripe, and third-party webhook mesh.',
       timeframeData: {
@@ -780,7 +792,7 @@ export function ConstellationEcosystem() {
         </div>
 
         {/* Constellation Container: 10 Orbiting Satellites + Central Dashboard */}
-        <div className="relative w-full max-w-6xl mx-auto min-h-[600px] lg:min-h-[660px] flex items-center justify-center pt-8 pb-12">
+        <div className="relative w-full max-w-6xl mx-auto min-h-[760px] lg:min-h-[840px] flex items-center justify-center pt-8 pb-12">
           {/* SVG Curved Flowing Connector Lines */}
           <svg
             className="absolute inset-0 hidden md:block size-full pointer-events-none z-0"
@@ -790,24 +802,24 @@ export function ConstellationEcosystem() {
           >
             <defs>
               <linearGradient id="marvel-active-glow" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#00D2FF" stopOpacity="0.9" />
-                <stop offset="100%" stopColor="#0066FF" stopOpacity="0.9" />
+                <stop offset="0%" stopColor="#00D2FF" stopOpacity="0.95" />
+                <stop offset="100%" stopColor="#0066FF" stopOpacity="0.95" />
               </linearGradient>
             </defs>
 
             {subsystems.map((sub) => {
               const isSelected = sub.id === activeSystemId;
-              const pathD = `M${sub.coords.x} ${sub.coords.y} Q ${sub.curve.cx} ${sub.curve.cy} 50 55`;
+              const pathD = `M ${sub.coords.x} ${sub.coords.y} Q ${sub.curve.cx} ${sub.curve.cy} ${sub.target.x} ${sub.target.y}`;
 
               return (
                 <path
                   key={sub.id}
                   d={pathD}
                   fill="none"
-                  stroke={isSelected ? 'url(#marvel-active-glow)' : 'rgba(255, 255, 255, 0.16)'}
-                  strokeOpacity={isSelected ? 1 : 0.4}
+                  stroke={isSelected ? 'url(#marvel-active-glow)' : 'rgba(255, 255, 255, 0.18)'}
+                  strokeOpacity={isSelected ? 1 : 0.45}
                   strokeWidth={isSelected ? 2.4 : 1.2}
-                  strokeDasharray={isSelected ? '6 4' : '4 5'}
+                  strokeDasharray={isSelected ? '6 3' : '3 4'}
                   vectorEffect="non-scaling-stroke"
                   className={isSelected ? 'dc-flow transition-all duration-300' : 'transition-all duration-300'}
                 />
@@ -839,7 +851,7 @@ export function ConstellationEcosystem() {
                 <div
                   className={`dc-bob flex items-center gap-2.5 rounded-2xl px-3.5 py-2 text-xs font-semibold whitespace-nowrap transition-all duration-300 select-none shadow-2xl backdrop-blur-xl ${
                     isSelected
-                      ? 'bg-gradient-to-r from-blue-900/95 to-indigo-950/95 text-cyan-300 border-2 border-cyan-400 shadow-[0_0_35px_rgba(0,210,255,0.5)] scale-110'
+                      ? 'bg-gradient-to-r from-blue-900/95 to-indigo-950/95 text-cyan-300 border-2 border-cyan-400 shadow-[0_0_35px_rgba(0,210,255,0.6)] scale-110 ring-2 ring-cyan-400/40'
                       : 'bg-[#090e1c]/90 text-slate-300 border border-white/15 hover:border-cyan-400/50 hover:text-white hover:scale-105'
                   }`}
                   style={
@@ -863,7 +875,7 @@ export function ConstellationEcosystem() {
           })}
 
           {/* Central Command Center Window */}
-          <div className="relative z-10 w-full max-w-xl lg:max-w-2xl rounded-3xl bg-[#080d1a]/95 border border-white/15 p-5 sm:p-7 shadow-[0_30px_90px_-20px_rgba(0,102,255,0.4)] backdrop-blur-2xl transition-all duration-300">
+          <div className="relative z-10 w-full max-w-xl lg:max-w-2xl mt-24 sm:mt-28 rounded-3xl bg-[#080d1a]/95 border border-white/15 p-5 sm:p-7 shadow-[0_30px_90px_-20px_rgba(0,102,255,0.4)] backdrop-blur-2xl transition-all duration-300">
             {/* Window Top Controls */}
             <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
               <div className="flex items-center gap-2">
@@ -1057,6 +1069,9 @@ export function ConstellationEcosystem() {
             </div>
           </div>
         </div>
+
+        {/* Companies We Build For Slideshow / Marquee */}
+        <CompaniesMarquee />
       </div>
     </section>
   );

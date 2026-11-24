@@ -123,7 +123,7 @@ html.lenis, html.lenis body {
 }
 
 .dc-flow {
-  animation: dc-dash 3s linear infinite;
+  animation: dc-dash 2.5s linear infinite;
 }
 
 @keyframes dc-float {
@@ -131,11 +131,31 @@ html.lenis, html.lenis body {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-6px);
+    transform: translateY(-10px);
   }
 }
 
 .dc-bob {
-  animation: dc-float var(--dur, 5s) ease-in-out var(--bob-delay, 0s) infinite;
+  animation: dc-float var(--dur, 4.5s) ease-in-out var(--bob-delay, 0s) infinite;
+}
+
+/* Infinite Marquee Slideshow */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-infinite {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 32s linear infinite;
+}
+
+.animate-marquee-infinite:hover {
+  animation-play-state: paused;
 }
 
