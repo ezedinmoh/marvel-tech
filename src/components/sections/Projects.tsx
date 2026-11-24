@@ -196,11 +196,12 @@ export function Projects() {
           onClose={() => setSelectedProject(null)}
           title={selectedProject.title}
           badge={`Project Detail · ${selectedProject.category}`}
+          size="5xl"
         >
           <div className="space-y-6">
             {/* Modal Tab Switcher */}
-            <div className="flex items-center justify-between border-b border-white/10 pb-3 gap-2">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center justify-between border-b border-white/10 pb-3 gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <button
                   onClick={() => setModalTab('case-study')}
                   className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer ${
@@ -222,7 +223,7 @@ export function Projects() {
                   }`}
                 >
                   <Smartphone className="w-3.5 h-3.5" />
-                  <span>Device Simulator (Desktop & Mobile)</span>
+                  <span>Interactive Device Simulator (Desktop & Mobile)</span>
                 </button>
               </div>
 
@@ -277,6 +278,17 @@ export function Projects() {
                   </p>
                 )}
 
+                {/* Switch to device view quick trigger */}
+                <div className="pt-2 flex items-center justify-between">
+                  <button
+                    onClick={() => setModalTab('device-preview')}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-950/40 hover:bg-cyan-900/50 text-cyan-400 border border-cyan-500/30 text-xs font-medium transition-colors cursor-pointer"
+                  >
+                    <Smartphone className="w-3.5 h-3.5" />
+                    <span>Open in Device Simulator →</span>
+                  </button>
+                </div>
+
                 {/* Key Stack */}
                 <div className="pt-2">
                   <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block mb-2">
@@ -299,25 +311,44 @@ export function Projects() {
             {/* Tab 2: Interactive Device Viewport */}
             {modalTab === 'device-preview' && (
               <div className="space-y-4 animate-in fade-in duration-200">
+                <div className="flex items-center justify-between pb-1">
+                  <button
+                    onClick={() => setModalTab('case-study')}
+                    className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors cursor-pointer"
+                  >
+                    <FileText className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>← Back to Architecture & Case Study</span>
+                  </button>
+                </div>
                 <DeviceFramePreview project={selectedProject} />
               </div>
             )}
 
             {/* Modal Actions */}
-            <div className="pt-4 flex items-center justify-between border-t border-white/10">
-              {selectedProject.githubUrl ? (
-                <a
-                  href={selectedProject.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white"
+            <div className="pt-4 flex flex-wrap items-center justify-between gap-3 border-t border-white/10">
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-slate-300 hover:text-white text-xs font-medium transition-colors cursor-pointer"
                 >
-                  <GithubIcon className="w-4 h-4" />
-                  <span>Inspect GitHub Repo</span>
-                </a>
-              ) : (
-                <span className="text-xs text-slate-500 font-mono">Proprietary / Client Code</span>
-              )}
+                  <ArrowRight className="w-3.5 h-3.5 rotate-180" />
+                  <span>Back to Projects</span>
+                </button>
+
+                {selectedProject.githubUrl ? (
+                  <a
+                    href={selectedProject.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white"
+                  >
+                    <GithubIcon className="w-4 h-4" />
+                    <span>Inspect GitHub Repo</span>
+                  </a>
+                ) : (
+                  <span className="text-xs text-slate-500 font-mono">Proprietary System</span>
+                )}
+              </div>
 
               {selectedProject.liveUrl && (
                 <a

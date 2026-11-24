@@ -57,12 +57,25 @@ export function CommandPalette() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen]);
 
-  // Focus input when opened
+  // Focus input & pause Lenis when opened
   useEffect(() => {
     if (isOpen) {
+      if (typeof window !== 'undefined' && window.__lenis) {
+        window.__lenis.stop();
+      }
+      const prevOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+
       setTimeout(() => inputRef.current?.focus(), 50);
       setQuery('');
       setSelectedIndex(0);
+
+      return () => {
+        if (typeof window !== 'undefined' && window.__lenis) {
+          window.__lenis.start();
+        }
+        document.body.style.overflow = prevOverflow;
+      };
     }
   }, [isOpen]);
 
@@ -70,7 +83,12 @@ export function CommandPalette() {
     setIsOpen(false);
     const element = document.querySelector(hash);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      if (typeof window !== 'undefined' && window.__lenis) {
+        window.__lenis.scrollTo(element as HTMLElement, { offset: -90 });
+      } else {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+      window.history.pushState(null, '', hash);
     }
   };
 
@@ -259,15 +277,19 @@ export function CommandPalette() {
 
       {/* Palette Modal */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 sm:px-6">
+        <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 sm:px-6" data-lenis-prevent="true">
           {/* Backdrop */}
           <div
             className="fixed inset-0 bg-black/75 backdrop-blur-md transition-opacity"
             onClick={() => setIsOpen(false)}
+            data-lenis-prevent="true"
           />
 
           {/* Palette Dialog Box */}
-          <div className="relative w-full max-w-2xl bg-slate-950/95 border border-white/15 rounded-2xl shadow-[0_0_60px_rgba(0,102,255,0.25)] overflow-hidden z-10 animate-in fade-in zoom-in-95 duration-150">
+          <div
+            data-lenis-prevent="true"
+            className="relative w-full max-w-2xl bg-slate-950/95 border border-white/15 rounded-2xl shadow-[0_0_60px_rgba(0,102,255,0.25)] overflow-hidden z-10 animate-in fade-in zoom-in-95 duration-150"
+          >
             {/* Header Search Input */}
             <div className="flex items-center gap-3 px-4 py-3.5 border-b border-white/10 bg-slate-900/60">
               <Search className="w-5 h-5 text-cyan-400 shrink-0" />

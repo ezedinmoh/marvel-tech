@@ -3,6 +3,12 @@
 import React, { useEffect, useState } from 'react';
 import Lenis from 'lenis';
 
+declare global {
+  interface Window {
+    __lenis?: Lenis;
+  }
+}
+
 export function SmoothScroll({ children }: { children?: React.ReactNode }) {
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -21,6 +27,8 @@ export function SmoothScroll({ children }: { children?: React.ReactNode }) {
       touchMultiplier: 1.5,
     });
 
+    window.__lenis = lenis;
+
     const updateScroll = () => {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (totalHeight > 0) {
@@ -38,10 +46,46 @@ export function SmoothScroll({ children }: { children?: React.ReactNode }) {
     const rafId = requestAnimationFrame(raf);
     window.addEventListener('scroll', updateScroll, { passive: true });
 
+    // Handle smooth anchor clicks with navbar offset
+    const handleAnchorClick = (e: MouseEvent) => {
+      const anchor = (e.target as HTMLElement).closest('a');
+      if (!anchor) return;
+      const href = anchor.getAttribute('href');
+      if (href && href.startsWith('#') && href.length > 1) {
+        const targetEl = document.querySelector(href);
+        if (targetEl) {
+          e.preventDefault();
+          lenis.scrollTo(targetEl as HTMLElement, { offset: -90 });
+          window.history.pushState(null, '', href);
+        }
+      }
+    };
+
+    // Handle browser back/forward buttons (popstate and hashchange)
+    const handleHashNavigation = () => {
+      const hash = window.location.hash;
+      if (hash && hash.length > 1) {
+        const targetEl = document.querySelector(hash);
+        if (targetEl) {
+          lenis.scrollTo(targetEl as HTMLElement, { offset: -90 });
+        }
+      } else if (!hash || hash === '#' || hash === '') {
+        lenis.scrollTo(0);
+      }
+    };
+
+    document.addEventListener('click', handleAnchorClick);
+    window.addEventListener('hashchange', handleHashNavigation);
+    window.addEventListener('popstate', handleHashNavigation);
+
     return () => {
+      delete window.__lenis;
       lenis.destroy();
       cancelAnimationFrame(rafId);
       window.removeEventListener('scroll', updateScroll);
+      document.removeEventListener('click', handleAnchorClick);
+      window.removeEventListener('hashchange', handleHashNavigation);
+      window.removeEventListener('popstate', handleHashNavigation);
     };
   }, []);
 
