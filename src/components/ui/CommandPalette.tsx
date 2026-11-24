@@ -159,15 +159,27 @@ export function CommandPalette() {
       },
     },
     {
-      id: 'act-tg',
+      id: 'act-biz-mohammed',
       category: 'Actions',
-      title: 'Connect on Telegram',
-      subtitle: `${companyData.telegramUsername} · Instant engineering desk`,
-      icon: <Send className="w-4 h-4 text-sky-400" />,
-      badge: 'Direct Message',
+      title: 'Contact Mohammed Imam (Business Lead)',
+      subtitle: '+251 941 670 897 · Strategic Growth & Client Partnerships',
+      icon: <Send className="w-4 h-4 text-cyan-400" />,
+      badge: 'Business Lead',
       action: () => {
         setIsOpen(false);
-        window.open(companyData.telegramUrl, '_blank');
+        window.open('https://t.me/Mohamediimam', '_blank');
+      },
+    },
+    {
+      id: 'act-ops-sudeys',
+      category: 'Actions',
+      title: 'Contact Sudeys Ibrahim (Operations Lead)',
+      subtitle: '+251 99 350 6625 · Product Operations & Delivery Coordination',
+      icon: <Send className="w-4 h-4 text-emerald-400" />,
+      badge: 'Operations Lead',
+      action: () => {
+        setIsOpen(false);
+        window.open('https://t.me/Ifshrmr', '_blank');
       },
     },
     {

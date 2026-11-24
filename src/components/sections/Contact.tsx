@@ -177,11 +177,62 @@ export function Contact() {
               </a>
             </div>
 
-            <div className="p-4 rounded-2xl bg-blue-900/10 border border-blue-500/20 text-xs text-slate-400 space-y-1">
-              <span className="text-blue-400 font-semibold block">Production Readiness Note:</span>
-              <p>
-                All company contact channels and email configurations are centralized in <code className="text-cyan-300">src/data/company.ts</code> for effortless updates.
-              </p>
+            {/* Direct Leadership Contacts */}
+            <div className="p-5 rounded-2xl bg-gradient-to-br from-cyan-950/30 via-slate-900/60 to-slate-950 border border-cyan-500/30 space-y-3">
+              <span className="text-xs font-mono uppercase tracking-wider text-cyan-300 font-bold block">
+                Direct Executive & Partnerships Desk:
+              </span>
+              <div className="space-y-2 text-xs">
+                <div className="flex items-center justify-between p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                  <div>
+                    <span className="font-semibold text-white block">Mohammed Imam</span>
+                    <span className="text-[10px] text-cyan-400 font-mono">Co-Founder & Business Lead</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <a
+                      href="https://t.me/Mohamediimam"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-1.5 rounded-lg bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-colors"
+                      title="Telegram @Mohamediimam"
+                    >
+                      <Send className="w-3.5 h-3.5" />
+                    </a>
+                    <a
+                      href="tel:+251941670897"
+                      className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 transition-colors"
+                      title="Call +251 941 670 897"
+                    >
+                      <Phone className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                  <div>
+                    <span className="font-semibold text-white block">Sudeys Ibrahim</span>
+                    <span className="text-[10px] text-slate-400 font-mono">Co-Founder & Operations Lead</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <a
+                      href="https://t.me/Ifshrmr"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-1.5 rounded-lg bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-colors"
+                      title="Telegram @Ifshrmr"
+                    >
+                      <Send className="w-3.5 h-3.5" />
+                    </a>
+                    <a
+                      href="tel:+251993506625"
+                      className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 transition-colors"
+                      title="Call +251 99 350 6625"
+                    >
+                      <Phone className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
