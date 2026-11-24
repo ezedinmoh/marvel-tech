@@ -1,0 +1,61 @@
+'use client';
+
+import React, { useState } from 'react';
+import { SectionHeading } from '../ui/SectionHeading';
+import { faqData } from '@/data/faq';
+import { ChevronDown } from 'lucide-react';
+
+export function Faq() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const toggle = (idx: number) => {
+    setOpenIndex(openIndex === idx ? null : idx);
+  };
+
+  return (
+    <section id="faq" className="py-24 sm:py-32 relative bg-[#040711]">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          badge="Frequently Asked Questions"
+          title="Clear Answers About Our"
+          highlight="Process & Engagement."
+          subtitle="Direct, transparent guidelines on how we collaborate with partners and deliver digital systems."
+        />
+
+        <div className="space-y-4">
+          {faqData.map((item, idx) => {
+            const isOpen = openIndex === idx;
+
+            return (
+              <div
+                key={item.question}
+                className="rounded-2xl bg-[#090e1c] border border-white/10 overflow-hidden transition-colors hover:border-white/20"
+              >
+                <button
+                  onClick={() => toggle(idx)}
+                  className="w-full px-6 py-5 flex items-center justify-between gap-4 text-left font-medium text-white transition-colors"
+                  aria-expanded={isOpen}
+                >
+                  <span className="text-base sm:text-lg font-bold">{item.question}</span>
+                  <div
+                    className={`p-1 rounded-full bg-white/[0.05] text-cyan-400 transition-transform duration-200 ${
+                      isOpen ? 'rotate-180 bg-blue-500/20' : ''
+                    }`}
+                  >
+                    <ChevronDown className="w-4 h-4" />
+                  </div>
+                </button>
+
+                {isOpen && (
+                  <div className="px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-4">
+                    {item.answer}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
