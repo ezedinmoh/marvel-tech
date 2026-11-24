@@ -21,13 +21,13 @@ export function BrandLogo({
 
   // Dimensions based on size with exact 1.84:1 official mark aspect ratio
   const dimensions = {
-    sm: { iconWidth: 48, iconHeight: 26, text: 'text-base', sub: 'text-[9px]' },
-    md: { iconWidth: 59, iconHeight: 32, text: 'text-lg', sub: 'text-[10px]' },
-    lg: { iconWidth: 81, iconHeight: 44, text: 'text-xl', sub: 'text-[11px]' },
+    sm: { iconWidth: 40, iconHeight: 22, text: 'text-sm sm:text-base', sub: 'text-[9px]' },
+    md: { iconWidth: 48, iconHeight: 26, text: 'text-base sm:text-lg', sub: 'text-[10px]' },
+    lg: { iconWidth: 72, iconHeight: 39, text: 'text-lg sm:text-xl', sub: 'text-[11px]' },
   }[size];
 
   const content = (
-    <div className={`flex items-center gap-3 select-none ${className}`}>
+    <div className={`flex items-center gap-2 sm:gap-3 select-none shrink-0 ${className}`}>
       {/* Official Supplied Marvel Technologies Brand Mark */}
       {!imageError ? (
         <div className="relative flex items-center justify-center shrink-0">
@@ -44,7 +44,7 @@ export function BrandLogo({
       ) : (
         /* Bespoke Geometric Marvel Monogram Mark Fallback */
         <div
-          className="relative flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-400 p-[1.5px] shadow-[0_0_20px_rgba(0,102,255,0.35)]"
+          className="relative flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-400 p-[1.5px] shadow-[0_0_20px_rgba(0,102,255,0.35)] shrink-0"
           style={{ width: dimensions.iconHeight, height: dimensions.iconHeight }}
         >
           <div className="flex h-full w-full items-center justify-center rounded-[10px] bg-[#040711]">
@@ -75,8 +75,8 @@ export function BrandLogo({
 
       {/* Brand Logotype Typography */}
       {variant !== 'mark' && (
-        <div className="flex flex-col">
-          <div className="flex items-center gap-1.5 leading-none">
+        <div className="flex flex-col shrink-0 min-w-0">
+          <div className="flex items-center gap-1 sm:gap-1.5 leading-none">
             <span className={`font-black tracking-tight text-white uppercase ${dimensions.text}`}>
               Marvel
             </span>
@@ -85,7 +85,7 @@ export function BrandLogo({
             </span>
           </div>
           <span
-            className={`font-mono uppercase tracking-[0.22em] text-slate-400 font-medium mt-0.5 ${dimensions.sub}`}
+            className={`font-mono uppercase tracking-[0.22em] text-slate-400 font-medium mt-0.5 hidden sm:block ${dimensions.sub}`}
           >
             Technologies
           </span>

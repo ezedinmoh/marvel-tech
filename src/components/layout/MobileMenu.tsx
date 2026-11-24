@@ -7,7 +7,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { companyData } from '@/data/company';
 import { Button } from '../ui/Button';
 import { BrandLogo } from '../ui/BrandLogo';
-import { X, ArrowUpRight, Mail, Phone, Send, ArrowLeft } from 'lucide-react';
+import { X, ArrowUpRight, Mail, Phone, Send, ArrowLeft, Search } from 'lucide-react';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -60,7 +60,7 @@ export function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) 
       >
         <div>
           {/* Header */}
-          <div className="flex items-center justify-between pb-6 border-b border-white/10">
+          <div className="flex items-center justify-between pb-5 border-b border-white/10">
             <BrandLogo size="sm" asLink={false} />
             <button
               onClick={onClose}
@@ -72,8 +72,27 @@ export function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) 
             </button>
           </div>
 
+          {/* Quick Search & Command Bar */}
+          <div className="pt-4">
+            <button
+              onClick={() => {
+                onClose();
+                setTimeout(() => {
+                  window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }));
+                }, 120);
+              }}
+              className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] active:bg-cyan-500/10 border border-white/10 text-xs text-slate-300 font-mono transition-colors cursor-pointer"
+            >
+              <div className="flex items-center gap-2">
+                <Search className="w-4 h-4 text-cyan-400" />
+                <span>{t('navSearch')}</span>
+              </div>
+              <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-[10px] text-slate-400 font-mono">⌘K</kbd>
+            </button>
+          </div>
+
           {/* Nav Links */}
-          <div className="flex flex-col gap-1.5 py-6">
+          <div className="flex flex-col gap-1.5 py-5">
             {currentNavItems
               .filter((item) => !item.isAction)
               .map((item) => {

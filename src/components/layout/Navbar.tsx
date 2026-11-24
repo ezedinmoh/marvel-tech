@@ -117,37 +117,25 @@ export function Navbar() {
               </Button>
             </div>
 
-            {/* Mobile Actions (Android Top Bar Style) */}
-            <div className="flex lg:hidden items-center gap-1.5">
-              {/* Mobile Search Button */}
-              <button
-                onClick={() => {
-                  window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }));
-                }}
-                className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 active:scale-90 transition-all cursor-pointer"
-                aria-label="Search"
-                title="Search"
-              >
-                <Search className="w-4 h-4 text-cyan-400" />
-              </button>
-
+            {/* Mobile Actions (Language Switcher & Hamburger Menu) */}
+            <div className="flex lg:hidden items-center gap-2 shrink-0">
               {/* Mobile Language Switcher */}
               <button
                 onClick={toggleLanguage}
-                className="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-white/[0.06] active:bg-cyan-500/20 border border-white/15 text-xs font-semibold text-slate-200 active:scale-90 transition-all cursor-pointer"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.08] active:bg-cyan-500/20 border border-white/15 text-xs font-semibold text-slate-200 active:scale-95 transition-all cursor-pointer select-none"
                 aria-label="Toggle Language"
               >
                 <Languages className="w-3.5 h-3.5 text-cyan-400" />
-                <span className="text-[11px]">{language === 'en' ? 'አማ' : 'EN'}</span>
+                <span className="text-xs font-semibold">{language === 'en' ? 'አማ' : 'EN'}</span>
               </button>
 
               {/* Mobile Menu Hamburger Toggle */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 active:scale-90 transition-all focus:outline-none cursor-pointer"
+                className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 active:scale-95 transition-all focus:outline-none cursor-pointer"
                 aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
               >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                {mobileMenuOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5 text-white" />}
               </button>
             </div>
           </nav>

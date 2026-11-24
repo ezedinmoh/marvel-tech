@@ -29,8 +29,11 @@ export function ScrollReveal({
     const el = elRef.current;
     if (!el) return;
 
-    // If reduced motion is preferred, reveal immediately
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // If mobile screen or reduced motion, reveal immediately
+    if (
+      typeof window !== 'undefined' &&
+      (window.innerWidth < 769 || window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+    ) {
       el.classList.add('is-revealed');
       return;
     }
@@ -48,7 +51,7 @@ export function ScrollReveal({
       },
       {
         threshold,
-        rootMargin: '0px 0px -40px 0px',
+        rootMargin: '100px 0px 50px 0px',
       }
     );
 
@@ -84,7 +87,11 @@ export function ScrollReveal({
  */
 export function GlobalScrollReveal() {
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // If mobile screen or reduced motion, reveal all elements immediately
+    if (
+      typeof window !== 'undefined' &&
+      (window.innerWidth < 769 || window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+    ) {
       document.querySelectorAll('.dc-reveal').forEach((el) => {
         el.classList.add('is-revealed');
       });
@@ -101,8 +108,8 @@ export function GlobalScrollReveal() {
         });
       },
       {
-        threshold: 0.1,
-        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.05,
+        rootMargin: '100px 0px 50px 0px',
       }
     );
 
