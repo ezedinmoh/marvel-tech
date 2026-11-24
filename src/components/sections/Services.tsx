@@ -65,7 +65,7 @@ export function Services() {
             <Card
               key={service.id}
               className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between group cursor-pointer border-white/[0.08] hover:border-blue-500/30 active:scale-[0.98] transition-all duration-200 dc-reveal"
-              style={{ transitionDelay: `${index * 80}ms` }}
+              style={{ transitionDelay: `${(index % 3) * 50}ms` }}
               onClick={() => setSelectedService(service)}
             >
               <div>

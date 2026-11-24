@@ -75,9 +75,9 @@ export function Technologies() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
           {techCategories.map((category, index) => (
             <Card
-              key={category.category}
+              key={index}
               className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl dc-reveal"
-              style={{ transitionDelay: `${index * 100}ms` }}
+              style={{ transitionDelay: `${Math.min(index * 60, 120)}ms` }}
             >
               <div className="mb-6">
                 <h3 className="text-xl font-bold text-white mb-1 tracking-tight">

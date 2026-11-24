@@ -159,7 +159,7 @@ html.lenis, html.lenis body {
   animation-play-state: paused;
 }
 
-/* Modern Clean Scroll Reveal Architecture (Zero Blur on all devices) */
+/* Modern Clean Scroll Reveal Architecture (Zero Blur, Zero Empty Content Guarantee) */
 .dc-reveal {
   opacity: 1;
   transform: none;
@@ -168,33 +168,36 @@ html.lenis, html.lenis body {
 
 @media (min-width: 769px) {
   .dc-reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
-    transition-delay: var(--reveal-delay, 0s);
+  }
+
+  /* Only elements explicitly marked offscreen-pending by JS start invisible */
+  .dc-reveal.dc-reveal-pending:not(.is-revealed) {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  .dc-reveal.dc-reveal-pending:not(.is-revealed)[data-reveal="left"] {
+    transform: translateX(-18px);
+  }
+
+  .dc-reveal.dc-reveal-pending:not(.is-revealed)[data-reveal="right"] {
+    transform: translateX(18px);
+  }
+
+  .dc-reveal.dc-reveal-pending:not(.is-revealed)[data-reveal="scale"] {
+    transform: translateY(14px) scale(0.97);
+  }
+
+  .dc-reveal.dc-reveal-pending:not(.is-revealed)[data-reveal="fade"] {
+    transform: translateY(0);
   }
 
   .dc-reveal.is-revealed {
     opacity: 1;
     transform: translateY(0) translateX(0) scale(1);
-  }
-
-  .dc-reveal[data-reveal="left"] {
-    transform: translateX(-24px);
-  }
-
-  .dc-reveal[data-reveal="right"] {
-    transform: translateX(24px);
-  }
-
-  .dc-reveal[data-reveal="scale"] {
-    transform: translateY(16px) scale(0.96);
-  }
-
-  .dc-reveal[data-reveal="fade"] {
-    transform: translateY(0);
   }
 }
 

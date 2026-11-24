@@ -46,7 +46,7 @@ export function Process() {
           {stages.map((stage, idx) => (
             <Card
               key={stage.step}
-              style={{ transitionDelay: `${idx * 90}ms` }}
+              style={{ transitionDelay: `${(idx % 3) * 50}ms` }}
               className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between relative group hover:border-blue-500/30 active:scale-[0.98] transition-all dc-reveal"
             >
               <div>

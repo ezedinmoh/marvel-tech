@@ -85,9 +85,9 @@ export function About() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {pillars.map((pillar, idx) => (
             <Card
-              key={pillar.title}
+              key={idx}
               className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl flex flex-col justify-between dc-reveal"
-              style={{ transitionDelay: `${idx * 80}ms` }}
+              style={{ transitionDelay: `${Math.min(idx * 50, 150)}ms` }}
             >
               <div>
                 <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/10 w-fit mb-4 sm:mb-5">

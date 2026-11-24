@@ -64,7 +64,7 @@ export function Projects() {
             <Card
               key={project.id}
               className="rounded-2xl sm:rounded-3xl flex flex-col justify-between group border-white/10 hover:border-blue-500/35 overflow-hidden active:scale-[0.99] transition-all dc-reveal"
-              style={{ transitionDelay: `${index * 80}ms` }}
+              style={{ transitionDelay: `${(index % 2) * 50}ms` }}
             >
               <div>
                 {/* Project Screenshot Container */}
