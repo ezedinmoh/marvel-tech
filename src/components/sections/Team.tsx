@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Card } from '../ui/Card';
+import { AnimatedProfileAvatar } from '../ui/AnimatedProfileAvatar';
 import { useLanguage } from '@/context/LanguageContext';
 import { getTeamData } from '@/data/translations';
 import { Mail, User, Shield, Phone, Send, MapPin } from 'lucide-react';
@@ -58,19 +59,23 @@ export function Team() {
 
                   {/* Avatar / Profile Visualizer */}
                   <div
-                    className={`relative w-full aspect-[4/3] sm:aspect-square rounded-xl sm:rounded-2xl bg-gradient-to-br from-slate-900 via-[#0a0f1d] to-[#040711] border flex flex-col items-center justify-center mb-4 sm:mb-6 overflow-hidden transition-colors ${
+                    className={`relative w-full aspect-[4/5] sm:aspect-[4/5] rounded-xl sm:rounded-2xl bg-gradient-to-br from-slate-900 via-[#0a0f1d] to-[#040711] border flex flex-col items-center justify-center mb-4 sm:mb-6 overflow-hidden transition-colors ${
                       isBusinessLead
                         ? 'border-cyan-500/40 shadow-[0_0_20px_rgba(0,166,255,0.2)]'
                         : 'border-white/10 group-hover:border-cyan-500/30'
                     }`}
                   >
-                    {member.avatar ? (
+                    {member.id === 'ezedin-mohammed' ? (
+                      <AnimatedProfileAvatar type="ezedin" />
+                    ) : member.id === 'sudeys-ibrahim' ? (
+                      <AnimatedProfileAvatar type="sudeys" />
+                    ) : member.avatar ? (
                       <Image
                         src={member.avatar}
                         alt={member.name}
                         fill
                         sizes="(max-width: 768px) 100vw, 33vw"
-                        className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                        className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
                       />
                     ) : (
                       <>
