@@ -1,11 +1,12 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Card } from '../ui/Card';
 import { useLanguage } from '@/context/LanguageContext';
 import { getAboutPillars } from '@/data/translations';
-import { Users, Code, Sparkles, Shield, Cpu, Target } from 'lucide-react';
+import { Users, Code, Sparkles, Shield, Cpu, Target, ArrowRight } from 'lucide-react';
 
 export function About() {
   const { language, t } = useLanguage();
@@ -101,6 +102,17 @@ export function About() {
               </div>
             </Card>
           ))}
+        </div>
+
+        {/* Link to Dedicated About Us Page */}
+        <div className="mt-8 sm:mt-12 text-center">
+          <Link
+            href="/about"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-500/30 text-xs font-mono text-cyan-300 hover:text-white transition-all shadow-md group"
+          >
+            <span>Read Complete Company Vision, Location & Story</span>
+            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+          </Link>
         </div>
       </div>
     </section>

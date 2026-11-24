@@ -181,11 +181,11 @@ export function Footer() {
               {t('footerServicesTitle')}
             </h4>
             <ul className="space-y-2.5 text-sm">
-              {servicesList.slice(0, 5).map((service) => (
+              {servicesList.slice(0, 6).map((service) => (
                 <li key={service.id}>
                   <Link
-                    href="#services"
-                    className="hover:text-blue-400 transition-colors inline-block py-0.5"
+                    href={`/services/${service.id}`}
+                    className="hover:text-cyan-400 transition-colors inline-block py-0.5"
                   >
                     {service.title}
                   </Link>

@@ -68,7 +68,7 @@ export function Navbar() {
                   return (
                     <Link
                       key={item.href}
-                      href={item.href}
+                      href={item.href.startsWith('#') ? `/${item.href}` : item.href}
                       className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
                         isActive
                           ? 'text-cyan-400 bg-cyan-500/10 border border-cyan-500/20'
@@ -108,7 +108,7 @@ export function Navbar() {
               </button>
 
               <Button
-                href="#contact"
+                href="/#contact"
                 size="sm"
                 variant="primary"
                 iconRight={<ArrowUpRight className="w-3.5 h-3.5" />}

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Card } from '../ui/Card';
 import { Badge } from '../ui/Badge';
@@ -16,6 +17,7 @@ import {
   Server,
   Zap,
   ArrowRight,
+  ExternalLink,
   CheckCircle2,
   Layers,
   Sparkles,
@@ -106,6 +108,17 @@ export function Services() {
             </Card>
           ))}
         </div>
+
+        {/* Link to Dedicated Services Directory */}
+        <div className="mt-8 text-center">
+          <Link
+            href="/services"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-500/30 text-xs font-mono text-cyan-300 hover:text-white transition-all shadow-md group"
+          >
+            <span>Explore All Dedicated Service Documentation & Specs</span>
+            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
       </div>
 
       {/* Modal View for Detailed Service Inspection */}
@@ -155,13 +168,23 @@ export function Services() {
 
             {/* Action Bar in Modal */}
             <div className="pt-4 flex flex-wrap items-center justify-between gap-3 border-t border-white/10">
-              <button
-                onClick={() => setSelectedService(null)}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-slate-300 hover:text-white text-xs font-medium transition-colors cursor-pointer"
-              >
-                <ArrowRight className="w-3.5 h-3.5 rotate-180" />
-                <span>{t('navClose')}</span>
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setSelectedService(null)}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-slate-300 hover:text-white text-xs font-medium transition-colors cursor-pointer"
+                >
+                  <ArrowRight className="w-3.5 h-3.5 rotate-180" />
+                  <span>{t('navClose')}</span>
+                </button>
+
+                <Link
+                  href={`/services/${selectedService.id}`}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-xs font-mono font-medium transition-colors"
+                >
+                  <span>Full Page Spec</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </Link>
+              </div>
 
               <a
                 href="#contact"

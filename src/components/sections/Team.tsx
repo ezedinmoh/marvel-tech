@@ -1,13 +1,14 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Card } from '../ui/Card';
 import { AnimatedProfileAvatar } from '../ui/AnimatedProfileAvatar';
 import { useLanguage } from '@/context/LanguageContext';
 import { getTeamData } from '@/data/translations';
-import { Mail, User, Shield, Phone, Send, MapPin } from 'lucide-react';
+import { Mail, User, Shield, Phone, Send, MapPin, ArrowRight, ArrowUpRight } from 'lucide-react';
 import {
   GithubIcon,
   LinkedinIcon,
@@ -102,7 +103,13 @@ export function Team() {
 
                   <div className="mb-2">
                     <h3 className="text-xl font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors">
-                      {member.name}
+                      <Link
+                        href={`/team/${member.id === 'ezedin-mohammed' ? 'ezedinmoh' : member.id}`}
+                        className="hover:underline inline-flex items-center gap-1.5"
+                      >
+                        <span>{member.name}</span>
+                        <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity text-cyan-400" />
+                      </Link>
                     </h3>
                     <div className="flex flex-wrap items-center gap-2 mt-0.5">
                       <span className="text-xs font-mono text-cyan-400 font-medium">
@@ -271,17 +278,13 @@ export function Team() {
                     )}
                   </div>
 
-                  {isBusinessLead && member.socials.telegram && (
-                    <a
-                      href={member.socials.telegram}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-[11px] font-mono text-cyan-400 hover:text-cyan-300 font-semibold transition-colors"
-                    >
-                      <span>Connect</span>
-                      <Send className="w-3 h-3" />
-                    </a>
-                  )}
+                  <Link
+                    href={`/team/${member.id === 'ezedin-mohammed' ? 'ezedinmoh' : member.id}`}
+                    className="inline-flex items-center gap-1 text-[11px] font-mono text-cyan-400 hover:text-cyan-300 font-semibold transition-colors"
+                  >
+                    <span>Bio & Profile</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </Link>
                 </div>
               </Card>
             );

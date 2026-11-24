@@ -102,7 +102,7 @@ export function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) 
                 return (
                   <Link
                     key={item.href}
-                    href={item.href}
+                    href={item.href.startsWith('#') ? `/${item.href}` : item.href}
                     onClick={onClose}
                     className={`px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                       isActive
@@ -120,7 +120,7 @@ export function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) 
         {/* Footer Contact Info */}
         <div className="pt-6 border-t border-white/10 space-y-4">
           <Button
-            href="#contact"
+            href="/#contact"
             variant="primary"
             size="md"
             className="w-full"

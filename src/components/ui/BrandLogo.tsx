@@ -96,7 +96,7 @@ export function BrandLogo({
 
   if (asLink) {
     return (
-      <Link href="#hero" className="inline-flex items-center hover:opacity-95 transition-opacity">
+      <Link href="/" title="Marvel Technologies — Innovation Without Limits" className="inline-flex items-center hover:opacity-95 transition-opacity">
         {content}
       </Link>
     );

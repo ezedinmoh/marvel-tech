@@ -30,7 +30,7 @@ export const uiTranslations: Record<Language, TranslationDictionary> = {
     heroTitlePrefix: 'Building Next-Generation',
     heroTitleHighlight: 'Digital Systems',
     heroTitleSuffix: 'Without Limits.',
-    heroSubtitle: 'We transform ambitious concepts into resilient digital products through modern full-stack engineering, cloud architecture, and human-centered design.',
+    heroSubtitle: 'Marvel Technologies is a technology company based in Kombolcha, Ethiopia, building modern digital solutions for businesses locally and worldwide. From custom software and web applications to ERP systems and business automation, we engineer practical technology with sub-second performance.',
     heroStartProject: 'Start Your Project',
     heroExploreSolutions: 'Explore Solutions',
     heroTypeSafe: 'Type-Safe Architecture',
@@ -76,7 +76,7 @@ export const uiTranslations: Record<Language, TranslationDictionary> = {
     aboutTitle: 'Engineered by Technologists,',
     aboutHighlight: 'Built for the Future.',
     aboutSubtitle: 'Marvel Technologies is a modern technology company driven by a shared belief that thoughtful software engineering can solve real-world organizational challenges without limits.',
-    aboutP1: 'We founded Marvel Technologies to bridge the gap between ambitious product ideas and production-grade software. Too often, businesses are forced to choose between rigid, slow legacy vendors or fragmented freelancers lacking architectural consistency.',
+    aboutP1: 'We founded Marvel Technologies in Kombolcha, Ethiopia to bridge the gap between ambitious product ideas and production-grade software. Too often, businesses in Ethiopia and internationally are forced to choose between rigid, slow legacy vendors or fragmented freelancers lacking architectural consistency.',
     aboutP2: 'As a collaborative founding team combining deep software architecture, business leadership, and operations execution, we operate with surgical focus. We leverage modern toolchains—Next.js, React Native, TypeScript, PostgreSQL, and cloud serverless architectures—to craft systems that perform with blistering speed, scale gracefully under load, and feel exceptional to use.',
     aboutOathTitle: 'Our Engineering Oath',
     aboutOathSub: 'Founding Principles',
@@ -180,7 +180,7 @@ export const uiTranslations: Record<Language, TranslationDictionary> = {
     contactAvailability: 'Mon - Sat: 8:30 AM - 7:30 PM (EAT / UTC+3)',
 
     // Footer
-    footerDesc: 'Marvel Technologies is a software engineering and technology company founded by collaborative software engineers and designers. We architect high-performance web platforms, scalable mobile applications, cloud infrastructures, and automated business systems.',
+    footerDesc: 'Marvel Technologies is an Ethiopian technology company based in Kombolcha, Ethiopia. We architect high-performance web platforms, scalable mobile applications, ERP systems, and automated business solutions for local and international organizations.',
     footerQuickLinksTitle: 'Navigation',
     footerServicesTitle: 'Core Capabilities',
     footerConnectTitle: 'Executive Desk',
@@ -238,7 +238,7 @@ export const uiTranslations: Record<Language, TranslationDictionary> = {
     heroTitlePrefix: 'የወደፊቱን ዘመናዊ',
     heroTitleHighlight: 'ዲጂታል ሥርዓቶች',
     heroTitleSuffix: 'ያለ ገደብ እንገነባለን።',
-    heroSubtitle: 'ታላላቅ የንግድ እና የቴክኖሎጂ ራዕዮችን ወደ አስተማማኝ፣ ዘመናዊና ፈጣን ዲጂታል ምርቶች በከፍተኛ የሶፍትዌር ምህንድስና፣ ደመና አርክቴክቸር እና ተጠቃሚ-ተኮር ዲዛይን እንለውጣለን።',
+    heroSubtitle: 'ማርቭል ቴክኖሎጂስ በኮምቦልቻ፣ ኢትዮጵያ የሚገኝ የቴክኖሎጂ ኩባንያ ሲሆን ለአገር ውስጥና ለዓለም አቀፍ ድርጅቶች ዘመናዊ የሶፍትዌር፣ የዌብሳይት፣ የኢአርፒ (ERP) ሲስተሞችና የቢዝነስ አውቶሜሽን ዲጂታል መፍትሄዎችን በከፍተኛ ጥራት ያቀርባል።',
     heroStartProject: 'ፕሮጀክትዎን ይጀምሩ',
     heroExploreSolutions: 'መፍትሔዎችን ይመልከቱ',
     heroTypeSafe: 'አስተማማኝ አርክቴክቸር',
@@ -284,7 +284,7 @@ export const uiTranslations: Record<Language, TranslationDictionary> = {
     aboutTitle: 'በመሀንዲሶች የታነፀ፣',
     aboutHighlight: 'ለወደፊቱ የተገነባ።',
     aboutSubtitle: 'ማርቭል ቴክኖሎጂስ የታሰበበት የሶፍትዌር ምህንድስና ውስብስብ የድርጅት ፈተናዎችን ያለ ገደብ መፍታት ይችላል በሚል ጽኑ እምነት የተመሰረተ ዘመናዊ የቴክኖሎጂ ኩባንያ ነው።',
-    aboutP1: 'ማርቭል ቴክኖሎጂስን የመሰረትነው በታላላቅ የዲጂታል ሃሳቦች እና በአስተማማኝ ፕሮዳክሽን-ደረጃ ሶፍትዌሮች መካከል ያለውን ክፍተት ለመድፈን ነው። አብዛኛውን ጊዜ ንግዶች በዘገየ የድሮ ቴክኖሎጂ አቅራቢዎች ወይም ወጥነት በሌላቸው ተቋራጮች መካከል እንዲመርጡ ይገደዳሉ።',
+    aboutP1: 'ማርቭል ቴክኖሎጂስን በኮምቦልቻ፣ ኢትዮጵያ የመሰረትነው በታላላቅ የዲጂታል ሃሳቦች እና በአስተማማኝ ፕሮዳክሽን-ደረጃ ሶፍትዌሮች መካከል ያለውን ክፍተት ለመድፈን ነው። በአገር ውስጥም ሆነ በዓለም አቀፍ ደረጃ ድርጅቶች አስተማማኝና ጥራት ያለው ቴክኖሎጂ እንዲያገኙ እንሰራለን።',
     aboutP2: 'ጥልቅ የሶፍትዌር አርክቴክቸርን፣ የንግድ አመራርን እና የተግባር ቅንጅትን ባጣመረው የመስራች ቡድናችን፣ በከፍተኛ ትኩረት እንሰራለን። ፈጣን አፈፃፀም፣ አስተማማኝ ደህንነት እና ማራኪ የተጠቃሚ ልምድ ያላቸውን ሲስተሞች ለመገንባት ዘመናዊ መሳሪያዎችን—Next.js፣ React Native፣ TypeScript፣ PostgreSQL እና ሰርቨር-አልባ የደመና አርክቴክቸርን—እንጠቀማለን።',
     aboutOathTitle: 'የምህንድስና ቃላችን',
     aboutOathSub: 'የመሰረት መርሆዎች',
@@ -388,7 +388,7 @@ export const uiTranslations: Record<Language, TranslationDictionary> = {
     contactAvailability: 'ሰኞ - ቅዳሜ፡ ከጠዋቱ 2:30 - ማታ 1:30 (የኢትዮጵያ ሰዓት / UTC+3)',
 
     // Footer
-    footerDesc: 'ማርቭል ቴክኖሎጂስ በጋራ መሀንዲሶችና ዲዛይነሮች የተመሰረተ የሶፍትዌር ምህንድስና እና ቴክኖሎጂ ኩባንያ ነው። ከፍተኛ አፈፃፀም ያላቸው የድር መድረኮችን፣ ሊሰፉ የሚችሉ የሞባይል መተግበሪያዎችን፣ የደመና መሰረተ-ልማቶችን እና አውቶሜትድ የንግድ ስርዓቶችን እንገነባለን።',
+    footerDesc: 'ማርቭል ቴክኖሎጂስ በኮምቦልቻ፣ ኢትዮጵያ የሚገኝ የሶፍትዌር ምህንድስና እና ቴክኖሎጂ ኩባንያ ነው። ከፍተኛ አፈፃፀም ያላቸው የድር መድረኮችን፣ ሊሰፉ የሚችሉ የሞባይል መተግበሪያዎችን፣ የኢአርፒ (ERP) እና አውቶሜትድ የንግድ ስርዓቶችን ለአገር ውስጥና ለዓለም አቀፍ ድርጅቶች እንገነባለን።',
     footerQuickLinksTitle: 'ፈጣን ማውጫ',
     footerServicesTitle: 'ዋና ዋና አቅሞች',
     footerConnectTitle: 'ስራ አስፈፃሚ ቢሮ',
@@ -444,23 +444,23 @@ export function getNavItems(lang: Language): NavItem[] {
 export function getFooterQuickLinks(lang: Language) {
   if (lang === 'am') {
     return [
-      { label: 'መነሻ', href: '#hero' },
-      { label: 'ስለ እኛ', href: '#about' },
-      { label: 'ዋና አገልግሎቶች', href: '#services' },
-      { label: 'አርክቴክቸርና ሂደት', href: '#process' },
-      { label: 'የተሰሩ ፕሮጀክቶች', href: '#projects' },
-      { label: 'የምህንድስና ቡድን', href: '#team' },
-      { label: 'አግኙንና ጥያቄ ያቅርቡ', href: '#contact' },
+      { label: 'መነሻ', href: '/' },
+      { label: 'ስለ እኛ', href: '/about' },
+      { label: 'ዋና አገልግሎቶች', href: '/services' },
+      { label: 'አርክቴክቸርና ሂደት', href: '/#process' },
+      { label: 'የተሰሩ ፕሮጀክቶች', href: '/#projects' },
+      { label: 'የምህንድስና ቡድን', href: '/team' },
+      { label: 'አግኙንና ጥያቄ ያቅርቡ', href: '/contact' },
     ];
   }
   return [
-    { label: 'Home', href: '#hero' },
-    { label: 'About Us', href: '#about' },
-    { label: 'Core Services', href: '#services' },
-    { label: 'Architecture & Process', href: '#process' },
-    { label: 'Project Portfolio', href: '#projects' },
-    { label: 'Engineering Team', href: '#team' },
-    { label: 'Contact & Inquiry', href: '#contact' },
+    { label: 'Home', href: '/' },
+    { label: 'About Us', href: '/about' },
+    { label: 'Core Services', href: '/services' },
+    { label: 'Architecture & Process', href: '/#process' },
+    { label: 'Project Portfolio', href: '/#projects' },
+    { label: 'Engineering Team', href: '/team' },
+    { label: 'Contact & Inquiry', href: '/contact' },
   ];
 }
 

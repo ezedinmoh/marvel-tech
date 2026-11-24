@@ -6,7 +6,7 @@ export const companyData: CompanyInfo = {
   tagline: 'Innovation Without Limits.',
   headline: 'Building Next-Generation Digital Systems Without Limits.',
   description:
-    'Marvel Technologies is a software engineering and technology company founded by collaborative software engineers and designers. We architect high-performance web platforms, scalable mobile applications, cloud infrastructures, and automated business systems.',
+    'Marvel Technologies is an Ethiopian technology company based in Kombolcha, Ethiopia. We architect high-performance web platforms, scalable mobile applications, cloud infrastructures, and automated business systems locally and internationally.',
   mission:
     'To engineer resilient, modern software solutions that empower forward-thinking organizations, eliminate technical debt, and transform bold concepts into production-grade systems.',
   vision:
@@ -23,7 +23,7 @@ export const companyData: CompanyInfo = {
   twitterUrl: 'https://x.com/ezedinmoh',
   youtubeUrl: 'https://www.youtube.com/@ezedin_moh',
   discordUrl: 'https://discord.com/users/ezedinmoh',
-  location: 'Kombolcha & Addis Ababa, Ethiopia · Global Operations',
+  location: 'Kombolcha, Ethiopia · Global Operations',
   foundedYear: '2025',
   statusText: 'All Systems Operational · Taking New Inquiries',
 };
