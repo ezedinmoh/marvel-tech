@@ -5,6 +5,7 @@ import { SectionHeading } from '../ui/SectionHeading';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { companyData } from '@/data/company';
+import { useLanguage } from '@/context/LanguageContext';
 import {
   Mail,
   Phone,
@@ -31,6 +32,7 @@ interface FormErrors {
 }
 
 export function Contact() {
+  const { language, t } = useLanguage();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -44,15 +46,15 @@ export function Contact() {
 
   const validate = (): boolean => {
     const newErrors: FormErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Please provide your name';
+    if (!formData.name.trim()) newErrors.name = language === 'am' ? 'እባክዎ ሙሉ ስምዎን ያስገቡ' : 'Please provide your name';
     if (!formData.email.trim()) {
-      newErrors.email = 'Please provide your email address';
+      newErrors.email = language === 'am' ? 'እባክዎ የኢሜይል አድራሻዎን ያስገቡ' : 'Please provide your email address';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = language === 'am' ? 'እባክዎ ትክክለኛ የኢሜይል አድራሻ ያስገቡ' : 'Please enter a valid email address';
     }
-    if (!formData.subject.trim()) newErrors.subject = 'Please specify a subject';
+    if (!formData.subject.trim()) newErrors.subject = language === 'am' ? 'እባክዎ ርዕሰ ጉዳዩን ይግለጹ' : 'Please specify a subject';
     if (!formData.message.trim() || formData.message.length < 10) {
-      newErrors.message = 'Please provide a message with at least 10 characters';
+      newErrors.message = language === 'am' ? 'እባክዎ ቢያንስ 10 ፊደላት ያለው መልእክት ያስገቡ' : 'Please provide a message with at least 10 characters';
     }
 
     setErrors(newErrors);
@@ -66,20 +68,15 @@ export function Contact() {
     setStatus('loading');
     setStatusMessage('');
 
-    // Honest simulation: demonstrates loading & success state without pretending to deliver when no API route is configured yet.
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
-
-      // Successfully validated
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       setStatus('success');
-      setStatusMessage(
-        'Thank you! Your inquiry has been received by Marvel Technologies. We will respond to your email within 24 hours.'
-      );
+      setStatusMessage(t('contactSuccessAlert'));
       setFormData({ name: '', email: '', subject: '', message: '' });
       setErrors({});
     } catch {
       setStatus('error');
-      setStatusMessage('Something went wrong. Please reach out to us directly via email or Telegram.');
+      setStatusMessage(t('contactErrorAlert'));
     }
   };
 
@@ -87,10 +84,10 @@ export function Contact() {
     <section id="contact" className="py-24 sm:py-32 relative bg-[#03060f]/90">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badge="Direct Engagement"
-          title="Let's Architect Your Next"
-          highlight="Digital System."
-          subtitle="Have an ambitious software product in mind? Reach out to our founding engineers for a technical consultation."
+          badge={t('contactBadge')}
+          title={t('contactTitle')}
+          highlight={t('contactHighlight')}
+          subtitle={t('contactSubtitle')}
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -280,14 +277,14 @@ export function Contact() {
                 {/* Name */}
                 <div>
                   <label htmlFor="name" className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">
-                    Your Full Name <span className="text-cyan-400">*</span>
+                    {t('contactFullName')} <span className="text-cyan-400">*</span>
                   </label>
                   <input
                     type="text"
                     id="name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="e.g. Alex Mercer"
+                    placeholder={t('contactFullNamePlaceholder')}
                     className={`w-full px-4 py-3 rounded-xl bg-black/40 border text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
                       errors.name ? 'border-rose-500' : 'border-white/10 focus:border-blue-500'
                     }`}
@@ -298,14 +295,14 @@ export function Contact() {
                 {/* Email */}
                 <div>
                   <label htmlFor="email" className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">
-                    Email Address <span className="text-cyan-400">*</span>
+                    {t('contactWorkEmail')} <span className="text-cyan-400">*</span>
                   </label>
                   <input
                     type="email"
                     id="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="alex@company.com"
+                    placeholder={t('contactWorkEmailPlaceholder')}
                     className={`w-full px-4 py-3 rounded-xl bg-black/40 border text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
                       errors.email ? 'border-rose-500' : 'border-white/10 focus:border-blue-500'
                     }`}
@@ -316,14 +313,14 @@ export function Contact() {
                 {/* Subject */}
                 <div>
                   <label htmlFor="subject" className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">
-                    Subject / Project Scope <span className="text-cyan-400">*</span>
+                    {t('contactSubject')} <span className="text-cyan-400">*</span>
                   </label>
                   <input
                     type="text"
                     id="subject"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    placeholder="e.g. Enterprise ERP Development or Mobile App Architecture"
+                    placeholder={t('contactSubjectPlaceholder')}
                     className={`w-full px-4 py-3 rounded-xl bg-black/40 border text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
                       errors.subject ? 'border-rose-500' : 'border-white/10 focus:border-blue-500'
                     }`}
@@ -334,14 +331,14 @@ export function Contact() {
                 {/* Message */}
                 <div>
                   <label htmlFor="message" className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">
-                    Project Details & Goals <span className="text-cyan-400">*</span>
+                    {t('contactMessage')} <span className="text-cyan-400">*</span>
                   </label>
                   <textarea
                     id="message"
                     rows={5}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Tell us about what you want to build, target timelines, and any architectural preferences..."
+                    placeholder={t('contactMessagePlaceholder')}
                     className={`w-full px-4 py-3 rounded-xl bg-black/40 border text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors resize-y ${
                       errors.message ? 'border-rose-500' : 'border-white/10 focus:border-blue-500'
                     }`}
@@ -374,7 +371,7 @@ export function Contact() {
                   icon={status === 'loading' ? <Loader2 className="w-4 h-4 animate-spin" /> : undefined}
                   iconRight={status !== 'loading' ? <ArrowRight className="w-4 h-4" /> : undefined}
                 >
-                  {status === 'loading' ? 'Transmitting Inquiries...' : 'Send Project Inquiry'}
+                  {status === 'loading' ? t('contactSubmitting') : t('contactSubmitBtn')}
                 </Button>
               </form>
             </Card>

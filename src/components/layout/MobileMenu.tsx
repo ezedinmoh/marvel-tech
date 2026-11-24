@@ -2,7 +2,8 @@
 
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { navItems } from '@/data/navigation';
+import { getNavItems } from '@/data/translations';
+import { useLanguage } from '@/context/LanguageContext';
 import { companyData } from '@/data/company';
 import { Button } from '../ui/Button';
 import { BrandLogo } from '../ui/BrandLogo';
@@ -15,6 +16,8 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) {
+  const { language, t } = useLanguage();
+  const currentNavItems = getNavItems(language);
   useEffect(() => {
     if (!isOpen) return;
 
@@ -65,13 +68,13 @@ export function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) 
               aria-label="Close menu"
             >
               <X className="w-4 h-4" />
-              <span>Close</span>
+              <span>{t('navClose')}</span>
             </button>
           </div>
 
           {/* Nav Links */}
           <div className="flex flex-col gap-1.5 py-6">
-            {navItems
+            {currentNavItems
               .filter((item) => !item.isAction)
               .map((item) => {
                 const targetId = item.href.replace('#', '');
@@ -79,7 +82,7 @@ export function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) 
 
                 return (
                   <Link
-                    key={item.label}
+                    key={item.href}
                     href={item.href}
                     onClick={onClose}
                     className={`px-4 py-3 rounded-xl text-sm font-medium transition-all ${
@@ -105,7 +108,7 @@ export function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) 
             iconRight={<ArrowUpRight className="w-4 h-4" />}
             onClick={onClose}
           >
-            Get In Touch
+            {t('navLetsBuild')}
           </Button>
 
           <div className="space-y-2.5 text-xs text-slate-400 pt-2">

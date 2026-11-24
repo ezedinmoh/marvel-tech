@@ -1,77 +1,63 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-
-type Language = 'en' | 'am';
+import { Language, uiTranslations } from '@/data/translations';
 
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   toggleLanguage: () => void;
-  t: (key: string) => string;
+  t: (key: string, fallback?: string) => string;
 }
-
-const translations: Record<Language, Record<string, string>> = {
-  en: {
-    tagline: 'Innovation Without Limits',
-    services: 'Services',
-    ecosystem: 'Ecosystem',
-    solutions: 'Solutions',
-    process: 'Process',
-    work: 'Work',
-    portfolio: 'Projects',
-    team: 'Team',
-    faq: 'FAQ',
-    contact: 'Contact',
-    startProject: 'Start a Project',
-    letsBuild: "Let's Build",
-    heroHeadline: 'Building Next-Generation Digital Systems Without Limits.',
-    heroSubhead: 'We transform ambitious concepts into resilient digital products through modern full-stack engineering, cloud architecture, and human-centered design.',
-    exploreWork: 'Explore Solutions',
-    startYourProject: 'Start Your Project',
-    typeSafe: 'Type-Safe Architecture',
-    subSecond: 'Sub-second Response Times',
-    uptime: '99.9% Uptime Design',
-  },
-  am: {
-    tagline: 'ወሰን የለሽ ፈጠራ',
-    services: 'አገልግሎቶች',
-    ecosystem: 'ሥነ-ምህዳር',
-    solutions: 'መፍትሔዎች',
-    process: 'ሂደት',
-    work: 'ሥራዎች',
-    portfolio: 'ፕሮጀክቶች',
-    team: 'ቡድናችን',
-    faq: 'ጥያቄዎች',
-    contact: 'አግኙን',
-    startProject: 'ፕሮጀክት ይጀምሩ',
-    letsBuild: 'እንገንባ',
-    heroHeadline: 'የወደፊቱን ዲጂታል ሥርዓቶች ያለ ገደብ መገንባት።',
-    heroSubhead: 'ታላላቅ የንግድ ሃሳቦችን ወደ ዘመናዊና አስተማማኝ ሶፍትዌሮች፣ የሞባይል አፕሊኬሽኖች እና አውቶሜሽን እንለውጣለን።',
-    exploreWork: 'ሥራዎቻችንን ይመልከቱ',
-    startYourProject: 'አሁኑኑ ይጀምሩ',
-    typeSafe: 'አስተማማኝ አርክቴክቸር',
-    subSecond: 'እጅግ ፈጣን አፈፃፀም',
-    uptime: '99.9% አስተማማኝነት',
-  },
-};
 
 const LanguageContext = createContext<LanguageContextType>({
   language: 'en',
   setLanguage: () => {},
   toggleLanguage: () => {},
-  t: (key: string) => key,
+  t: (key: string, fallback?: string) => fallback || key,
 });
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguageState] = useState<Language>('en');
 
-  const toggleLanguage = () => {
-    setLanguage((prev) => (prev === 'en' ? 'am' : 'en'));
+  // Load persisted language from localStorage
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('marvel_lang') as Language;
+      if (saved === 'en' || saved === 'am') {
+        setLanguageState(saved);
+        document.documentElement.lang = saved;
+      }
+    } catch {
+      // Ignore storage errors in private mode
+    }
+  }, []);
+
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
+    try {
+      localStorage.setItem('marvel_lang', lang);
+      document.documentElement.lang = lang;
+    } catch {
+      // Ignore storage errors
+    }
   };
 
-  const t = (key: string) => {
-    return translations[language][key] || translations.en[key] || key;
+  const toggleLanguage = () => {
+    const nextLang: Language = language === 'en' ? 'am' : 'en';
+    setLanguage(nextLang);
+  };
+
+  const t = (key: string, fallback?: string): string => {
+    const dict = uiTranslations[language];
+    if (dict && dict[key]) {
+      return dict[key];
+    }
+    const enDict = uiTranslations.en;
+    if (enDict && enDict[key]) {
+      return enDict[key];
+    }
+    return fallback || key;
   };
 
   return (

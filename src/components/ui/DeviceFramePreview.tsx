@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { ProjectItem } from '@/types';
+import { useLanguage } from '@/context/LanguageContext';
 import {
   Monitor,
   Smartphone,
@@ -24,6 +25,7 @@ interface DeviceFramePreviewProps {
 }
 
 export function DeviceFramePreview({ project, className = '' }: DeviceFramePreviewProps) {
+  const { t } = useLanguage();
   const [device, setDevice] = useState<'desktop' | 'mobile'>('desktop');
   const [viewMode, setViewMode] = useState<'screenshot' | 'iframe'>('screenshot');
   const [fitMode, setFitMode] = useState<'scroll' | 'fit'>('scroll');
@@ -65,7 +67,7 @@ export function DeviceFramePreview({ project, className = '' }: DeviceFramePrevi
             }`}
           >
             <Monitor className="w-3.5 h-3.5" />
-            <span>Desktop (1440px)</span>
+            <span>{t('deviceDesktop')}</span>
           </button>
 
           <button
@@ -77,7 +79,7 @@ export function DeviceFramePreview({ project, className = '' }: DeviceFramePrevi
             }`}
           >
             <Smartphone className="w-3.5 h-3.5" />
-            <span>Mobile (390px)</span>
+            <span>{t('deviceMobile')}</span>
           </button>
         </div>
 
@@ -92,12 +94,12 @@ export function DeviceFramePreview({ project, className = '' }: DeviceFramePrevi
               {fitMode === 'scroll' ? (
                 <>
                   <Minimize2 className="w-3 h-3 text-cyan-400" />
-                  <span className="hidden sm:inline">Fit Window</span>
+                  <span className="hidden sm:inline">{t('deviceFitWindow')}</span>
                 </>
               ) : (
                 <>
                   <Maximize2 className="w-3 h-3 text-cyan-400" />
-                  <span className="hidden sm:inline">Full Scroll</span>
+                  <span className="hidden sm:inline">{t('deviceFullScroll')}</span>
                 </>
               )}
             </button>
@@ -114,7 +116,7 @@ export function DeviceFramePreview({ project, className = '' }: DeviceFramePrevi
                 }`}
               >
                 <ImageIcon className="w-3 h-3" />
-                <span>Screenshot</span>
+                <span>{t('deviceScreenshot')}</span>
               </button>
 
               <button
@@ -127,7 +129,7 @@ export function DeviceFramePreview({ project, className = '' }: DeviceFramePrevi
                 title="Load live interactive webview inside frame"
               >
                 <Globe className="w-3 h-3" />
-                <span>Live Interactive View</span>
+                <span>{t('deviceLiveInteractive')}</span>
               </button>
             </div>
           )}

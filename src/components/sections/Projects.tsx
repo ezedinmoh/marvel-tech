@@ -6,6 +6,7 @@ import { SectionHeading } from '../ui/SectionHeading';
 import { Card } from '../ui/Card';
 import { Modal } from '../ui/Modal';
 import { projectsData } from '@/data/projects';
+import { useLanguage } from '@/context/LanguageContext';
 import { ProjectItem } from '@/types';
 import { ExternalLink, CheckCircle, Eye, ArrowRight, ShieldCheck, Sparkles, Smartphone, Layers, FileText } from 'lucide-react';
 import { GithubIcon } from '../ui/Icons';
@@ -15,8 +16,15 @@ export function Projects() {
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const [modalTab, setModalTab] = useState<'case-study' | 'device-preview'>('case-study');
+  const { language, t } = useLanguage();
 
-  const categories = ['All', 'Full-Stack', 'E-Commerce', 'Enterprise & Cloud', 'Mobile & PWA'];
+  const categories = [
+    { key: 'All', label: t('projectsAll') },
+    { key: 'Full-Stack', label: t('projectsFullStack') },
+    { key: 'E-Commerce', label: t('projectsEcommerce') },
+    { key: 'Enterprise & Cloud', label: t('projectsEnterprise') },
+    { key: 'Mobile & PWA', label: t('projectsMobile') },
+  ];
 
   const filteredProjects =
     activeCategory === 'All'
@@ -27,25 +35,25 @@ export function Projects() {
     <section id="projects" className="py-24 sm:py-32 relative bg-[#03060f]/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badge="Production Portfolio"
-          title="Real Systems Shipped &"
-          highlight="Deployed to Production."
-          subtitle="Explore high-impact production web applications, enterprise platforms, and digital products engineered with our modern stack."
+          badge={t('projectsBadge')}
+          title={t('projectsTitle')}
+          highlight={t('projectsHighlight')}
+          subtitle={t('projectsSubtitle')}
         />
 
         {/* Category Filters */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-14">
           {categories.map((cat) => (
             <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
+              key={cat.key}
+              onClick={() => setActiveCategory(cat.key)}
               className={`px-4 py-2 rounded-full text-xs font-medium transition-all cursor-pointer ${
-                activeCategory === cat
+                activeCategory === cat.key
                   ? 'bg-blue-600 text-white shadow-[0_0_20px_rgba(0,102,255,0.35)] border border-blue-400'
                   : 'bg-white/[0.04] text-slate-400 hover:text-white border border-white/10 hover:border-white/20'
               }`}
             >
-              {cat}
+              {cat.label}
             </button>
           ))}
         </div>
@@ -213,7 +221,7 @@ export function Projects() {
                   }`}
                 >
                   <FileText className="w-3.5 h-3.5" />
-                  <span>Architecture & Case Study</span>
+                  <span>{t('projectsTabArchitecture')}</span>
                 </button>
 
                 <button
@@ -225,7 +233,7 @@ export function Projects() {
                   }`}
                 >
                   <Smartphone className="w-3.5 h-3.5" />
-                  <span>Interactive Device Simulator (Desktop & Mobile)</span>
+                  <span>{t('projectsTabSimulator')}</span>
                 </button>
               </div>
 
@@ -247,7 +255,7 @@ export function Projects() {
                     {/* Problem */}
                     <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 space-y-1">
                       <h4 className="text-xs font-mono uppercase tracking-wider text-rose-400 font-bold">
-                        The Challenge
+                        {t('projectsChallenge')}
                       </h4>
                       <p className="text-sm text-slate-300 leading-relaxed">
                         {selectedProject.caseStudy.problem}
@@ -257,7 +265,7 @@ export function Projects() {
                     {/* Solution */}
                     <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20 space-y-1">
                       <h4 className="text-xs font-mono uppercase tracking-wider text-blue-400 font-bold">
-                        Engineering Solution
+                        {t('projectsSolution')}
                       </h4>
                       <p className="text-sm text-slate-300 leading-relaxed">
                         {selectedProject.caseStudy.solution}
@@ -267,7 +275,7 @@ export function Projects() {
                     {/* Outcome */}
                     <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 space-y-1">
                       <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold">
-                        Measurable Outcome & Impact
+                        {t('projectsOutcome')}
                       </h4>
                       <p className="text-sm text-slate-300 leading-relaxed">
                         {selectedProject.caseStudy.outcome}
@@ -334,7 +342,7 @@ export function Projects() {
                   className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-slate-300 hover:text-white text-xs font-medium transition-colors cursor-pointer"
                 >
                   <ArrowRight className="w-3.5 h-3.5 rotate-180" />
-                  <span>Back to Projects</span>
+                  <span>{t('navClose')}</span>
                 </button>
 
                 {selectedProject.githubUrl ? (

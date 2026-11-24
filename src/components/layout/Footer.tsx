@@ -4,8 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import { BrandLogo } from '../ui/BrandLogo';
 import { companyData } from '@/data/company';
-import { servicesData } from '@/data/services';
-import { footerQuickLinks, legalLinks } from '@/data/navigation';
+import { useLanguage } from '@/context/LanguageContext';
+import { getFooterQuickLinks, getLegalLinks, getServicesData } from '@/data/translations';
 import { Mail, Phone, Send, ArrowUp, Activity } from 'lucide-react';
 import {
   GithubIcon,
@@ -19,6 +19,11 @@ import {
 } from '../ui/Icons';
 
 export function Footer() {
+  const { language, t } = useLanguage();
+  const quickLinks = getFooterQuickLinks(language);
+  const legal = getLegalLinks(language);
+  const servicesList = getServicesData(language);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -35,13 +40,13 @@ export function Footer() {
             <BrandLogo size="md" />
 
             <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
-              {companyData.description}
+              {t('footerDesc')}
             </p>
 
             {/* Live Operational Status Indicator */}
             <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono text-emerald-400">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>{companyData.statusText}</span>
+              <span>{t('footerStatus')}</span>
             </div>
 
             {/* Social Links */}
@@ -154,10 +159,10 @@ export function Footer() {
           {/* Column 2: Navigation Links */}
           <div>
             <h4 className="text-xs font-mono uppercase tracking-wider text-slate-200 font-semibold mb-4">
-              Navigation
+              {t('footerQuickLinksTitle')}
             </h4>
             <ul className="space-y-2.5 text-sm">
-              {footerQuickLinks.map((link) => (
+              {quickLinks.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
@@ -173,10 +178,10 @@ export function Footer() {
           {/* Column 3: Services */}
           <div>
             <h4 className="text-xs font-mono uppercase tracking-wider text-slate-200 font-semibold mb-4">
-              Solutions & Engineering
+              {t('footerServicesTitle')}
             </h4>
             <ul className="space-y-2.5 text-sm">
-              {servicesData.slice(0, 5).map((service) => (
+              {servicesList.slice(0, 5).map((service) => (
                 <li key={service.id}>
                   <Link
                     href="#services"
@@ -192,7 +197,7 @@ export function Footer() {
           {/* Column 4: Contact Info */}
           <div>
             <h4 className="text-xs font-mono uppercase tracking-wider text-slate-200 font-semibold mb-4">
-              Direct Contact
+              {t('footerConnectTitle')}
             </h4>
             <div className="space-y-3 text-sm">
               <a
@@ -232,10 +237,10 @@ export function Footer() {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <span>
-              &copy; {new Date().getFullYear()} {companyData.legalName} All rights reserved.
+              &copy; {new Date().getFullYear()} {companyData.legalName} {language === 'am' ? 'መብቱ በህግ የተጠበቀ ነው።' : 'All rights reserved.'}
             </span>
             <div className="flex items-center gap-4">
-              {legalLinks.map((link) => (
+              {legal.map((link) => (
                 <a key={link.label} href={link.href} className="hover:text-slate-400 transition-colors">
                   {link.label}
                 </a>
@@ -248,7 +253,7 @@ export function Footer() {
             className="flex items-center gap-1.5 text-slate-400 hover:text-white px-3 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 transition-colors"
             aria-label="Scroll to top"
           >
-            <span>Back to top</span>
+            <span>{language === 'am' ? 'ወደ ላይ ተመለስ' : 'Back to top'}</span>
             <ArrowUp className="w-3.5 h-3.5" />
           </button>
         </div>

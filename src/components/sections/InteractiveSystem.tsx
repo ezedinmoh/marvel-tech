@@ -2,114 +2,15 @@
 
 import React, { useState } from 'react';
 import { SectionHeading } from '../ui/SectionHeading';
+import { useLanguage } from '@/context/LanguageContext';
+import { getInteractiveLayers } from '@/data/translations';
 import {
-  Globe,
-  Smartphone,
-  Server,
-  Database,
-  CreditCard,
-  Send,
-  Zap,
-  Shield,
-  Layers,
   Code,
-  CheckCircle,
 } from 'lucide-react';
 
-interface LayerInfo {
-  id: string;
-  name: string;
-  badge: string;
-  headline: string;
-  description: string;
-  tech: string[];
-  metrics: { label: string; value: string }[];
-  codeSample: string;
-}
-
-const layers: LayerInfo[] = [
-  {
-    id: 'frontend',
-    name: '01 / Edge & Frontend',
-    badge: 'Presentation Layer',
-    headline: 'Sub-second SSR & Universal Mobile Interfaces',
-    description:
-      'High-velocity consumer and administrative experiences engineered with Next.js 15 App Router and React Native. Optimized with streaming SSR, dynamic imports, and instant edge CDN hydration.',
-    tech: ['Next.js 15', 'React 19', 'React Native', 'Tailwind CSS', 'TypeScript'],
-    metrics: [
-      { label: 'Edge Hydration', value: '< 45ms' },
-      { label: 'Lighthouse Score', value: '98/100' },
-      { label: 'Asset Payload', value: '48 KB compressed' },
-    ],
-    codeSample: `// Next.js App Router Edge Handler
-export const runtime = 'edge';
-
-export async function GET(request: Request) {
-  const telemetry = await getEdgeTelemetry();
-  return Response.json({ status: 200, latency: '12ms', telemetry });
-}`,
-  },
-  {
-    id: 'gateway',
-    name: '02 / API & Logic Core',
-    badge: 'Microservices & Routing',
-    headline: 'Resilient Microservices & Event Orchestration',
-    description:
-      'Stateless, horizontal-scaling backend services built on Node.js and Express. Features cryptographic JWT token validation, rate-limiting shields, and transactional event streams.',
-    tech: ['Node.js', 'Express', 'JWT Auth', 'Redis Queues', 'Docker'],
-    metrics: [
-      { label: 'Throughput', value: '12,000 req/sec' },
-      { label: 'Error Rate', value: '0.001%' },
-      { label: 'Availability', value: '99.95%' },
-    ],
-    codeSample: `// Authenticated Microservice Handler
-router.post('/v1/process-mission', verifyAuth, rateLimit(100), async (req, res) => {
-  const job = await dispatchQueue.add('order-sync', req.body);
-  res.status(202).json({ jobId: job.id, status: 'enqueued' });
-});`,
-  },
-  {
-    id: 'database',
-    name: '03 / Persistence & Cache',
-    badge: 'Data Integrity',
-    headline: 'ACID-Compliant Relational Schemas & In-Memory Caching',
-    description:
-      'Rock-solid PostgreSQL persistence layer orchestrated with Prisma ORM. Paired with in-memory Redis caching clusters to eliminate cold reads and prevent database throttling.',
-    tech: ['PostgreSQL', 'Prisma ORM', 'Redis', 'Connection Pooling', 'Automated Backups'],
-    metrics: [
-      { label: 'Query Latency', value: '< 2.4ms (p95)' },
-      { label: 'Cache Hit Rate', value: '94.2%' },
-      { label: 'Replication Lag', value: '0.0s' },
-    ],
-    codeSample: `// Type-Safe Prisma Relational Query
-const activeSession = await prisma.systemNode.findUnique({
-  where: { id: nodeId },
-  include: { auditLogs: { take: 10, orderBy: { createdAt: 'desc' } } },
-});`,
-  },
-  {
-    id: 'integrations',
-    name: '04 / Integrations & Webhooks',
-    badge: 'Connective Tissue',
-    headline: 'Reliable Payment Gateways & Automated Dispatch',
-    description:
-      'Seamlessly connects Telebirr, Chapa, Stripe, and Telegram bots. Features automated webhook retries with exponential backoffs and dead-letter queue isolation for guaranteed delivery.',
-    tech: ['Telebirr SDK', 'Chapa Pay', 'Telegram Bot API', 'Stripe', 'Webhook Queues'],
-    metrics: [
-      { label: 'Webhook SLA', value: '99.99%' },
-      { label: 'Max Retry Buffer', value: '72 Hours' },
-      { label: 'Signature Check', value: 'HMAC-SHA256' },
-    ],
-    codeSample: `// Webhook Signature & Idempotency Pipeline
-export async function handlePaymentWebhook(req: Request) {
-  const sig = req.headers.get('x-gateway-signature');
-  verifyHmac(req.rawBody, sig, process.env.SECRET_KEY);
-  await markTransactionSettled(req.body.referenceId);
-}`,
-  },
-];
-
 export function InteractiveSystem() {
+  const { language, t } = useLanguage();
+  const layers = getInteractiveLayers(language);
   const [selectedLayerId, setSelectedLayerId] = useState('frontend');
   const activeLayer = layers.find((l) => l.id === selectedLayerId) || layers[0];
 
@@ -117,10 +18,10 @@ export function InteractiveSystem() {
     <section id="system" className="py-24 sm:py-32 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badge="System Architecture"
-          title="How Marvel Technologies Connects"
-          highlight="The Complete Digital Stack."
-          subtitle="Explore the interactive layers of our architectural blueprint—from client viewports to cloud data persistence."
+          badge={t('systemBadge')}
+          title={t('systemTitle')}
+          highlight={t('systemHighlight')}
+          subtitle={t('systemSubtitle')}
         />
 
         {/* Layer Selector Bar */}
@@ -166,12 +67,12 @@ export function InteractiveSystem() {
                   Core Technologies in this Layer:
                 </span>
                 <div className="flex flex-wrap gap-2">
-                  {activeLayer.tech.map((t) => (
+                  {activeLayer.tech.map((tItem) => (
                     <span
-                      key={t}
+                      key={tItem}
                       className="px-3 py-1 rounded-lg text-xs font-mono bg-white/[0.05] text-slate-200 border border-white/10"
                     >
-                      {t}
+                      {tItem}
                     </span>
                   ))}
                 </div>

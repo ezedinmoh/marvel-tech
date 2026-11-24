@@ -4,7 +4,8 @@ import React from 'react';
 import Image from 'next/image';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Card } from '../ui/Card';
-import { teamData } from '@/data/team';
+import { useLanguage } from '@/context/LanguageContext';
+import { getTeamData } from '@/data/translations';
 import { Mail, User, Shield, Phone, Send, MapPin } from 'lucide-react';
 import {
   GithubIcon,
@@ -18,19 +19,22 @@ import {
 } from '../ui/Icons';
 
 export function Team() {
+  const { language, t } = useLanguage();
+  const members = getTeamData(language);
+
   return (
     <section id="team" className="py-24 sm:py-32 relative bg-[#03060f]/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badge="Founding Team"
-          title="Collaborative"
-          highlight="Engineering Collective."
-          subtitle="A focused core of technology professionals combining deep domain knowledge in distributed web platforms, mobile engineering, and cloud systems."
+          badge={t('teamBadge')}
+          title={t('teamTitle')}
+          highlight={t('teamHighlight')}
+          subtitle={t('teamSubtitle')}
         />
 
         {/* Team Member Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {teamData.map((member, index) => {
+          {members.map((member, index) => {
             const isBusinessLead = member.id === 'mohammed-imam';
 
             return (
@@ -48,7 +52,7 @@ export function Team() {
                   {isBusinessLead && (
                     <div className="mb-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-blue-600/30 to-cyan-500/30 border border-cyan-500/40 text-[11px] font-mono text-cyan-300">
                       <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                      <span>Executive Business & Partnerships</span>
+                      <span>{t('teamBusinessLeadBanner')}</span>
                     </div>
                   )}
 

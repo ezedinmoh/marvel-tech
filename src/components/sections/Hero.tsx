@@ -4,10 +4,12 @@ import React, { useState } from 'react';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 import { companyData } from '@/data/company';
+import { useLanguage } from '@/context/LanguageContext';
 import { ArrowRight, Terminal, Layers, Activity, ShieldCheck, Zap, Server } from 'lucide-react';
 
 export function Hero() {
   const [activeTab, setActiveTab] = useState<'architecture' | 'telemetry'>('architecture');
+  const { language, t } = useLanguage();
 
   return (
     <section id="hero" className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 lg:pt-48 lg:pb-36 overflow-hidden">
@@ -16,7 +18,7 @@ export function Hero() {
           {/* Tagline Badge */}
           <div className="mb-6 dc-reveal" style={{ transitionDelay: '0ms' }}>
             <Badge variant="cyan" dot={true}>
-              Marvel Technologies · Innovation Without Limits
+              {t('heroBadge')}
             </Badge>
           </div>
 
@@ -25,11 +27,11 @@ export function Hero() {
             className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl leading-[1.08] dc-reveal"
             style={{ transitionDelay: '100ms' }}
           >
-            Building Next-Generation{' '}
+            {t('heroTitlePrefix')}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400">
-              Digital Systems
+              {t('heroTitleHighlight')}
             </span>{' '}
-            Without Limits.
+            {t('heroTitleSuffix')}
           </h1>
 
           {/* Supporting Narrative */}
@@ -37,7 +39,7 @@ export function Hero() {
             className="mt-6 text-lg sm:text-xl text-slate-300 max-w-2xl leading-relaxed font-normal dc-reveal"
             style={{ transitionDelay: '180ms' }}
           >
-            We transform ambitious concepts into resilient digital products through modern full-stack engineering, cloud architecture, and human-centered design.
+            {t('heroSubtitle')}
           </p>
 
           {/* Action CTAs */}
@@ -51,14 +53,14 @@ export function Hero() {
               variant="primary"
               iconRight={<ArrowRight className="w-4 h-4" />}
             >
-              Start Your Project
+              {t('heroStartProject')}
             </Button>
             <Button
               href="#projects"
               size="lg"
               variant="outline"
             >
-              Explore Solutions
+              {t('heroExploreSolutions')}
             </Button>
           </div>
 
@@ -69,15 +71,15 @@ export function Hero() {
           >
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-cyan-400" />
-              <span>Type-Safe Architecture</span>
+              <span>{t('heroTypeSafe')}</span>
             </div>
             <div className="flex items-center gap-2">
               <Zap className="w-4 h-4 text-blue-400" />
-              <span>Sub-second Response Times</span>
+              <span>{t('heroSubSecond')}</span>
             </div>
             <div className="flex items-center gap-2">
               <Activity className="w-4 h-4 text-emerald-400" />
-              <span>99.9% Uptime Design</span>
+              <span>{t('heroUptime')}</span>
             </div>
           </div>
 
@@ -108,7 +110,7 @@ export function Hero() {
                       : 'text-slate-400 hover:text-white'
                   }`}
                 >
-                  Architecture Mesh
+                  {t('heroArchMesh')}
                 </button>
                 <button
                   onClick={() => setActiveTab('telemetry')}
@@ -118,7 +120,7 @@ export function Hero() {
                       : 'text-slate-400 hover:text-white'
                   }`}
                 >
-                  Real-time Telemetry
+                  {t('heroRealtimeTelemetry')}
                 </button>
               </div>
             </div>
@@ -130,55 +132,55 @@ export function Hero() {
                   {/* Node 1 */}
                   <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-cyan-500/40 transition-colors">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-cyan-400 font-semibold">01 / FRONTEND LAYER</span>
+                      <span className="text-cyan-400 font-semibold">{t('heroLayer1Title')}</span>
                       <Layers className="w-4 h-4 text-cyan-400" />
                     </div>
                     <p className="text-slate-400 text-[11px] mb-2">
-                      Next.js App Router, React 19 Server Components, Edge CDN Caching
+                      {t('heroLayer1Desc')}
                     </p>
                     <div className="flex items-center gap-2 text-emerald-400 text-[11px]">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                      <span>TTFB: 42ms · Optimized</span>
+                      <span>{t('heroLayer1Metric')}</span>
                     </div>
                   </div>
 
                   {/* Node 2 */}
                   <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-blue-500/40 transition-colors">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-blue-400 font-semibold">02 / BACKEND & API</span>
+                      <span className="text-blue-400 font-semibold">{t('heroLayer2Title')}</span>
                       <Server className="w-4 h-4 text-blue-400" />
                     </div>
                     <p className="text-slate-400 text-[11px] mb-2">
-                      TypeScript Microservices, Distributed Redis, Idempotent Queues
+                      {t('heroLayer2Desc')}
                     </p>
                     <div className="flex items-center gap-2 text-emerald-400 text-[11px]">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                      <span>Cluster: 3 Nodes Healthy</span>
+                      <span>{t('heroLayer2Metric')}</span>
                     </div>
                   </div>
 
                   {/* Node 3 */}
                   <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-indigo-500/40 transition-colors">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-indigo-400 font-semibold">03 / PERSISTENCE</span>
+                      <span className="text-indigo-400 font-semibold">{t('heroLayer3Title')}</span>
                       <Terminal className="w-4 h-4 text-indigo-400" />
                     </div>
                     <p className="text-slate-400 text-[11px] mb-2">
-                      PostgreSQL Relational DB, Prisma ORM, Automated Backups
+                      {t('heroLayer3Desc')}
                     </p>
                     <div className="flex items-center gap-2 text-emerald-400 text-[11px]">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                      <span>Replication: Synchronous</span>
+                      <span>{t('heroLayer3Metric')}</span>
                     </div>
                   </div>
                 </div>
               ) : (
                 <div className="space-y-2 text-slate-300 text-xs bg-black/40 p-4 rounded-xl border border-white/5">
-                  <div className="text-slate-500">// Real-time operational logs</div>
-                  <div className="text-emerald-400">[2026-11-24T12:00:01Z] [OK] System health check verified. 0 defects reported.</div>
-                  <div className="text-cyan-400">[2026-11-24T12:00:02Z] [DEPLOY] CI/CD pipeline succeeded (build time: 24.3s).</div>
-                  <div className="text-blue-400">[2026-11-24T12:00:03Z] [LATENCY] Global edge p99 response: 18.2ms.</div>
-                  <div className="text-slate-400">[2026-11-24T12:00:04Z] [SECURITY] Zero vulnerable dependencies detected.</div>
+                  <div className="text-slate-500">{t('heroLogsTitle')}</div>
+                  <div className="text-emerald-400">[2026-11-24T12:00:01Z] {t('heroLog1')}</div>
+                  <div className="text-cyan-400">[2026-11-24T12:00:02Z] {t('heroLog2')}</div>
+                  <div className="text-blue-400">[2026-11-24T12:00:03Z] {t('heroLog3')}</div>
+                  <div className="text-slate-400">[2026-11-24T12:00:04Z] {t('heroLog4')}</div>
                 </div>
               )}
             </div>

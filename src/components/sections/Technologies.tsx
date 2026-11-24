@@ -3,7 +3,8 @@
 import React from 'react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Card } from '../ui/Card';
-import { technologiesData } from '@/data/technologies';
+import { useLanguage } from '@/context/LanguageContext';
+import { getTechnologiesData } from '@/data/translations';
 import {
   Globe,
   Code2,
@@ -21,6 +22,9 @@ import {
 } from 'lucide-react';
 
 export function Technologies() {
+  const { language, t } = useLanguage();
+  const techCategories = getTechnologiesData(language);
+
   const getTechIcon = (iconName: string) => {
     const props = { className: 'w-5 h-5 text-cyan-400' };
     switch (iconName) {
@@ -61,15 +65,15 @@ export function Technologies() {
     <section id="tech" className="py-24 sm:py-32 relative bg-[#040711]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badge="Technology Stack"
-          title="Battle-Tested Tooling For"
-          highlight="Uncompromising Speed."
-          subtitle="We select tools based on performance, type safety, ecosystem health, and long-term maintainability."
+          badge={t('techBadge')}
+          title={t('techTitle')}
+          highlight={t('techHighlight')}
+          subtitle={t('techSubtitle')}
         />
 
         {/* 4 Categories */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {technologiesData.map((category, index) => (
+          {techCategories.map((category, index) => (
             <Card
               key={category.category}
               className="p-8 dc-reveal"

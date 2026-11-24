@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { BrandLogo } from '../ui/BrandLogo';
 import { Button } from '../ui/Button';
-import { navItems } from '@/data/navigation';
+import { getNavItems } from '@/data/translations';
 import { Menu, X, ArrowUpRight, Languages, Search } from 'lucide-react';
 import { MobileMenu } from './MobileMenu';
 import { useLanguage } from '@/context/LanguageContext';
@@ -14,6 +14,7 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const { language, toggleLanguage, t } = useLanguage();
+  const currentNavItems = getNavItems(language);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,7 +59,7 @@ export function Navbar() {
 
             {/* Desktop Navigation Links */}
             <div className="hidden lg:flex items-center gap-1 xl:gap-2">
-              {navItems
+              {currentNavItems
                 .filter((item) => !item.isAction)
                 .map((item) => {
                   const targetId = item.href.replace('#', '');
@@ -66,7 +67,7 @@ export function Navbar() {
 
                   return (
                     <Link
-                      key={item.label}
+                      key={item.href}
                       href={item.href}
                       className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
                         isActive
@@ -91,7 +92,7 @@ export function Navbar() {
                 title="Search & Quick Actions (Cmd+K)"
               >
                 <Search className="w-3.5 h-3.5 text-cyan-400" />
-                <span className="text-[11px] text-slate-300">Search</span>
+                <span className="text-[11px] text-slate-300">{t('navSearch')}</span>
                 <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-[10px] text-slate-400 font-mono">⌘K</kbd>
               </button>
 
@@ -112,7 +113,7 @@ export function Navbar() {
                 variant="primary"
                 iconRight={<ArrowUpRight className="w-3.5 h-3.5" />}
               >
-                {t('letsBuild')}
+                {t('navLetsBuild')}
               </Button>
             </div>
 

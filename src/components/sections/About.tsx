@@ -3,54 +3,43 @@
 import React from 'react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Card } from '../ui/Card';
+import { useLanguage } from '@/context/LanguageContext';
+import { getAboutPillars } from '@/data/translations';
 import { Users, Code, Sparkles, Shield, Cpu, Target } from 'lucide-react';
 
 export function About() {
-  const pillars = [
-    {
-      icon: <Users className="w-6 h-6 text-cyan-400" />,
-      title: 'Core Engineering Collective',
-      description:
-        'Marvel Technologies was founded by collaborative technology professionals combining distinct strengths in systems engineering, mobile development, backend cloud operations, and UI/UX design.',
-    },
-    {
-      icon: <Code className="w-6 h-6 text-blue-400" />,
-      title: 'Modern Engineering Discipline',
-      description:
-        'We reject legacy shortcuts and bloat. Every line of TypeScript, SQL schema, and React component is crafted with strict type safety, modular cohesion, and high maintainability.',
-    },
-    {
-      icon: <Target className="w-6 h-6 text-indigo-400" />,
-      title: 'Real Problem Solvers',
-      description:
-        'We do not build software for the sake of technology alone. We architect tools that automate repetitive labor, reduce operational friction, and generate measurable business momentum.',
-    },
-    {
-      icon: <Shield className="w-6 h-6 text-emerald-400" />,
-      title: 'Reliability & Ownership',
-      description:
-        'When you collaborate with us, you work directly with our engineering founders. No account managers, no hidden offshore handoffs, and 100% intellectual property ownership from day one.',
-    },
+  const { language, t } = useLanguage();
+  const rawPillars = getAboutPillars(language);
+  const icons = [
+    <Users key="users" className="w-6 h-6 text-cyan-400" />,
+    <Code key="code" className="w-6 h-6 text-blue-400" />,
+    <Target key="target" className="w-6 h-6 text-indigo-400" />,
+    <Shield key="shield" className="w-6 h-6 text-emerald-400" />,
   ];
+
+  const pillars = rawPillars.map((p, i) => ({
+    ...p,
+    icon: icons[i % icons.length],
+  }));
 
   return (
     <section id="about" className="py-24 sm:py-32 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badge="Company Identity"
-          title="Engineered by Technologists,"
-          highlight="Built for the Future."
-          subtitle="Marvel Technologies is a modern technology company driven by a shared belief that thoughtful software engineering can solve real-world organizational challenges without limits."
+          badge={t('aboutBadge')}
+          title={t('aboutTitle')}
+          highlight={t('aboutHighlight')}
+          subtitle={t('aboutSubtitle')}
         />
 
         {/* Narrative Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
           <div className="lg:col-span-7 space-y-6 text-slate-300 leading-relaxed text-base sm:text-lg dc-reveal" data-reveal="left">
             <p>
-              We founded <span className="text-white font-semibold">Marvel Technologies</span> to bridge the gap between ambitious product ideas and production-grade software. Too often, businesses are forced to choose between rigid, slow legacy vendors or fragmented freelancers lacking architectural consistency.
+              {t('aboutP1')}
             </p>
             <p className="text-slate-400 text-base">
-              As a collaborative founding team combining deep software architecture, business leadership, and operations execution, we operate with surgical focus. We leverage modern toolchains—Next.js, React Native, TypeScript, PostgreSQL, and cloud serverless architectures—to craft systems that perform with blistering speed, scale gracefully under load, and feel exceptional to use.
+              {t('aboutP2')}
             </p>
             <div className="pt-2 flex flex-wrap gap-4 text-xs font-mono text-cyan-400">
               <span className="px-3 py-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/20">
@@ -74,17 +63,17 @@ export function About() {
                   <Cpu className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-base font-bold text-white">Our Engineering Oath</h4>
-                  <span className="text-xs text-slate-400 font-mono">Founding Principles</span>
+                  <h4 className="text-base font-bold text-white">{t('aboutOathTitle')}</h4>
+                  <span className="text-xs text-slate-400 font-mono">{t('aboutOathSub')}</span>
                 </div>
               </div>
 
               <blockquote className="italic text-sm text-slate-300 border-l-2 border-cyan-400 pl-4 my-4">
-                &ldquo;We engineer every project as if we are its primary operators. We write clean code, document every endpoint, test rigorously, and build solutions that endure.&rdquo;
+                {t('aboutOathQuote')}
               </blockquote>
 
               <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
-                <span>Founding Leadership</span>
+                <span>{t('aboutOathRole')}</span>
                 <span className="font-mono text-cyan-400">Marvel Technologies</span>
               </div>
             </div>

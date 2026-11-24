@@ -2,11 +2,14 @@
 
 import React, { useState } from 'react';
 import { SectionHeading } from '../ui/SectionHeading';
-import { faqData } from '@/data/faq';
+import { useLanguage } from '@/context/LanguageContext';
+import { getFaqData } from '@/data/translations';
 import { ChevronDown } from 'lucide-react';
 
 export function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const { language, t } = useLanguage();
+  const faqList = getFaqData(language);
 
   const toggle = (idx: number) => {
     setOpenIndex(openIndex === idx ? null : idx);
@@ -16,14 +19,14 @@ export function Faq() {
     <section id="faq" className="py-24 sm:py-32 relative bg-[#040711]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badge="Frequently Asked Questions"
-          title="Clear Answers About Our"
-          highlight="Process & Engagement."
-          subtitle="Direct, transparent guidelines on how we collaborate with partners and deliver digital systems."
+          badge={t('faqBadge')}
+          title={t('faqTitle')}
+          highlight={t('faqHighlight')}
+          subtitle={t('faqSubtitle')}
         />
 
         <div className="space-y-4">
-          {faqData.map((item, idx) => {
+          {faqList.map((item, idx) => {
             const isOpen = openIndex === idx;
 
             return (

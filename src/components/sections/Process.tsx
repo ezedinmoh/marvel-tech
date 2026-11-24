@@ -3,10 +3,14 @@
 import React from 'react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Card } from '../ui/Card';
-import { processStages } from '@/data/process';
+import { useLanguage } from '@/context/LanguageContext';
+import { getProcessStages } from '@/data/translations';
 import { Search, Cpu, Palette, Code2, Rocket, TrendingUp, CheckCircle } from 'lucide-react';
 
 export function Process() {
+  const { language, t } = useLanguage();
+  const stages = getProcessStages(language);
+
   const getIcon = (iconName: string) => {
     const props = { className: 'w-5 h-5 text-cyan-400' };
     switch (iconName) {
@@ -31,15 +35,15 @@ export function Process() {
     <section id="process" className="py-24 sm:py-32 relative bg-[#040711]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badge="Engineering Lifecycle"
-          title="From Initial Conception"
-          highlight="To Production Deployment."
-          subtitle="Our 6-stage development framework guarantees architectural rigor, transparent milestones, and zero surprises."
+          badge={t('processBadge')}
+          title={t('processTitle')}
+          highlight={t('processHighlight')}
+          subtitle={t('processSubtitle')}
         />
 
         {/* 6-Stage Timeline Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
-          {processStages.map((stage, idx) => (
+          {stages.map((stage, idx) => (
             <Card
               key={stage.step}
               style={{ transitionDelay: `${idx * 90}ms` }}
@@ -67,7 +71,7 @@ export function Process() {
               {/* Deliverables Checklist */}
               <div className="pt-4 border-t border-white/5 space-y-2">
                 <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">
-                  Stage Deliverables:
+                  {t('processDeliverablesTitle')}
                 </span>
                 {stage.deliverables.map((item) => (
                   <div key={item} className="flex items-center gap-2 text-xs text-slate-300">

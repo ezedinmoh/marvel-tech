@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useLanguage } from '@/context/LanguageContext';
 import {
   Moon,
   Layers,
@@ -96,6 +97,7 @@ export const trustedCompanies: Company[] = [
 ];
 
 export function CompaniesMarquee() {
+  const { t } = useLanguage();
   // Duplicate array to ensure seamless infinite continuous ticker loop
   const marqueeItems = [...trustedCompanies, ...trustedCompanies];
 
@@ -104,10 +106,10 @@ export function CompaniesMarquee() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-[11px] font-mono uppercase tracking-[0.22em] text-slate-400 mb-2">
           <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-          <span>Companies We Build For</span>
+          <span>{t('marqueeBadge')}</span>
         </div>
         <p className="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto">
-          Trusted by forward-thinking organizations, international venture studios, and modern industry leaders.
+          {t('marqueeSubtitle')}
         </p>
       </div>
 

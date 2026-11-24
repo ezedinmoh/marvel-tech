@@ -314,7 +314,11 @@ export function CommandPalette() {
                   setSelectedIndex(0);
                 }}
                 onKeyDown={handleInputKeyDown}
-                placeholder="Type a section, project, or action... (or ↑ ↓ to navigate)"
+                placeholder={
+                  language === 'am'
+                    ? 'ትዕዛዝ፣ ፕሮጀክት ወይም ገጽ ይፈልጉ... (ለመምረጥ ↑ ↓ ይጠቀሙ)'
+                    : 'Type a section, project, or action... (or ↑ ↓ to navigate)'
+                }
                 className="w-full bg-transparent text-sm sm:text-base text-white placeholder-slate-500 focus:outline-none"
               />
               <button
@@ -332,17 +336,28 @@ export function CommandPalette() {
             >
               {filtered.length === 0 ? (
                 <div className="p-8 text-center text-slate-500 text-sm">
-                  No matching results for &ldquo;<span className="text-white">{query}</span>&rdquo;
+                  {language === 'am'
+                    ? <>ምንም ተዛማጅ ውጤት አልተገኘም &ldquo;<span className="text-white">{query}</span>&rdquo;</>
+                    : <>No matching results for &ldquo;<span className="text-white">{query}</span>&rdquo;</>}
                 </div>
               ) : (
                 categories.map((category) => {
                   const catItems = filtered.filter((i) => i.category === category);
                   if (catItems.length === 0) return null;
 
+                  const catLabel =
+                    language === 'am'
+                      ? category === 'Navigation'
+                        ? 'ማውጫ እና ገጾች'
+                        : category === 'Projects'
+                        ? 'የተሰሩ ፕሮጀክቶች'
+                        : 'ፈጣን እርምጃዎች'
+                      : category;
+
                   return (
                     <div key={category} className="pt-2 first:pt-0">
                       <div className="px-3 py-1 text-[10px] font-mono uppercase tracking-wider text-slate-500 font-semibold">
-                        {category}
+                        {catLabel}
                       </div>
 
                       <div className="space-y-1 mt-1">

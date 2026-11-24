@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { CompaniesMarquee } from './CompaniesMarquee';
+import { useLanguage } from '@/context/LanguageContext';
+import { getSubsystemMeta } from '@/data/translations';
 import {
   Globe,
   ShoppingBag,
@@ -45,6 +47,8 @@ export function ConstellationEcosystem() {
   const [activeSystemId, setActiveSystemId] = useState<string>('erp');
   const [timeframe, setTimeframe] = useState<'Today' | 'This week' | 'This month'>('This week');
   const [hoveredPoint, setHoveredPoint] = useState<{ day: string; value: string; x: number; y: number } | null>(null);
+  const { language, t } = useLanguage();
+  const sysMetaMap = getSubsystemMeta(language);
 
   const subsystems: SubsystemData[] = [
     {
@@ -761,16 +765,19 @@ export function ConstellationEcosystem() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
-          badge="The Connected Platform"
-          title="Everything Your Business Needs —"
-          highlight="Connected."
-          subtitle="Hover or click any satellite node to see it come alive on the central command center. Every part talks to every other part in real time."
+          badge={t('ecoBadge')}
+          title={t('ecoTitle')}
+          highlight={t('ecoTitleHighlight')}
+          subtitle={t('ecoSubtitle')}
         />
 
         {/* Mobile/Tablet Quick Selector Pills */}
         <div className="flex md:hidden flex-wrap items-center justify-center gap-2 mb-8">
           {subsystems.map((sub) => {
             const isSelected = sub.id === activeSystemId;
+            const metaInfo = sysMetaMap[sub.id as keyof typeof sysMetaMap];
+            const displayName = metaInfo?.name || sub.name;
+
             return (
               <button
                 key={sub.id}
@@ -785,7 +792,7 @@ export function ConstellationEcosystem() {
                 }`}
               >
                 <span>{sub.icon}</span>
-                <span>{sub.name}</span>
+                <span>{displayName}</span>
               </button>
             );
           })}
@@ -868,7 +875,9 @@ export function ConstellationEcosystem() {
                   >
                     {sub.icon}
                   </div>
-                  <span className="tracking-tight">{sub.name}</span>
+                  <span className="tracking-tight">
+                    {sysMetaMap[sub.id as keyof typeof sysMetaMap]?.name || sub.name}
+                  </span>
                 </div>
               </div>
             );
@@ -883,7 +892,7 @@ export function ConstellationEcosystem() {
                 <span className="w-3 h-3 rounded-full bg-[#febc2e] inline-block shadow-[0_0_8px_rgba(254,188,46,0.5)]" />
                 <span className="w-3 h-3 rounded-full bg-[#28c840] inline-block shadow-[0_0_8px_rgba(40,200,64,0.5)]" />
                 <span className="ml-2 font-mono text-xs text-slate-400 font-medium truncate max-w-[260px] sm:max-w-none">
-                  {currentSystem.windowTitle}
+                  {sysMetaMap[currentSystem.id as keyof typeof sysMetaMap]?.windowTitle || currentSystem.windowTitle}
                 </span>
               </div>
 
@@ -899,34 +908,37 @@ export function ConstellationEcosystem() {
             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-5">
               <div>
                 <h4 className="text-base sm:text-lg font-bold text-white tracking-tight flex items-center gap-2">
-                  <span>Good morning, Admin</span>
+                  <span>{t('ecoGreeting')}</span>
                   <span className="text-cyan-400 text-xs font-mono font-normal">
-                    [{currentSystem.name}]
+                    [{sysMetaMap[currentSystem.id as keyof typeof sysMetaMap]?.name || currentSystem.name}]
                   </span>
                 </h4>
                 <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
-                  {currentSystem.adminSubtitle}
+                  {sysMetaMap[currentSystem.id as keyof typeof sysMetaMap]?.adminSubtitle || currentSystem.adminSubtitle}
                 </p>
               </div>
 
               {/* Timeframe Filter Buttons */}
               <div className="flex items-center gap-1 bg-white/[0.04] p-1 rounded-lg border border-white/10 self-start">
-                {(['Today', 'This week', 'This month'] as const).map((tf) => (
-                  <button
-                    key={tf}
-                    onClick={() => {
-                      setTimeframe(tf);
-                      setHoveredPoint(null);
-                    }}
-                    className={`px-2.5 py-1 rounded text-xs font-mono transition-all cursor-pointer ${
-                      timeframe === tf
-                        ? 'bg-blue-600 text-white shadow-sm font-semibold'
-                        : 'text-slate-400 hover:text-white'
-                    }`}
-                  >
-                    {tf}
-                  </button>
-                ))}
+                {(['Today', 'This week', 'This month'] as const).map((tf) => {
+                  const tfLabel = tf === 'Today' ? t('ecoToday') : tf === 'This week' ? t('ecoThisWeek') : t('ecoThisMonth');
+                  return (
+                    <button
+                      key={tf}
+                      onClick={() => {
+                        setTimeframe(tf);
+                        setHoveredPoint(null);
+                      }}
+                      className={`px-2.5 py-1 rounded text-xs font-mono transition-all cursor-pointer ${
+                        timeframe === tf
+                          ? 'bg-blue-600 text-white shadow-sm font-semibold'
+                          : 'text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      {tfLabel}
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
@@ -963,7 +975,7 @@ export function ConstellationEcosystem() {
               <div className="mb-2 flex items-center justify-between">
                 <span className="text-xs font-semibold text-white flex items-center gap-2">
                   <Activity className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>Telemetry Pulse (Hover chart to scrub)</span>
+                  <span>{t('ecoTelemetryPulse')}</span>
                 </span>
                 <span className="text-xs font-mono font-bold text-cyan-400">
                   {hoveredPoint ? `${hoveredPoint.day}: ${hoveredPoint.value}` : currentData.chartTotal}
@@ -1058,12 +1070,14 @@ export function ConstellationEcosystem() {
 
             {/* Bottom Insight Footer */}
             <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-400 font-mono">
-              <span className="truncate">{currentSystem.description}</span>
+              <span className="truncate">
+                {sysMetaMap[currentSystem.id as keyof typeof sysMetaMap]?.description || currentSystem.description}
+              </span>
               <a
                 href="#contact"
                 className="inline-flex items-center gap-1 text-cyan-400 hover:text-cyan-300 font-semibold shrink-0 ml-2"
               >
-                <span>Deploy Module</span>
+                <span>{t('ecoDeployModule')}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </a>
             </div>
