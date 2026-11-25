@@ -57,18 +57,22 @@ export function Services() {
           title={t('servicesTitle')}
           highlight={t('servicesHighlight')}
           subtitle={t('servicesSubtitle')}
+          variant="kinetic"
         />
 
-        {/* Services Cards Grid — Stagger & Scale */}
+        {/* Services Cards Grid — Decoupled 3D Perspective Diagonal Wave */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
           {servicesList.map((service, index) => (
-            <Card
+            <div
               key={service.id}
-              className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between group cursor-pointer border-white/[0.08] hover:border-blue-500/30 active:scale-[0.98] transition-all duration-200 dc-reveal"
-              data-reveal="fade-scale"
-              style={{ '--reveal-delay': `${(index % 3) * 65}ms` } as React.CSSProperties}
-              onClick={() => setSelectedService(service)}
+              className="dc-reveal flex"
+              data-reveal="unfold-3d"
+              style={{ '--reveal-delay': `${(index % 3) * 65 + Math.floor(index / 3) * 55}ms` } as React.CSSProperties}
             >
+              <Card
+                className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between w-full group cursor-pointer border-white/[0.08] hover:border-blue-500/30 active:scale-[0.98]"
+                onClick={() => setSelectedService(service)}
+              >
               <div>
                 <div className="flex items-center justify-between mb-4 sm:mb-6">
                   <div className="p-3 sm:p-3.5 rounded-xl sm:rounded-2xl bg-white/[0.04] border border-white/10 group-hover:scale-110 transition-transform duration-300">
@@ -106,12 +110,13 @@ export function Services() {
                 <span>{t('servicesViewArchitecture')}</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </div>
-            </Card>
+              </Card>
+            </div>
           ))}
         </div>
 
         {/* Link to Dedicated Services Directory */}
-        <div className="mt-8 text-center dc-reveal" data-reveal="dropdown">
+        <div className="mt-8 text-center dc-reveal" data-reveal="cascade-row">
           <Link
             href="/services"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-500/30 text-xs font-mono text-cyan-300 hover:text-white transition-all shadow-md group"

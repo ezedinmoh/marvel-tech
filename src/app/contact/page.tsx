@@ -59,14 +59,14 @@ export default function ContactPage() {
 
         {/* Hero Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-400 mb-4 dc-load-dropdown">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-400 mb-4 dc-load-fade-scale">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Direct Engineering Consultations</span>
           </div>
 
           <h1
-            className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-6 dc-load-zoom-out"
-            style={{ animationDelay: '80ms' }}
+            className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-6 dc-load-clip-up"
+            style={{ animationDelay: '70ms' }}
           >
             Contact{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400">
@@ -76,7 +76,7 @@ export default function ContactPage() {
 
           <p
             className="text-base sm:text-lg text-slate-300 leading-relaxed dc-load-fade-scale"
-            style={{ animationDelay: '160ms' }}
+            style={{ animationDelay: '150ms' }}
           >
             Based in <strong>Kombolcha, Ethiopia</strong>, serving forward-thinking businesses locally, nationwide, and internationally. Reach out directly to discuss your custom software, web platform, or ERP requirements.
           </p>
@@ -84,7 +84,7 @@ export default function ContactPage() {
 
         {/* Contact Info Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
-          <div className="p-6 rounded-2xl bg-slate-900/40 border border-white/10 dc-reveal" data-reveal="fade-scale" style={{ '--reveal-delay': '0ms' } as React.CSSProperties}>
+          <div className="p-6 rounded-2xl bg-slate-900/40 border border-white/10 dc-reveal" data-reveal="pop-spring" style={{ '--reveal-delay': '0ms' } as React.CSSProperties}>
             <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-4">
               <MapPin className="w-5 h-5" />
             </div>
@@ -95,7 +95,7 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-slate-900/40 border border-white/10 dc-reveal" data-reveal="fade-scale" style={{ '--reveal-delay': '75ms' } as React.CSSProperties}>
+          <div className="p-6 rounded-2xl bg-slate-900/40 border border-white/10 dc-reveal" data-reveal="pop-spring" style={{ '--reveal-delay': '75ms' } as React.CSSProperties}>
             <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-4">
               <Phone className="w-5 h-5" />
             </div>
@@ -111,7 +111,7 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-slate-900/40 border border-white/10 dc-reveal" data-reveal="fade-scale" style={{ '--reveal-delay': '150ms' } as React.CSSProperties}>
+          <div className="p-6 rounded-2xl bg-slate-900/40 border border-white/10 dc-reveal" data-reveal="pop-spring" style={{ '--reveal-delay': '150ms' } as React.CSSProperties}>
             <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-4">
               <Mail className="w-5 h-5" />
             </div>

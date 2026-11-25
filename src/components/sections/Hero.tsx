@@ -41,17 +41,17 @@ export function Hero() {
     <section id="hero" className="relative pt-24 pb-12 sm:pt-40 sm:pb-28 lg:pt-48 lg:pb-36 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col items-center text-center">
-          {/* Tagline Badge — Immediate Page-Load Dropdown */}
-          <div className="mb-4 sm:mb-6 dc-load-dropdown" style={{ animationDelay: '0ms' }}>
+          {/* Tagline Badge — Crisp Page-Load Entrance */}
+          <div className="mb-4 sm:mb-6 dc-load-fade-scale" style={{ animationDelay: '0ms' }}>
             <Badge variant="cyan" dot={true}>
               {t('heroBadge')}
             </Badge>
           </div>
 
-          {/* Main Headline — Authoritative Page-Load Zoom-Out */}
+          {/* Main Headline — Editorial Clip Reveal */}
           <h1
-            className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl leading-[1.12] sm:leading-[1.08] dc-load-zoom-out"
-            style={{ animationDelay: '80ms' }}
+            className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl leading-[1.12] sm:leading-[1.08] dc-load-clip-up"
+            style={{ animationDelay: '70ms' }}
           >
             {t('heroTitlePrefix')}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400">
@@ -60,18 +60,18 @@ export function Hero() {
             {t('heroTitleSuffix')}
           </h1>
 
-          {/* Supporting Narrative — Page-Load Fade & Scale */}
+          {/* Supporting Narrative — Silky Fade & Scale */}
           <p
             className="mt-3.5 sm:mt-6 text-sm sm:text-lg text-slate-300 max-w-2xl leading-relaxed font-normal dc-load-fade-scale"
-            style={{ animationDelay: '160ms' }}
+            style={{ animationDelay: '150ms' }}
           >
             {t('heroSubtitle')}
           </p>
 
-          {/* Action CTAs — Staggered Fade & Scale */}
+          {/* Action CTAs — Tactile Spring Pop */}
           <div
-            className="mt-6 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto dc-load-fade-scale"
-            style={{ animationDelay: '240ms' }}
+            className="mt-6 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto dc-load-pop-spring"
+            style={{ animationDelay: '220ms' }}
           >
             <Button
               href="#contact"
@@ -92,33 +92,39 @@ export function Hero() {
             </Button>
           </div>
 
-          {/* Tech Trust Metrics — Staggered Fade & Scale */}
-          <div
-            className="mt-6 sm:mt-12 flex flex-wrap items-center justify-center gap-2 sm:gap-10 text-[11px] sm:text-xs font-mono text-slate-400 dc-load-fade-scale"
-            style={{ animationDelay: '310ms' }}
-          >
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/5 sm:border-transparent sm:bg-transparent">
+          {/* Tech Trust Metrics — Individually Staggered Pills */}
+          <div className="mt-6 sm:mt-12 flex flex-wrap items-center justify-center gap-2 sm:gap-10 text-[11px] sm:text-xs font-mono text-slate-400">
+            <div
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/5 sm:border-transparent sm:bg-transparent dc-load-pop-spring"
+              style={{ animationDelay: '280ms' }}
+            >
               <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400" />
               <span>{t('heroTypeSafe')}</span>
             </div>
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/5 sm:border-transparent sm:bg-transparent">
+            <div
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/5 sm:border-transparent sm:bg-transparent dc-load-pop-spring"
+              style={{ animationDelay: '330ms' }}
+            >
               <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-400" />
               <span>{t('heroSubSecond')}</span>
             </div>
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/5 sm:border-transparent sm:bg-transparent">
+            <div
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/5 sm:border-transparent sm:bg-transparent dc-load-pop-spring"
+              style={{ animationDelay: '380ms' }}
+            >
               <Activity className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
               <span>{t('heroUptime')}</span>
             </div>
           </div>
 
-          {/* Interactive Technology Preview Terminal Widget — Zoom-In + Scroll Depth */}
+          {/* Interactive Technology Preview Terminal Widget — 3D Unfold + Decoupled Scroll Depth */}
           <div
             ref={previewRef}
             className="mt-8 sm:mt-16 w-full max-w-4xl mx-auto will-change-transform"
           >
             <div
-              className="w-full rounded-2xl sm:rounded-3xl bg-[#090e1c]/90 border border-white/15 p-3.5 sm:p-6 shadow-[0_20px_60px_-15px_rgba(0,102,255,0.3)] backdrop-blur-2xl text-left dc-load-zoom-in"
-              style={{ animationDelay: '360ms' }}
+              className="w-full rounded-2xl sm:rounded-3xl bg-[#090e1c]/90 border border-white/15 p-3.5 sm:p-6 shadow-[0_20px_60px_-15px_rgba(0,102,255,0.3)] backdrop-blur-2xl text-left dc-load-unfold-3d"
+              style={{ animationDelay: '340ms' }}
             >
             {/* Terminal Window Header */}
             <div className="flex items-center justify-between pb-4 border-b border-white/10 text-xs font-mono">

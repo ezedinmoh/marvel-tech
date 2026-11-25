@@ -23,6 +23,7 @@ export function Faq() {
           title={t('faqTitle')}
           highlight={t('faqHighlight')}
           subtitle={t('faqSubtitle')}
+          variant="editorial"
         />
 
         <div className="space-y-3 sm:space-y-4">
@@ -33,8 +34,8 @@ export function Faq() {
               <div
                 key={idx}
                 className="rounded-2xl bg-[#090e1c] border border-white/10 overflow-hidden transition-colors hover:border-white/20 dc-reveal"
-                data-reveal="dropdown"
-                style={{ '--reveal-delay': `${idx * 60}ms` } as React.CSSProperties}
+                data-reveal="cascade-row"
+                style={{ '--reveal-delay': `${idx * 55}ms` } as React.CSSProperties}
               >
                 <button
                   onClick={() => toggle(idx)}
@@ -43,7 +44,7 @@ export function Faq() {
                 >
                   <span className="text-sm sm:text-base lg:text-lg font-bold">{item.question}</span>
                   <div
-                    className={`p-1 rounded-full bg-white/[0.05] text-cyan-400 transition-transform duration-200 shrink-0 ${
+                    className={`p-1 rounded-full bg-white/[0.05] text-cyan-400 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] shrink-0 ${
                       isOpen ? 'rotate-180 bg-blue-500/20' : ''
                     }`}
                   >
@@ -51,11 +52,17 @@ export function Faq() {
                   </div>
                 </button>
 
-                {isOpen && (
-                  <div className="px-4 sm:px-6 pb-4 sm:pb-6 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-3 sm:pt-4">
-                    {item.answer}
+                <div
+                  className={`grid transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                    isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="px-4 sm:px-6 pb-4 sm:pb-6 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-3 sm:pt-4">
+                      {item.answer}
+                    </div>
                   </div>
-                )}
+                </div>
               </div>
             );
           })}

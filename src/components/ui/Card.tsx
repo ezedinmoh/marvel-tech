@@ -37,7 +37,7 @@ export function Card({
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`relative rounded-2xl bg-[#090e1c]/85 border border-white/[0.08] backdrop-blur-xl transition-all duration-300 overflow-hidden ${
+      className={`relative rounded-2xl bg-[#090e1c]/85 border border-white/[0.08] backdrop-blur-xl transition-[transform,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
         hoverable ? 'hover:border-white/[0.22] hover:bg-[#0e162c]/95 hover:-translate-y-1' : ''
       } ${
         glow ? 'shadow-[0_0_30px_rgba(0,102,255,0.12)] hover:shadow-[0_0_40px_rgba(0,102,255,0.25)]' : ''

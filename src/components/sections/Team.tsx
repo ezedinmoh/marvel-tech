@@ -32,24 +32,28 @@ export function Team() {
           title={t('teamTitle')}
           highlight={t('teamHighlight')}
           subtitle={t('teamSubtitle')}
+          variant="split"
         />
 
-        {/* Team Member Cards */}
+        {/* Team Member Cards — Decoupled 3D Perspective Lift */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8 max-w-6xl mx-auto">
           {members.map((member, index) => {
             const isBusinessLead = member.id === 'mohammed-imam';
 
             return (
-              <Card
+              <div
                 key={member.id}
-                data-reveal="zoom-in"
-                style={{ '--reveal-delay': `${index * 80}ms` } as React.CSSProperties}
-                className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl flex flex-col justify-between group relative overflow-hidden transition-all duration-300 dc-reveal ${
-                  isBusinessLead
-                    ? 'border-cyan-500/40 shadow-[0_0_35px_rgba(0,166,255,0.15)] bg-gradient-to-b from-cyan-950/25 via-slate-900/90 to-[#040711] ring-1 ring-cyan-500/20'
-                    : 'border-white/10 hover:border-blue-500/40'
-                }`}
+                className="dc-reveal flex"
+                data-reveal="unfold-3d"
+                style={{ '--reveal-delay': `${index * 85}ms` } as React.CSSProperties}
               >
+                <Card
+                  className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl flex flex-col justify-between w-full group relative overflow-hidden ${
+                    isBusinessLead
+                      ? 'border-cyan-500/40 shadow-[0_0_35px_rgba(0,166,255,0.15)] bg-gradient-to-b from-cyan-950/25 via-slate-900/90 to-[#040711] ring-1 ring-cyan-500/20'
+                      : 'border-white/10 hover:border-blue-500/40'
+                  }`}
+                >
                 <div>
                   {/* Business Lead Accent Header Banner */}
                   {isBusinessLead && (
@@ -287,7 +291,8 @@ export function Team() {
                     <ArrowRight className="w-3 h-3" />
                   </Link>
                 </div>
-              </Card>
+                </Card>
+              </div>
             );
           })}
         </div>

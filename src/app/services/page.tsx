@@ -139,14 +139,14 @@ export default function ServicesDirectoryPage() {
 
         {/* Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-mono text-cyan-400 mb-4 dc-load-dropdown">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-mono text-cyan-400 mb-4 dc-load-fade-scale">
             <Layers className="w-3.5 h-3.5" />
             <span>Full-Stack Engineering Spectrum</span>
           </div>
 
           <h1
-            className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-6 dc-load-zoom-out"
-            style={{ animationDelay: '80ms' }}
+            className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-6 dc-load-clip-up"
+            style={{ animationDelay: '70ms' }}
           >
             Software Development &{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400">
@@ -156,7 +156,7 @@ export default function ServicesDirectoryPage() {
 
           <p
             className="text-base sm:text-lg text-slate-300 leading-relaxed dc-load-fade-scale"
-            style={{ animationDelay: '160ms' }}
+            style={{ animationDelay: '150ms' }}
           >
             At <strong>Marvel Technologies</strong>, we architect resilient digital platforms, custom software, ERP platforms, and automation systems tailored for high-growth businesses in Ethiopia and worldwide.
           </p>
@@ -168,12 +168,13 @@ export default function ServicesDirectoryPage() {
             const Icon = service.icon;
 
             return (
-              <Card
+              <div
                 key={service.slug}
-                data-reveal="fade-scale"
+                className="dc-reveal flex"
+                data-reveal="unfold-3d"
                 style={{ '--reveal-delay': `${(idx % 2) * 75}ms` } as React.CSSProperties}
-                className="p-6 sm:p-8 rounded-2xl bg-slate-900/40 border-white/10 hover:border-cyan-500/30 transition-all flex flex-col justify-between group dc-reveal"
               >
+                <Card className="p-6 sm:p-8 rounded-2xl bg-slate-900/40 border-white/10 hover:border-cyan-500/30 flex flex-col justify-between group w-full">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform">
@@ -211,7 +212,8 @@ export default function ServicesDirectoryPage() {
                     <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-1" />
                   </Link>
                 </div>
-              </Card>
+                </Card>
+              </div>
             );
           })}
         </div>

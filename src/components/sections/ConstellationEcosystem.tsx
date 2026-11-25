@@ -769,6 +769,7 @@ export function ConstellationEcosystem() {
           title={t('ecoTitle')}
           highlight={t('ecoTitleHighlight')}
           subtitle={t('ecoSubtitle')}
+          variant="zoom"
         />
 
         {/* Mobile/Tablet Android Segmented Chip Carousel */}
@@ -801,7 +802,7 @@ export function ConstellationEcosystem() {
         {/* Constellation Container: 10 Orbiting Satellites + Central Dashboard */}
         <div
           className="relative w-full max-w-6xl mx-auto min-h-0 md:min-h-[760px] lg:min-h-[840px] flex items-center justify-center pt-2 md:pt-8 pb-4 md:pb-12 dc-reveal"
-          data-reveal="zoom-in"
+          data-reveal="unfold-3d"
         >
           {/* SVG Curved Flowing Connector Lines */}
           <svg

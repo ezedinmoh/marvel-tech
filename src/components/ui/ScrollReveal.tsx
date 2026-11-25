@@ -12,6 +12,11 @@ export type RevealDirection =
   | 'fade-scale'
   | 'zoom-in'
   | 'zoom-out'
+  | 'clip-up'
+  | 'unfold-3d'
+  | 'pop-spring'
+  | 'cascade-row'
+  | 'hairline'
   | 'dropdown'
   | 'fade';
 
@@ -23,6 +28,24 @@ interface ScrollRevealProps extends React.HTMLAttributes<HTMLDivElement> {
   threshold?: number;
   className?: string;
   once?: boolean;
+}
+
+function scheduleCleanup(el: HTMLElement, maxMs = 950) {
+  let cleaned = false;
+  const finish = () => {
+    if (cleaned) return;
+    cleaned = true;
+    el.classList.remove('dc-animating');
+    el.style.willChange = '';
+    el.removeEventListener('animationend', onAnimEnd);
+  };
+  const onAnimEnd = (e: AnimationEvent) => {
+    if (e.target === el) {
+      finish();
+    }
+  };
+  el.addEventListener('animationend', onAnimEnd);
+  setTimeout(finish, maxMs);
 }
 
 export function ScrollReveal({
@@ -46,13 +69,14 @@ export function ScrollReveal({
       typeof window === 'undefined' ||
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
     ) {
-      el.classList.remove('dc-will-animate');
+      el.classList.remove('dc-will-animate', 'dc-animating');
       el.classList.add('is-revealed');
       return;
     }
 
-    if (delay > 0) {
-      el.style.setProperty('--reveal-delay', `${Math.min(delay, 220)}ms`);
+    const cappedDelay = delay > 0 ? Math.min(delay, 260) : 0;
+    if (cappedDelay > 0) {
+      el.style.setProperty('--reveal-delay', `${cappedDelay}ms`);
     }
 
     const vh = window.innerHeight || document.documentElement.clientHeight;
@@ -61,6 +85,7 @@ export function ScrollReveal({
     if (rect.top <= vh + 10) {
       el.classList.remove('dc-will-animate');
       el.classList.add('dc-animating', 'is-revealed');
+      scheduleCleanup(el, cappedDelay + (duration || 720) + 120);
       return;
     }
 
@@ -72,6 +97,7 @@ export function ScrollReveal({
         if (entry.isIntersecting || entry.boundingClientRect.top <= currentVh + 25) {
           el.classList.remove('dc-will-animate');
           el.classList.add('dc-animating', 'is-revealed');
+          scheduleCleanup(el, cappedDelay + (duration || 720) + 120);
           if (once) {
             observer.unobserve(el);
           }
@@ -88,7 +114,7 @@ export function ScrollReveal({
     return () => {
       observer.disconnect();
     };
-  }, [delay, threshold, once]);
+  }, [delay, duration, threshold, once]);
 
   const customStyle: React.CSSProperties = {
     ...style,
@@ -113,10 +139,8 @@ export function ScrollReveal({
  * Coordinates scroll-triggered keyframe choreography across all `.dc-reveal` elements:
  * - `.dc-reveal` base CSS is ALWAYS `opacity: 1` (zero blank/empty screen risk).
  * - Only genuinely offscreen elements below `window.innerHeight + 10` get `.dc-will-animate`.
- * - Fires right as elements enter the bottom of the screen so zoom-in, zoom-out,
- *   fade-scale, dropdown, and stagger effects are visibly experienced while scrolling.
- * - Includes rAF scroll/resize sweepers + post-scroll failsafe so skipped or
- *   anchor-jumped elements never stay invisible.
+ * - Fires right as elements enter the bottom of the screen.
+ * - Cleans up `.dc-animating` and `will-change` after `animationend` so Card hovers/spotlights never conflict.
  */
 export function GlobalScrollReveal() {
   const pathname = usePathname();
@@ -126,7 +150,7 @@ export function GlobalScrollReveal() {
 
     const revealAllImmediately = () => {
       document.querySelectorAll('.dc-reveal').forEach((el) => {
-        el.classList.remove('dc-will-animate');
+        el.classList.remove('dc-will-animate', 'dc-animating');
         el.classList.add('is-revealed');
       });
     };
@@ -136,32 +160,37 @@ export function GlobalScrollReveal() {
       return;
     }
 
-    const syncDelayVar = (el: Element) => {
+    const syncDelayVar = (el: Element): number => {
       const htmlEl = el as HTMLElement;
-      // Preserve explicit CSS var if set, otherwise convert inline transitionDelay cleanly
-      if (!htmlEl.style.getPropertyValue('--reveal-delay')) {
-        const inlineDelay = htmlEl.style.transitionDelay;
-        if (inlineDelay) {
-          const parsed = parseFloat(inlineDelay);
-          const ms = inlineDelay.endsWith('ms') ? parsed : parsed * 1000;
-          if (!Number.isNaN(ms) && ms > 0) {
-            htmlEl.style.setProperty('--reveal-delay', `${Math.min(ms, 220)}ms`);
-          }
-          // Clear inline transitionDelay so Card hover states remain instantaneous
-          htmlEl.style.transitionDelay = '';
+      const existing = htmlEl.style.getPropertyValue('--reveal-delay');
+      if (existing) {
+        return parseFloat(existing) || 0;
+      }
+      const inlineDelay = htmlEl.style.transitionDelay;
+      if (inlineDelay) {
+        const parsed = parseFloat(inlineDelay);
+        const ms = inlineDelay.endsWith('ms') ? parsed : parsed * 1000;
+        htmlEl.style.transitionDelay = '';
+        if (!Number.isNaN(ms) && ms > 0) {
+          const capped = Math.min(ms, 260);
+          htmlEl.style.setProperty('--reveal-delay', `${capped}ms`);
+          return capped;
         }
       }
+      return 0;
     };
 
     const triggerReveal = (el: Element, rect?: DOMRect) => {
-      syncDelayVar(el);
+      const delayMs = syncDelayVar(el);
       const r = rect || el.getBoundingClientRect();
       el.classList.remove('dc-will-animate');
       if (r.bottom < -40) {
-        // Already scrolled completely past (e.g., anchor jump) — skip animation, keep visible
+        // Already scrolled past (e.g. anchor jump) — skip entrance animation, keep crisp & visible
+        el.classList.remove('dc-animating');
         el.classList.add('is-revealed');
       } else {
         el.classList.add('dc-animating', 'is-revealed');
+        scheduleCleanup(el as HTMLElement, delayMs + 820);
       }
     };
 
@@ -199,7 +228,6 @@ export function GlobalScrollReveal() {
         syncDelayVar(el);
         const rect = el.getBoundingClientRect();
         if (rect.top <= vh + 10) {
-          // Visible or above fold right now: never hide it!
           el.classList.remove('dc-will-animate');
           el.classList.add('is-revealed');
         } else {
@@ -225,14 +253,13 @@ export function GlobalScrollReveal() {
       if (settleTimer) clearTimeout(settleTimer);
       settleTimer = setTimeout(() => {
         checkPendingElements();
-      }, 220);
+      }, 200);
     };
 
     window.addEventListener('scroll', handleViewportChange, { passive: true });
     window.addEventListener('resize', handleViewportChange, { passive: true });
     window.addEventListener('hashchange', handleViewportChange, { passive: true });
 
-    // Re-scan cleanly if React dynamically mounts new cards (e.g., project filters / language switch)
     const mutationObserver = new MutationObserver(() => {
       checkPendingElements();
       const vh = window.innerHeight || document.documentElement.clientHeight;

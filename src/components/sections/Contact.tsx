@@ -88,6 +88,7 @@ export function Contact() {
           title={t('contactTitle')}
           highlight={t('contactHighlight')}
           subtitle={t('contactSubtitle')}
+          variant="kinetic"
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-12 items-start">
@@ -273,8 +274,8 @@ export function Contact() {
           {/* Right Column: Contact Form */}
           <div
             className="lg:col-span-7 dc-reveal"
-            data-reveal="zoom-in"
-            style={{ '--reveal-delay': '80ms' } as React.CSSProperties}
+            data-reveal="pop-spring"
+            style={{ '--reveal-delay': '85ms' } as React.CSSProperties}
           >
             <Card className="p-5 sm:p-10 rounded-2xl sm:rounded-3xl border-white/15">
               <form onSubmit={handleSubmit} className="space-y-6" noValidate>

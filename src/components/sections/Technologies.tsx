@@ -69,17 +69,19 @@ export function Technologies() {
           title={t('techTitle')}
           highlight={t('techHighlight')}
           subtitle={t('techSubtitle')}
+          variant="editorial"
         />
 
-        {/* 4 Categories — Stagger & Scale */}
+        {/* 4 Categories — Optical Zoom-Out Bento Matrix */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
           {techCategories.map((category, index) => (
-            <Card
+            <div
               key={index}
-              className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl dc-reveal"
-              data-reveal="fade-scale"
-              style={{ '--reveal-delay': `${(index % 2) * 75}ms` } as React.CSSProperties}
+              className="dc-reveal flex"
+              data-reveal="zoom-out"
+              style={{ '--reveal-delay': `${(index % 2) * 80 + Math.floor(index / 2) * 60}ms` } as React.CSSProperties}
             >
+              <Card className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl w-full">
               <div className="mb-6">
                 <h3 className="text-xl font-bold text-white mb-1 tracking-tight">
                   {category.category}
@@ -113,7 +115,8 @@ export function Technologies() {
                   </div>
                 ))}
               </div>
-            </Card>
+              </Card>
+            </div>
           ))}
         </div>
       </div>

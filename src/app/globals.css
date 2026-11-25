@@ -180,6 +180,7 @@ html.lenis, html.lenis body {
    - Zero blur filters (prevents mobile bitmap rasterization artifacts)
    - Base `.dc-reveal` is ALWAYS visible (`opacity: 1`) so content never goes empty
    - Offscreen elements get `.dc-will-animate` and animate in smoothly via GPU keyframes
+   - `.dc-animating` is stripped on `animationend` so hover/card transitions never conflict
    ============================================================================ */
 
 @keyframes dc-kf-fade-up {
@@ -193,10 +194,47 @@ html.lenis, html.lenis body {
   }
 }
 
+@keyframes dc-kf-clip-up {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0% 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes dc-kf-unfold-3d {
+  from {
+    opacity: 0;
+    transform: perspective(1100px) rotateX(9deg) translate3d(0, 24px, 0) scale(0.965);
+    transform-origin: center top;
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1100px) rotateX(0deg) translate3d(0, 0, 0) scale(1);
+    transform-origin: center top;
+  }
+}
+
+@keyframes dc-kf-pop-spring {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) scale(0.91);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
 @keyframes dc-kf-zoom-in {
   from {
     opacity: 0;
-    transform: translate3d(0, 16px, 0) scale(0.9);
+    transform: translate3d(0, 14px, 0) scale(0.93);
   }
   to {
     opacity: 1;
@@ -207,7 +245,7 @@ html.lenis, html.lenis body {
 @keyframes dc-kf-zoom-out {
   from {
     opacity: 0;
-    transform: translate3d(0, -10px, 0) scale(1.06);
+    transform: translate3d(0, 8px, 0) scale(1.045);
   }
   to {
     opacity: 1;
@@ -218,7 +256,7 @@ html.lenis, html.lenis body {
 @keyframes dc-kf-fade-scale {
   from {
     opacity: 0;
-    transform: translate3d(0, 20px, 0) scale(0.94);
+    transform: translate3d(0, 18px, 0) scale(0.955);
   }
   to {
     opacity: 1;
@@ -229,7 +267,7 @@ html.lenis, html.lenis body {
 @keyframes dc-kf-dropdown {
   from {
     opacity: 0;
-    transform: translate3d(0, -20px, 0) scale(0.98);
+    transform: translate3d(0, -14px, 0) scale(0.985);
   }
   to {
     opacity: 1;
@@ -240,7 +278,29 @@ html.lenis, html.lenis body {
 @keyframes dc-kf-slide-left {
   from {
     opacity: 0;
-    transform: translate3d(-26px, 0, 0);
+    transform: translate3d(-28px, 0, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes dc-kf-slide-right {
+  from {
+    opacity: 0;
+    transform: translate3d(28px, 0, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes dc-kf-cascade-row {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
   }
   to {
     opacity: 1;
@@ -248,14 +308,14 @@ html.lenis, html.lenis body {
   }
 }
 
-@keyframes dc-kf-slide-right {
+@keyframes dc-kf-hairline {
   from {
     opacity: 0;
-    transform: translate3d(26px, 0, 0);
+    transform: scaleX(0.15);
   }
   to {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: scaleX(1);
   }
 }
 
@@ -269,20 +329,36 @@ html.lenis, html.lenis body {
 }
 
 /* Immediate Page-Load Cascade Animations (Pure CSS, Zero JS Dependency) */
+.dc-load-nav {
+  animation: dc-kf-dropdown 0.48s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 .dc-load-dropdown {
-  animation: dc-kf-dropdown 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: dc-kf-dropdown 0.52s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.dc-load-clip-up {
+  animation: dc-kf-clip-up 0.68s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .dc-load-zoom-out {
-  animation: dc-kf-zoom-out 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: dc-kf-zoom-out 0.62s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .dc-load-zoom-in {
-  animation: dc-kf-zoom-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: dc-kf-zoom-in 0.58s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.dc-load-pop-spring {
+  animation: dc-kf-pop-spring 0.56s cubic-bezier(0.22, 1.28, 0.36, 1) both;
+}
+
+.dc-load-unfold-3d {
+  animation: dc-kf-unfold-3d 0.72s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .dc-load-fade-scale {
-  animation: dc-kf-fade-scale 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: dc-kf-fade-scale 0.58s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* Scroll Reveal Base: Always visible by default so sections can NEVER stay blank */
@@ -298,31 +374,49 @@ html.lenis, html.lenis body {
   will-change: opacity, transform;
 }
 
-/* Active Scroll Entrance Keyframe Choreography */
 .dc-reveal.dc-animating {
-  animation: dc-kf-fade-up 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: opacity, transform;
+  animation: dc-kf-fade-up 0.58s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: var(--reveal-delay, 0ms);
+}
+
+.dc-reveal.dc-animating[data-reveal="clip-up"] {
+  animation-name: dc-kf-clip-up;
+  animation-duration: 0.64s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dc-reveal.dc-animating[data-reveal="unfold-3d"] {
+  animation-name: dc-kf-unfold-3d;
+  animation-duration: 0.68s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dc-reveal.dc-animating[data-reveal="pop-spring"] {
+  animation-name: dc-kf-pop-spring;
+  animation-duration: 0.56s;
+  animation-timing-function: cubic-bezier(0.22, 1.26, 0.36, 1);
 }
 
 .dc-reveal.dc-animating[data-reveal="zoom-in"] {
   animation-name: dc-kf-zoom-in;
-  animation-duration: 0.62s;
+  animation-duration: 0.58s;
 }
 
 .dc-reveal.dc-animating[data-reveal="zoom-out"] {
   animation-name: dc-kf-zoom-out;
-  animation-duration: 0.64s;
+  animation-duration: 0.6s;
 }
 
 .dc-reveal.dc-animating[data-reveal="scale"],
 .dc-reveal.dc-animating[data-reveal="fade-scale"] {
   animation-name: dc-kf-fade-scale;
-  animation-duration: 0.58s;
+  animation-duration: 0.56s;
 }
 
 .dc-reveal.dc-animating[data-reveal="dropdown"] {
   animation-name: dc-kf-dropdown;
-  animation-duration: 0.52s;
+  animation-duration: 0.5s;
 }
 
 .dc-reveal.dc-animating[data-reveal="left"] {
@@ -335,21 +429,38 @@ html.lenis, html.lenis body {
   animation-duration: 0.6s;
 }
 
+.dc-reveal.dc-animating[data-reveal="cascade-row"] {
+  animation-name: dc-kf-cascade-row;
+  animation-duration: 0.48s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dc-reveal.dc-animating[data-reveal="hairline"] {
+  animation-name: dc-kf-hairline;
+  animation-duration: 0.62s;
+  transform-origin: center;
+}
+
 .dc-reveal.dc-animating[data-reveal="fade"] {
   animation-name: dc-kf-fade;
-  animation-duration: 0.5s;
+  animation-duration: 0.48s;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .dc-reveal,
   .dc-reveal.dc-will-animate,
   .dc-reveal.dc-animating,
+  .dc-load-nav,
   .dc-load-dropdown,
+  .dc-load-clip-up,
   .dc-load-zoom-out,
   .dc-load-zoom-in,
+  .dc-load-pop-spring,
+  .dc-load-unfold-3d,
   .dc-load-fade-scale {
     opacity: 1 !important;
     transform: none !important;
+    clip-path: none !important;
     filter: none !important;
     animation: none !important;
     transition: none !important;
@@ -376,13 +487,17 @@ html.lenis, html.lenis body {
     -webkit-overflow-scrolling: touch;
   }
 
-  /* On mobile: fast, crisp 60fps GPU vertical/scale motion (zero horizontal jitter, zero blur) */
+  /* On mobile: crisp 60fps GPU vertical/scale motion (zero horizontal jitter, zero blur) */
   .dc-reveal.dc-animating {
-    animation-duration: 0.46s;
+    animation-duration: 0.44s;
   }
 
   .dc-reveal.dc-animating[data-reveal="left"],
   .dc-reveal.dc-animating[data-reveal="right"] {
+    animation-name: dc-kf-fade-scale;
+  }
+
+  .dc-reveal.dc-animating[data-reveal="unfold-3d"] {
     animation-name: dc-kf-fade-scale;
   }
 }

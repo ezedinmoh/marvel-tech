@@ -77,11 +77,12 @@ export function IndustrySolutions() {
           title={t('industriesTitle')}
           highlight={t('industriesHighlight')}
           subtitle={t('industriesSubtitle')}
+          variant="split"
         />
       </div>
 
       {/* Continuous Auto-Sliding Industry Marquee (Desktop & Mobile) */}
-      <div className="relative w-full overflow-hidden py-3 sm:py-4 mb-6 sm:mb-10 dc-reveal" data-reveal="fade-scale">
+      <div className="relative w-full overflow-hidden py-3 sm:py-4 mb-6 sm:mb-10 dc-reveal" data-reveal="cascade-row">
         {/* Left & Right Ambient Fade Gradients */}
         <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-28 bg-gradient-to-r from-[#03060f] via-[#03060f]/80 to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-28 bg-gradient-to-l from-[#03060f] via-[#03060f]/80 to-transparent z-10 pointer-events-none" />
@@ -129,7 +130,7 @@ export function IndustrySolutions() {
         </div>
 
         {/* Active Industry Architecture Card */}
-        <div className="max-w-4xl mx-auto dc-reveal" data-reveal="zoom-in">
+        <div className="max-w-4xl mx-auto dc-reveal" data-reveal="clip-up">
           <Card className="p-5 sm:p-10 rounded-2xl sm:rounded-3xl border-white/15 bg-gradient-to-br from-[#080d1a] to-[#040711] shadow-2xl">
             <div key={activeIndustry.id} className="animate-slide-fade">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10 mb-6">

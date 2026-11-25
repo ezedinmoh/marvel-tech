@@ -35,11 +35,10 @@ export function Footer() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 pb-24 sm:pb-12">
         <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 pb-12 border-b border-white/10 dc-reveal"
-          data-reveal="fade-scale"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 pb-12 border-b border-white/10"
         >
           {/* Column 1: Company Profile & Status */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-6 dc-reveal" data-reveal="cascade-row" style={{ '--reveal-delay': '0ms' } as React.CSSProperties}>
             <BrandLogo size="md" />
 
             <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
@@ -160,7 +159,7 @@ export function Footer() {
           </div>
 
           {/* Column 2: Navigation Links */}
-          <div>
+          <div className="dc-reveal" data-reveal="cascade-row" style={{ '--reveal-delay': '60ms' } as React.CSSProperties}>
             <h4 className="text-xs font-mono uppercase tracking-wider text-slate-200 font-semibold mb-4">
               {t('footerQuickLinksTitle')}
             </h4>
@@ -179,7 +178,7 @@ export function Footer() {
           </div>
 
           {/* Column 3: Services */}
-          <div>
+          <div className="dc-reveal" data-reveal="cascade-row" style={{ '--reveal-delay': '120ms' } as React.CSSProperties}>
             <h4 className="text-xs font-mono uppercase tracking-wider text-slate-200 font-semibold mb-4">
               {t('footerServicesTitle')}
             </h4>
@@ -198,7 +197,7 @@ export function Footer() {
           </div>
 
           {/* Column 4: Contact Info */}
-          <div>
+          <div className="dc-reveal" data-reveal="cascade-row" style={{ '--reveal-delay': '180ms' } as React.CSSProperties}>
             <h4 className="text-xs font-mono uppercase tracking-wider text-slate-200 font-semibold mb-4">
               {t('footerConnectTitle')}
             </h4>

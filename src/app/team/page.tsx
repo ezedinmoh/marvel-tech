@@ -64,14 +64,14 @@ export default function TeamDirectoryPage() {
 
         {/* Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-400 mb-4 dc-load-dropdown">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-400 mb-4 dc-load-fade-scale">
             <Users className="w-3.5 h-3.5" />
             <span>Founders & Core Leadership</span>
           </div>
 
           <h1
-            className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-6 dc-load-zoom-out"
-            style={{ animationDelay: '80ms' }}
+            className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-6 dc-load-clip-up"
+            style={{ animationDelay: '70ms' }}
           >
             The Team Driving{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400">
@@ -81,7 +81,7 @@ export default function TeamDirectoryPage() {
 
           <p
             className="text-base sm:text-lg text-slate-300 leading-relaxed dc-load-fade-scale"
-            style={{ animationDelay: '160ms' }}
+            style={{ animationDelay: '150ms' }}
           >
             Founded by software engineers and business strategists in <strong>Kombolcha, Ethiopia</strong>, Marvel Technologies unites software architecture, operations rigor, and commercial strategy to engineer world-class digital platforms.
           </p>
@@ -93,16 +93,19 @@ export default function TeamDirectoryPage() {
             const isBusinessLead = member.slug === 'mohammed-imam';
 
             return (
-              <Card
+              <div
                 key={member.slug}
-                data-reveal="zoom-in"
+                className="dc-reveal flex"
+                data-reveal="unfold-3d"
                 style={{ '--reveal-delay': `${idx * 80}ms` } as React.CSSProperties}
-                className={`p-5 sm:p-6 rounded-2xl bg-slate-900/40 border transition-all flex flex-col justify-between group dc-reveal ${
-                  isBusinessLead
-                    ? 'border-cyan-500/40 shadow-[0_0_30px_rgba(0,166,255,0.15)] bg-gradient-to-b from-cyan-950/20 via-slate-900/90 to-[#040711]'
-                    : 'border-white/10 hover:border-cyan-500/30'
-                }`}
               >
+                <Card
+                  className={`p-5 sm:p-6 rounded-2xl bg-slate-900/40 border flex flex-col justify-between group w-full ${
+                    isBusinessLead
+                      ? 'border-cyan-500/40 shadow-[0_0_30px_rgba(0,166,255,0.15)] bg-gradient-to-b from-cyan-950/20 via-slate-900/90 to-[#040711]'
+                      : 'border-white/10 hover:border-cyan-500/30'
+                  }`}
+                >
                 <div>
                   {/* Status Banner */}
                   <div className="mb-3">
@@ -178,7 +181,8 @@ export default function TeamDirectoryPage() {
                     )}
                   </div>
                 </div>
-              </Card>
+                </Card>
+              </div>
             );
           })}
         </div>

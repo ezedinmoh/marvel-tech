@@ -39,12 +39,13 @@ export function Projects() {
           title={t('projectsTitle')}
           highlight={t('projectsHighlight')}
           subtitle={t('projectsSubtitle')}
+          variant="zoom"
         />
 
         {/* Android Segmented Category Chips Carousel */}
         <div
           className="flex overflow-x-auto no-scrollbar gap-2 mb-6 sm:mb-14 py-1 px-1 -mx-4 sm:mx-0 px-4 sm:px-0 snap-x scroll-smooth justify-start sm:justify-center dc-reveal"
-          data-reveal="dropdown"
+          data-reveal="cascade-row"
         >
           {categories.map((cat) => (
             <button
@@ -61,15 +62,18 @@ export function Projects() {
           ))}
         </div>
 
-        {/* Project Cards Grid — Stagger & Zoom-In */}
+        {/* Project Cards Grid — Editorial Clip-Up Showcase */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
           {filteredProjects.map((project, index) => (
-            <Card
+            <div
               key={project.id}
-              className="rounded-2xl sm:rounded-3xl flex flex-col justify-between group border-white/10 hover:border-blue-500/35 overflow-hidden active:scale-[0.99] transition-all dc-reveal"
-              data-reveal="zoom-in"
-              style={{ '--reveal-delay': `${(index % 2) * 70}ms` } as React.CSSProperties}
+              className="dc-reveal flex"
+              data-reveal="clip-up"
+              style={{ '--reveal-delay': `${(index % 2) * 80}ms` } as React.CSSProperties}
             >
+              <Card
+                className="rounded-2xl sm:rounded-3xl flex flex-col justify-between w-full group border-white/10 hover:border-blue-500/35 overflow-hidden active:scale-[0.99]"
+              >
               <div>
                 {/* Project Screenshot Container */}
                 {project.image && (
@@ -197,7 +201,8 @@ export function Projects() {
                   )}
                 </div>
               </div>
-            </Card>
+              </Card>
+            </div>
           ))}
         </div>
       </div>

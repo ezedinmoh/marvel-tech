@@ -98,28 +98,28 @@ export default async function ServiceDetailPage({ params }: Props) {
 
         {/* Hero Header */}
         <header className="mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-400 mb-4 dc-load-dropdown">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-400 mb-4 dc-load-fade-scale">
             <Sparkles className="w-3.5 h-3.5" />
             <span>{service.category}</span>
           </div>
 
           <h1
-            className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-6 dc-load-zoom-out"
-            style={{ animationDelay: '80ms' }}
+            className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-6 dc-load-clip-up"
+            style={{ animationDelay: '70ms' }}
           >
             {service.heroHeadline}
           </h1>
 
           <p
             className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-3xl mb-8 dc-load-fade-scale"
-            style={{ animationDelay: '160ms' }}
+            style={{ animationDelay: '150ms' }}
           >
             {service.heroSubtitle}
           </p>
 
           <div
-            className="flex flex-wrap gap-2 pt-2 dc-load-fade-scale"
-            style={{ animationDelay: '230ms' }}
+            className="flex flex-wrap gap-2 pt-2 dc-load-pop-spring"
+            style={{ animationDelay: '220ms' }}
           >
             {service.techStack.map((tech) => (
               <span
@@ -153,18 +153,20 @@ export default async function ServiceDetailPage({ params }: Props) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {service.problemsSolved.map((item, i) => (
-              <Card
+              <div
                 key={i}
-                data-reveal="dropdown"
+                className="dc-reveal flex"
+                data-reveal="cascade-row"
                 style={{ '--reveal-delay': `${i * 70}ms` } as React.CSSProperties}
-                className="p-5 sm:p-6 rounded-xl bg-slate-900/30 border-white/10 dc-reveal"
               >
-                <div className="w-10 h-10 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 mb-4">
-                  <AlertCircle className="w-5 h-5" />
-                </div>
-                <h3 className="text-base font-semibold text-white mb-2">{item.title}</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
-              </Card>
+                <Card className="p-5 sm:p-6 rounded-xl bg-slate-900/30 border-white/10 w-full">
+                  <div className="w-10 h-10 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 mb-4">
+                    <AlertCircle className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-base font-semibold text-white mb-2">{item.title}</h3>
+                  <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
+                </Card>
+              </div>
             ))}
           </div>
         </section>

@@ -65,11 +65,12 @@ export function InteractiveSystem() {
           title={t('systemTitle')}
           highlight={t('systemHighlight')}
           subtitle={t('systemSubtitle')}
+          variant="editorial"
         />
       </div>
 
       {/* Continuous Auto-Sliding Layer Selector Marquee (Desktop & Mobile) */}
-      <div className="relative w-full overflow-hidden py-3 sm:py-4 mb-6 sm:mb-10 dc-reveal" data-reveal="fade-scale">
+      <div className="relative w-full overflow-hidden py-3 sm:py-4 mb-6 sm:mb-10 dc-reveal" data-reveal="cascade-row">
         {/* Left & Right Ambient Fade Gradients */}
         <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-28 bg-gradient-to-r from-[#040711] via-[#040711]/80 to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-28 bg-gradient-to-l from-[#040711] via-[#040711]/80 to-transparent z-10 pointer-events-none" />
@@ -115,7 +116,7 @@ export function InteractiveSystem() {
         </div>
 
         {/* Interactive Architecture Console */}
-        <div className="dc-reveal" data-reveal="zoom-in">
+        <div className="dc-reveal" data-reveal="unfold-3d">
           <div key={activeLayer.id} className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch animate-slide-fade">
           {/* Left Details Panel */}
           <div className="lg:col-span-6 rounded-2xl sm:rounded-3xl bg-[#090e1c] border border-white/15 p-4 sm:p-8 flex flex-col justify-between shadow-2xl">

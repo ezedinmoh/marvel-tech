@@ -39,17 +39,21 @@ export function Process() {
           title={t('processTitle')}
           highlight={t('processHighlight')}
           subtitle={t('processSubtitle')}
+          variant="kinetic"
         />
 
-        {/* 6-Stage Timeline Grid — Stagger & Dropdown */}
+        {/* 6-Stage Timeline Grid — Sequential Domino Cadence */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 relative">
           {stages.map((stage, idx) => (
-            <Card
+            <div
               key={stage.step}
-              data-reveal="dropdown"
-              style={{ '--reveal-delay': `${(idx % 3) * 70}ms` } as React.CSSProperties}
-              className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between relative group hover:border-blue-500/30 active:scale-[0.98] transition-all dc-reveal"
+              className="dc-reveal flex"
+              data-reveal="cascade-row"
+              style={{ '--reveal-delay': `${idx * 55}ms` } as React.CSSProperties}
             >
+              <Card
+                className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between w-full relative group hover:border-blue-500/30 active:scale-[0.98]"
+              >
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <div className="p-3 rounded-xl bg-white/[0.04] border border-white/10 group-hover:scale-110 transition-transform">
@@ -81,7 +85,8 @@ export function Process() {
                   </div>
                 ))}
               </div>
-            </Card>
+              </Card>
+            </div>
           ))}
         </div>
       </div>

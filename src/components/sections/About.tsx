@@ -31,6 +31,7 @@ export function About() {
           title={t('aboutTitle')}
           highlight={t('aboutHighlight')}
           subtitle={t('aboutSubtitle')}
+          variant="editorial"
         />
 
         {/* Narrative Grid */}
@@ -55,7 +56,7 @@ export function About() {
             </div>
           </div>
 
-          <div className="lg:col-span-5 dc-reveal" data-reveal="right" style={{ '--reveal-delay': '80ms' } as React.CSSProperties}>
+          <div className="lg:col-span-5 dc-reveal" data-reveal="unfold-3d" style={{ '--reveal-delay': '80ms' } as React.CSSProperties}>
             <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-blue-900/20 via-[#0a0f1d] to-[#040711] border border-blue-500/20 relative overflow-hidden shadow-2xl">
               <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl pointer-events-none" />
               
@@ -81,32 +82,34 @@ export function About() {
           </div>
         </div>
 
-        {/* 4 Pillars Cards — Stagger & Scale */}
+        {/* 4 Pillars Cards — Decoupled Staggered Pop-Spring */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {pillars.map((pillar, idx) => (
-            <Card
+            <div
               key={idx}
-              className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl flex flex-col justify-between dc-reveal"
-              data-reveal="fade-scale"
+              className="dc-reveal flex"
+              data-reveal="pop-spring"
               style={{ '--reveal-delay': `${idx * 65}ms` } as React.CSSProperties}
             >
-              <div>
-                <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/10 w-fit mb-4 sm:mb-5">
-                  {pillar.icon}
+              <Card className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl flex flex-col justify-between w-full">
+                <div>
+                  <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/10 w-fit mb-4 sm:mb-5">
+                    {pillar.icon}
+                  </div>
+                  <h3 className="text-base sm:text-lg font-bold text-white mb-2 tracking-tight">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                    {pillar.description}
+                  </p>
                 </div>
-                <h3 className="text-base sm:text-lg font-bold text-white mb-2 tracking-tight">
-                  {pillar.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-                  {pillar.description}
-                </p>
-              </div>
-            </Card>
+              </Card>
+            </div>
           ))}
         </div>
 
         {/* Link to Dedicated About Us Page */}
-        <div className="mt-8 sm:mt-12 text-center dc-reveal" data-reveal="dropdown">
+        <div className="mt-8 sm:mt-12 text-center dc-reveal" data-reveal="cascade-row">
           <Link
             href="/about"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-500/30 text-xs font-mono text-cyan-300 hover:text-white transition-all shadow-md group"
