@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 import { companyData } from '@/data/company';
@@ -10,22 +10,48 @@ import { ArrowRight, Terminal, Layers, Activity, ShieldCheck, Zap, Server } from
 export function Hero() {
   const [activeTab, setActiveTab] = useState<'architecture' | 'telemetry'>('architecture');
   const { language, t } = useLanguage();
+  const previewRef = useRef<HTMLDivElement>(null);
+
+  // Subtle GPU scroll-linked parallax/scale depth on the Hero terminal card
+  useEffect(() => {
+    const el = previewRef.current;
+    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let rafId: number | null = null;
+    const onScroll = () => {
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        const y = Math.min(Math.max(window.scrollY, 0), 600);
+        const progress = y / 600;
+        const scale = 1 - progress * 0.025;
+        const translateY = progress * -12;
+        el.style.transform = `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(4)})`;
+        rafId = null;
+      });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
+  }, []);
 
   return (
     <section id="hero" className="relative pt-24 pb-12 sm:pt-40 sm:pb-28 lg:pt-48 lg:pb-36 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col items-center text-center">
-          {/* Tagline Badge */}
-          <div className="mb-4 sm:mb-6 dc-reveal" style={{ transitionDelay: '0ms' }}>
+          {/* Tagline Badge — Immediate Page-Load Dropdown */}
+          <div className="mb-4 sm:mb-6 dc-load-dropdown" style={{ animationDelay: '0ms' }}>
             <Badge variant="cyan" dot={true}>
               {t('heroBadge')}
             </Badge>
           </div>
 
-          {/* Main Headline */}
+          {/* Main Headline — Authoritative Page-Load Zoom-Out */}
           <h1
-            className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl leading-[1.12] sm:leading-[1.08] dc-reveal"
-            style={{ transitionDelay: '100ms' }}
+            className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl leading-[1.12] sm:leading-[1.08] dc-load-zoom-out"
+            style={{ animationDelay: '80ms' }}
           >
             {t('heroTitlePrefix')}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400">
@@ -34,18 +60,18 @@ export function Hero() {
             {t('heroTitleSuffix')}
           </h1>
 
-          {/* Supporting Narrative */}
+          {/* Supporting Narrative — Page-Load Fade & Scale */}
           <p
-            className="mt-3.5 sm:mt-6 text-sm sm:text-lg text-slate-300 max-w-2xl leading-relaxed font-normal dc-reveal"
-            style={{ transitionDelay: '180ms' }}
+            className="mt-3.5 sm:mt-6 text-sm sm:text-lg text-slate-300 max-w-2xl leading-relaxed font-normal dc-load-fade-scale"
+            style={{ animationDelay: '160ms' }}
           >
             {t('heroSubtitle')}
           </p>
 
-          {/* Action CTAs */}
+          {/* Action CTAs — Staggered Fade & Scale */}
           <div
-            className="mt-6 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto dc-reveal"
-            style={{ transitionDelay: '260ms' }}
+            className="mt-6 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto dc-load-fade-scale"
+            style={{ animationDelay: '240ms' }}
           >
             <Button
               href="#contact"
@@ -66,10 +92,10 @@ export function Hero() {
             </Button>
           </div>
 
-          {/* Tech Trust Metrics */}
+          {/* Tech Trust Metrics — Staggered Fade & Scale */}
           <div
-            className="mt-6 sm:mt-12 flex flex-wrap items-center justify-center gap-2 sm:gap-10 text-[11px] sm:text-xs font-mono text-slate-400 dc-reveal"
-            style={{ transitionDelay: '340ms' }}
+            className="mt-6 sm:mt-12 flex flex-wrap items-center justify-center gap-2 sm:gap-10 text-[11px] sm:text-xs font-mono text-slate-400 dc-load-fade-scale"
+            style={{ animationDelay: '310ms' }}
           >
             <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/5 sm:border-transparent sm:bg-transparent">
               <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400" />
@@ -85,12 +111,15 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Interactive Technology Preview Terminal Widget */}
+          {/* Interactive Technology Preview Terminal Widget — Zoom-In + Scroll Depth */}
           <div
-            className="mt-8 sm:mt-16 w-full max-w-4xl mx-auto rounded-2xl sm:rounded-3xl bg-[#090e1c]/90 border border-white/15 p-3.5 sm:p-6 shadow-[0_20px_60px_-15px_rgba(0,102,255,0.3)] backdrop-blur-2xl text-left dc-reveal"
-            data-reveal="scale"
-            style={{ transitionDelay: '420ms' }}
+            ref={previewRef}
+            className="mt-8 sm:mt-16 w-full max-w-4xl mx-auto will-change-transform"
           >
+            <div
+              className="w-full rounded-2xl sm:rounded-3xl bg-[#090e1c]/90 border border-white/15 p-3.5 sm:p-6 shadow-[0_20px_60px_-15px_rgba(0,102,255,0.3)] backdrop-blur-2xl text-left dc-load-zoom-in"
+              style={{ animationDelay: '360ms' }}
+            >
             {/* Terminal Window Header */}
             <div className="flex items-center justify-between pb-4 border-b border-white/10 text-xs font-mono">
               <div className="flex items-center gap-2">
@@ -185,6 +214,7 @@ export function Hero() {
                   <div className="text-slate-400">[2026-11-24T12:00:04Z] {t('heroLog4')}</div>
                 </div>
               )}
+              </div>
             </div>
           </div>
         </div>

@@ -42,7 +42,8 @@ export function Team() {
             return (
               <Card
                 key={member.id}
-                style={{ transitionDelay: `${index * 60}ms` }}
+                data-reveal="zoom-in"
+                style={{ '--reveal-delay': `${index * 80}ms` } as React.CSSProperties}
                 className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl flex flex-col justify-between group relative overflow-hidden transition-all duration-300 dc-reveal ${
                   isBusinessLead
                     ? 'border-cyan-500/40 shadow-[0_0_35px_rgba(0,166,255,0.15)] bg-gradient-to-b from-cyan-950/25 via-slate-900/90 to-[#040711] ring-1 ring-cyan-500/20'

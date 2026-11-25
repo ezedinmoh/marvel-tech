@@ -98,20 +98,29 @@ export default async function ServiceDetailPage({ params }: Props) {
 
         {/* Hero Header */}
         <header className="mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-400 mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-400 mb-4 dc-load-dropdown">
             <Sparkles className="w-3.5 h-3.5" />
             <span>{service.category}</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-6">
+          <h1
+            className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-6 dc-load-zoom-out"
+            style={{ animationDelay: '80ms' }}
+          >
             {service.heroHeadline}
           </h1>
 
-          <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-3xl mb-8">
+          <p
+            className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-3xl mb-8 dc-load-fade-scale"
+            style={{ animationDelay: '160ms' }}
+          >
             {service.heroSubtitle}
           </p>
 
-          <div className="flex flex-wrap gap-2 pt-2">
+          <div
+            className="flex flex-wrap gap-2 pt-2 dc-load-fade-scale"
+            style={{ animationDelay: '230ms' }}
+          >
             {service.techStack.map((tech) => (
               <span
                 key={tech}
@@ -144,7 +153,12 @@ export default async function ServiceDetailPage({ params }: Props) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {service.problemsSolved.map((item, i) => (
-              <Card key={i} className="p-5 sm:p-6 rounded-xl bg-slate-900/30 border-white/10">
+              <Card
+                key={i}
+                data-reveal="dropdown"
+                style={{ '--reveal-delay': `${i * 70}ms` } as React.CSSProperties}
+                className="p-5 sm:p-6 rounded-xl bg-slate-900/30 border-white/10 dc-reveal"
+              >
                 <div className="w-10 h-10 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 mb-4">
                   <AlertCircle className="w-5 h-5" />
                 </div>

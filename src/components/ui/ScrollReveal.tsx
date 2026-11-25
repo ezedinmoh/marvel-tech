@@ -3,9 +3,21 @@
 import React, { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 
+export type RevealDirection =
+  | 'up'
+  | 'down'
+  | 'left'
+  | 'right'
+  | 'scale'
+  | 'fade-scale'
+  | 'zoom-in'
+  | 'zoom-out'
+  | 'dropdown'
+  | 'fade';
+
 interface ScrollRevealProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  direction?: 'up' | 'down' | 'left' | 'right' | 'scale' | 'fade';
+  direction?: RevealDirection;
   delay?: number; // milliseconds
   duration?: number; // milliseconds
   threshold?: number;
@@ -32,28 +44,34 @@ export function ScrollReveal({
 
     if (
       typeof window === 'undefined' ||
-      window.innerWidth < 769 ||
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
     ) {
-      el.classList.remove('dc-reveal-pending');
+      el.classList.remove('dc-will-animate');
       el.classList.add('is-revealed');
       return;
     }
 
+    if (delay > 0) {
+      el.style.setProperty('--reveal-delay', `${Math.min(delay, 220)}ms`);
+    }
+
+    const vh = window.innerHeight || document.documentElement.clientHeight;
     const rect = el.getBoundingClientRect();
-    if (rect.top <= window.innerHeight + 180) {
-      el.classList.remove('dc-reveal-pending');
-      el.classList.add('is-revealed');
+
+    if (rect.top <= vh + 10) {
+      el.classList.remove('dc-will-animate');
+      el.classList.add('dc-animating', 'is-revealed');
       return;
     }
 
-    el.classList.add('dc-reveal-pending');
+    el.classList.add('dc-will-animate');
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting || entry.boundingClientRect.top <= window.innerHeight + 200) {
-          el.classList.remove('dc-reveal-pending');
-          el.classList.add('is-revealed');
+        const currentVh = window.innerHeight || document.documentElement.clientHeight;
+        if (entry.isIntersecting || entry.boundingClientRect.top <= currentVh + 25) {
+          el.classList.remove('dc-will-animate');
+          el.classList.add('dc-animating', 'is-revealed');
           if (once) {
             observer.unobserve(el);
           }
@@ -61,7 +79,7 @@ export function ScrollReveal({
       },
       {
         threshold,
-        rootMargin: '250px 0px 250px 0px',
+        rootMargin: '0px 0px 25px 0px',
       }
     );
 
@@ -70,12 +88,11 @@ export function ScrollReveal({
     return () => {
       observer.disconnect();
     };
-  }, [threshold, once]);
+  }, [delay, threshold, once]);
 
   const customStyle: React.CSSProperties = {
     ...style,
-    ...(delay > 0 ? { transitionDelay: `${Math.min(delay, 160)}ms` } : {}),
-    ...(duration ? { transitionDuration: `${duration}ms` } : {}),
+    ...(duration ? { animationDuration: `${duration}ms` } : {}),
   };
 
   return (
@@ -93,10 +110,13 @@ export function ScrollReveal({
 
 /**
  * Global Scroll Reveal Initializer
- * Bulletproof reveal coordinator:
- * - Elements default to visible (`opacity: 1`) so content NEVER appears blank/empty.
- * - Only genuinely below-the-fold desktop elements are armed with `.dc-reveal-pending`.
- * - Triggered eagerly by IntersectionObserver (250px margin) + rAF scroll/resize failsafe.
+ * Coordinates scroll-triggered keyframe choreography across all `.dc-reveal` elements:
+ * - `.dc-reveal` base CSS is ALWAYS `opacity: 1` (zero blank/empty screen risk).
+ * - Only genuinely offscreen elements below `window.innerHeight + 10` get `.dc-will-animate`.
+ * - Fires right as elements enter the bottom of the screen so zoom-in, zoom-out,
+ *   fade-scale, dropdown, and stagger effects are visibly experienced while scrolling.
+ * - Includes rAF scroll/resize sweepers + post-scroll failsafe so skipped or
+ *   anchor-jumped elements never stay invisible.
  */
 export function GlobalScrollReveal() {
   const pathname = usePathname();
@@ -106,33 +126,51 @@ export function GlobalScrollReveal() {
 
     const revealAllImmediately = () => {
       document.querySelectorAll('.dc-reveal').forEach((el) => {
-        el.classList.remove('dc-reveal-pending');
+        el.classList.remove('dc-will-animate');
         el.classList.add('is-revealed');
       });
     };
 
-    const isMobileOrReduced =
-      window.innerWidth < 769 ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (isMobileOrReduced) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       revealAllImmediately();
       return;
     }
 
-    const revealElement = (el: Element) => {
-      el.classList.remove('dc-reveal-pending');
-      el.classList.add('is-revealed');
+    const syncDelayVar = (el: Element) => {
+      const htmlEl = el as HTMLElement;
+      // Preserve explicit CSS var if set, otherwise convert inline transitionDelay cleanly
+      if (!htmlEl.style.getPropertyValue('--reveal-delay')) {
+        const inlineDelay = htmlEl.style.transitionDelay;
+        if (inlineDelay) {
+          const parsed = parseFloat(inlineDelay);
+          const ms = inlineDelay.endsWith('ms') ? parsed : parsed * 1000;
+          if (!Number.isNaN(ms) && ms > 0) {
+            htmlEl.style.setProperty('--reveal-delay', `${Math.min(ms, 220)}ms`);
+          }
+          // Clear inline transitionDelay so Card hover states remain instantaneous
+          htmlEl.style.transitionDelay = '';
+        }
+      }
     };
 
-    const checkVisibleElements = () => {
+    const triggerReveal = (el: Element, rect?: DOMRect) => {
+      syncDelayVar(el);
+      const r = rect || el.getBoundingClientRect();
+      el.classList.remove('dc-will-animate');
+      if (r.bottom < -40) {
+        // Already scrolled completely past (e.g., anchor jump) — skip animation, keep visible
+        el.classList.add('is-revealed');
+      } else {
+        el.classList.add('dc-animating', 'is-revealed');
+      }
+    };
+
+    const checkPendingElements = () => {
       const vh = window.innerHeight || document.documentElement.clientHeight;
-      const pending = document.querySelectorAll('.dc-reveal:not(.is-revealed)');
-      pending.forEach((el) => {
+      document.querySelectorAll('.dc-reveal.dc-will-animate').forEach((el) => {
         const rect = el.getBoundingClientRect();
-        // Reveal if inside viewport, within 220px below fold, or already scrolled past above
-        if (rect.top <= vh + 220) {
-          revealElement(el);
+        if (rect.top <= vh + 25) {
+          triggerReveal(el, rect);
         }
       });
     };
@@ -141,74 +179,73 @@ export function GlobalScrollReveal() {
       (entries) => {
         const vh = window.innerHeight || document.documentElement.clientHeight;
         entries.forEach((entry) => {
-          if (entry.isIntersecting || entry.boundingClientRect.top <= vh + 240) {
-            revealElement(entry.target);
+          if (entry.isIntersecting || entry.boundingClientRect.top <= vh + 25) {
+            triggerReveal(entry.target, entry.boundingClientRect);
             observer.unobserve(entry.target);
           }
         });
       },
       {
         threshold: 0,
-        rootMargin: '250px 0px 250px 0px',
+        rootMargin: '0px 0px 25px 0px',
       }
     );
 
-    const scanAndArmElements = () => {
-      if (window.innerWidth < 769) {
-        revealAllImmediately();
-        return;
-      }
-
+    const armOffscreenElements = () => {
       const vh = window.innerHeight || document.documentElement.clientHeight;
       const elements = document.querySelectorAll('.dc-reveal:not(.is-revealed)');
 
       elements.forEach((el) => {
+        syncDelayVar(el);
         const rect = el.getBoundingClientRect();
-        if (rect.top <= vh + 200) {
-          revealElement(el);
+        if (rect.top <= vh + 10) {
+          // Visible or above fold right now: never hide it!
+          el.classList.remove('dc-will-animate');
+          el.classList.add('is-revealed');
         } else {
-          el.classList.add('dc-reveal-pending');
+          el.classList.add('dc-will-animate');
           observer.observe(el);
         }
       });
     };
 
-    // Initial scan
-    scanAndArmElements();
+    armOffscreenElements();
 
-    // rAF-throttled scroll & resize handler to catch fast scrolls, Lenis jumps, or scrollbar drags
     let rafPending = false;
-    const handleScrollOrResize = () => {
-      if (window.innerWidth < 769) {
-        revealAllImmediately();
-        return;
-      }
+    let settleTimer: ReturnType<typeof setTimeout> | null = null;
+
+    const handleViewportChange = () => {
       if (!rafPending) {
         rafPending = true;
         requestAnimationFrame(() => {
-          checkVisibleElements();
+          checkPendingElements();
           rafPending = false;
         });
       }
+      if (settleTimer) clearTimeout(settleTimer);
+      settleTimer = setTimeout(() => {
+        checkPendingElements();
+      }, 220);
     };
 
-    window.addEventListener('scroll', handleScrollOrResize, { passive: true });
-    window.addEventListener('resize', handleScrollOrResize, { passive: true });
-    window.addEventListener('hashchange', handleScrollOrResize, { passive: true });
+    window.addEventListener('scroll', handleViewportChange, { passive: true });
+    window.addEventListener('resize', handleViewportChange, { passive: true });
+    window.addEventListener('hashchange', handleViewportChange, { passive: true });
 
-    // Re-scan when DOM changes dynamically (language switch, project filters, tabs)
+    // Re-scan cleanly if React dynamically mounts new cards (e.g., project filters / language switch)
     const mutationObserver = new MutationObserver(() => {
-      checkVisibleElements();
-      // Only observe newly mounted below-fold nodes without hiding anything already visible
+      checkPendingElements();
       const vh = window.innerHeight || document.documentElement.clientHeight;
       document
-        .querySelectorAll('.dc-reveal:not(.is-revealed):not(.dc-reveal-pending)')
+        .querySelectorAll('.dc-reveal:not(.is-revealed):not(.dc-will-animate)')
         .forEach((el) => {
+          syncDelayVar(el);
           const rect = el.getBoundingClientRect();
-          if (rect.top <= vh + 220) {
-            revealElement(el);
+          if (rect.top <= vh + 25) {
+            el.classList.remove('dc-will-animate');
+            el.classList.add('is-revealed');
           } else {
-            el.classList.add('dc-reveal-pending');
+            el.classList.add('dc-will-animate');
             observer.observe(el);
           }
         });
@@ -220,11 +257,12 @@ export function GlobalScrollReveal() {
     });
 
     return () => {
+      if (settleTimer) clearTimeout(settleTimer);
       observer.disconnect();
       mutationObserver.disconnect();
-      window.removeEventListener('scroll', handleScrollOrResize);
-      window.removeEventListener('resize', handleScrollOrResize);
-      window.removeEventListener('hashchange', handleScrollOrResize);
+      window.removeEventListener('scroll', handleViewportChange);
+      window.removeEventListener('resize', handleViewportChange);
+      window.removeEventListener('hashchange', handleViewportChange);
     };
   }, [pathname]);
 

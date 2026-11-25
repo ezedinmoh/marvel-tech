@@ -64,32 +64,40 @@ export default function TeamDirectoryPage() {
 
         {/* Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-400 mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-400 mb-4 dc-load-dropdown">
             <Users className="w-3.5 h-3.5" />
             <span>Founders & Core Leadership</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-6">
+          <h1
+            className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-6 dc-load-zoom-out"
+            style={{ animationDelay: '80ms' }}
+          >
             The Team Driving{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400">
               Marvel Technologies
             </span>
           </h1>
 
-          <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
+          <p
+            className="text-base sm:text-lg text-slate-300 leading-relaxed dc-load-fade-scale"
+            style={{ animationDelay: '160ms' }}
+          >
             Founded by software engineers and business strategists in <strong>Kombolcha, Ethiopia</strong>, Marvel Technologies unites software architecture, operations rigor, and commercial strategy to engineer world-class digital platforms.
           </p>
         </div>
 
         {/* Team Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-16">
-          {members.map((member) => {
+          {members.map((member, idx) => {
             const isBusinessLead = member.slug === 'mohammed-imam';
 
             return (
               <Card
                 key={member.slug}
-                className={`p-5 sm:p-6 rounded-2xl bg-slate-900/40 border transition-all flex flex-col justify-between group ${
+                data-reveal="zoom-in"
+                style={{ '--reveal-delay': `${idx * 80}ms` } as React.CSSProperties}
+                className={`p-5 sm:p-6 rounded-2xl bg-slate-900/40 border transition-all flex flex-col justify-between group dc-reveal ${
                   isBusinessLead
                     ? 'border-cyan-500/40 shadow-[0_0_30px_rgba(0,166,255,0.15)] bg-gradient-to-b from-cyan-950/20 via-slate-900/90 to-[#040711]'
                     : 'border-white/10 hover:border-cyan-500/30'

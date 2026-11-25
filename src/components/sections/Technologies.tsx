@@ -71,13 +71,14 @@ export function Technologies() {
           subtitle={t('techSubtitle')}
         />
 
-        {/* 4 Categories */}
+        {/* 4 Categories — Stagger & Scale */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
           {techCategories.map((category, index) => (
             <Card
               key={index}
               className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl dc-reveal"
-              style={{ transitionDelay: `${Math.min(index * 60, 120)}ms` }}
+              data-reveal="fade-scale"
+              style={{ '--reveal-delay': `${(index % 2) * 75}ms` } as React.CSSProperties}
             >
               <div className="mb-6">
                 <h3 className="text-xl font-bold text-white mb-1 tracking-tight">

@@ -33,7 +33,8 @@ export function Faq() {
               <div
                 key={idx}
                 className="rounded-2xl bg-[#090e1c] border border-white/10 overflow-hidden transition-colors hover:border-white/20 dc-reveal"
-                style={{ transitionDelay: `${Math.min(idx * 45, 140)}ms` }}
+                data-reveal="dropdown"
+                style={{ '--reveal-delay': `${idx * 60}ms` } as React.CSSProperties}
               >
                 <button
                   onClick={() => toggle(idx)}

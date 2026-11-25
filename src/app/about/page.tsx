@@ -55,19 +55,25 @@ export default function AboutPage() {
 
         {/* Hero Section */}
         <div className="mb-14 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-400 mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-400 mb-4 dc-load-dropdown">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Company Identity & Roots</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-6">
+          <h1
+            className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-6 dc-load-zoom-out"
+            style={{ animationDelay: '80ms' }}
+          >
             Engineered by Technologists,{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400">
               Built for the Future.
             </span>
           </h1>
 
-          <p className="text-base sm:text-xl text-slate-300 leading-relaxed max-w-3xl">
+          <p
+            className="text-base sm:text-xl text-slate-300 leading-relaxed max-w-3xl dc-load-fade-scale"
+            style={{ animationDelay: '160ms' }}
+          >
             <strong className="text-white">Marvel Technologies</strong> is a modern software engineering company based in{' '}
             <strong className="text-cyan-300">Kombolcha, Ethiopia</strong>, driven by a conviction that rigorous, thoughtful engineering can solve real-world operational challenges for organizations locally and across the globe.
           </p>
@@ -75,7 +81,7 @@ export default function AboutPage() {
 
         {/* Strategic Positioning: Local Roots & International Ambition */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-16">
-          <Card className="p-6 sm:p-8 rounded-2xl bg-slate-900/40 border-white/10 relative overflow-hidden">
+          <Card className="p-6 sm:p-8 rounded-2xl bg-slate-900/40 border-white/10 relative overflow-hidden dc-reveal" data-reveal="left">
             <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-6">
               <MapPin className="w-6 h-6" />
             </div>
@@ -88,7 +94,11 @@ export default function AboutPage() {
             </p>
           </Card>
 
-          <Card className="p-6 sm:p-8 rounded-2xl bg-slate-900/40 border-white/10 relative overflow-hidden">
+          <Card
+            className="p-6 sm:p-8 rounded-2xl bg-slate-900/40 border-white/10 relative overflow-hidden dc-reveal"
+            data-reveal="right"
+            style={{ '--reveal-delay': '80ms' } as React.CSSProperties}
+          >
             <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-6">
               <Globe2 className="w-6 h-6" />
             </div>
@@ -136,7 +146,7 @@ export default function AboutPage() {
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <div className="p-5 rounded-xl bg-slate-900/30 border border-white/10">
+            <div className="p-5 rounded-xl bg-slate-900/30 border border-white/10 dc-reveal" data-reveal="fade-scale" style={{ '--reveal-delay': '0ms' } as React.CSSProperties}>
               <Code2 className="w-6 h-6 text-cyan-400 mb-3" />
               <h3 className="text-base font-semibold text-white mb-2">Purity & Maintainability</h3>
               <p className="text-xs text-slate-400 leading-relaxed">
@@ -144,7 +154,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="p-5 rounded-xl bg-slate-900/30 border border-white/10">
+            <div className="p-5 rounded-xl bg-slate-900/30 border border-white/10 dc-reveal" data-reveal="fade-scale" style={{ '--reveal-delay': '75ms' } as React.CSSProperties}>
               <Cpu className="w-6 h-6 text-blue-400 mb-3" />
               <h3 className="text-base font-semibold text-white mb-2">Performance by Default</h3>
               <p className="text-xs text-slate-400 leading-relaxed">
@@ -152,7 +162,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="p-5 rounded-xl bg-slate-900/30 border border-white/10">
+            <div className="p-5 rounded-xl bg-slate-900/30 border border-white/10 dc-reveal" data-reveal="fade-scale" style={{ '--reveal-delay': '150ms' } as React.CSSProperties}>
               <Users className="w-6 h-6 text-emerald-400 mb-3" />
               <h3 className="text-base font-semibold text-white mb-2">Tangible Business ROI</h3>
               <p className="text-xs text-slate-400 leading-relaxed">

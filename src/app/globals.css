@@ -175,53 +175,183 @@ html.lenis, html.lenis body {
   animation: dc-slide-fade 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Modern Clean Scroll Reveal Architecture (Zero Blur, Zero Empty Content Guarantee) */
+/* ============================================================================
+   MODERN GPU-ONLY PAGE LOAD & SCROLL REVEAL ARCHITECTURE
+   - Zero blur filters (prevents mobile bitmap rasterization artifacts)
+   - Base `.dc-reveal` is ALWAYS visible (`opacity: 1`) so content never goes empty
+   - Offscreen elements get `.dc-will-animate` and animate in smoothly via GPU keyframes
+   ============================================================================ */
+
+@keyframes dc-kf-fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes dc-kf-zoom-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes dc-kf-zoom-out {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -10px, 0) scale(1.06);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes dc-kf-fade-scale {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes dc-kf-dropdown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -20px, 0) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes dc-kf-slide-left {
+  from {
+    opacity: 0;
+    transform: translate3d(-26px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes dc-kf-slide-right {
+  from {
+    opacity: 0;
+    transform: translate3d(26px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes dc-kf-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Immediate Page-Load Cascade Animations (Pure CSS, Zero JS Dependency) */
+.dc-load-dropdown {
+  animation: dc-kf-dropdown 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.dc-load-zoom-out {
+  animation: dc-kf-zoom-out 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.dc-load-zoom-in {
+  animation: dc-kf-zoom-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.dc-load-fade-scale {
+  animation: dc-kf-fade-scale 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Scroll Reveal Base: Always visible by default so sections can NEVER stay blank */
 .dc-reveal {
   opacity: 1;
   transform: none;
   filter: none !important;
 }
 
-@media (min-width: 769px) {
-  .dc-reveal {
-    transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
-  }
+/* Only offscreen elements armed by ScrollReveal start hidden while waiting below fold */
+.dc-reveal.dc-will-animate {
+  opacity: 0;
+  will-change: opacity, transform;
+}
 
-  /* Only elements explicitly marked offscreen-pending by JS start invisible */
-  .dc-reveal.dc-reveal-pending:not(.is-revealed) {
-    opacity: 0;
-    transform: translateY(16px);
-  }
+/* Active Scroll Entrance Keyframe Choreography */
+.dc-reveal.dc-animating {
+  animation: dc-kf-fade-up 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
 
-  .dc-reveal.dc-reveal-pending:not(.is-revealed)[data-reveal="left"] {
-    transform: translateX(-18px);
-  }
+.dc-reveal.dc-animating[data-reveal="zoom-in"] {
+  animation-name: dc-kf-zoom-in;
+  animation-duration: 0.62s;
+}
 
-  .dc-reveal.dc-reveal-pending:not(.is-revealed)[data-reveal="right"] {
-    transform: translateX(18px);
-  }
+.dc-reveal.dc-animating[data-reveal="zoom-out"] {
+  animation-name: dc-kf-zoom-out;
+  animation-duration: 0.64s;
+}
 
-  .dc-reveal.dc-reveal-pending:not(.is-revealed)[data-reveal="scale"] {
-    transform: translateY(14px) scale(0.97);
-  }
+.dc-reveal.dc-animating[data-reveal="scale"],
+.dc-reveal.dc-animating[data-reveal="fade-scale"] {
+  animation-name: dc-kf-fade-scale;
+  animation-duration: 0.58s;
+}
 
-  .dc-reveal.dc-reveal-pending:not(.is-revealed)[data-reveal="fade"] {
-    transform: translateY(0);
-  }
+.dc-reveal.dc-animating[data-reveal="dropdown"] {
+  animation-name: dc-kf-dropdown;
+  animation-duration: 0.52s;
+}
 
-  .dc-reveal.is-revealed {
-    opacity: 1;
-    transform: translateY(0) translateX(0) scale(1);
-  }
+.dc-reveal.dc-animating[data-reveal="left"] {
+  animation-name: dc-kf-slide-left;
+  animation-duration: 0.6s;
+}
+
+.dc-reveal.dc-animating[data-reveal="right"] {
+  animation-name: dc-kf-slide-right;
+  animation-duration: 0.6s;
+}
+
+.dc-reveal.dc-animating[data-reveal="fade"] {
+  animation-name: dc-kf-fade;
+  animation-duration: 0.5s;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .dc-reveal {
+  .dc-reveal,
+  .dc-reveal.dc-will-animate,
+  .dc-reveal.dc-animating,
+  .dc-load-dropdown,
+  .dc-load-zoom-out,
+  .dc-load-zoom-in,
+  .dc-load-fade-scale {
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;
+    animation: none !important;
     transition: none !important;
   }
 }
@@ -246,16 +376,14 @@ html.lenis, html.lenis body {
     -webkit-overflow-scrolling: touch;
   }
 
-  /* On mobile: all elements are 100% sharp, readable, and non-blurred with zero pop-in delay */
-  .dc-reveal,
-  .dc-reveal[data-reveal="left"],
-  .dc-reveal[data-reveal="right"],
-  .dc-reveal[data-reveal="scale"],
-  .dc-reveal[data-reveal="fade"] {
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
-    transition: none !important;
+  /* On mobile: fast, crisp 60fps GPU vertical/scale motion (zero horizontal jitter, zero blur) */
+  .dc-reveal.dc-animating {
+    animation-duration: 0.46s;
+  }
+
+  .dc-reveal.dc-animating[data-reveal="left"],
+  .dc-reveal.dc-animating[data-reveal="right"] {
+    animation-name: dc-kf-fade-scale;
   }
 }
 

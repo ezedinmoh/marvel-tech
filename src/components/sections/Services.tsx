@@ -59,13 +59,14 @@ export function Services() {
           subtitle={t('servicesSubtitle')}
         />
 
-        {/* Services Cards Grid */}
+        {/* Services Cards Grid — Stagger & Scale */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
           {servicesList.map((service, index) => (
             <Card
               key={service.id}
               className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between group cursor-pointer border-white/[0.08] hover:border-blue-500/30 active:scale-[0.98] transition-all duration-200 dc-reveal"
-              style={{ transitionDelay: `${(index % 3) * 50}ms` }}
+              data-reveal="fade-scale"
+              style={{ '--reveal-delay': `${(index % 3) * 65}ms` } as React.CSSProperties}
               onClick={() => setSelectedService(service)}
             >
               <div>
@@ -110,7 +111,7 @@ export function Services() {
         </div>
 
         {/* Link to Dedicated Services Directory */}
-        <div className="mt-8 text-center">
+        <div className="mt-8 text-center dc-reveal" data-reveal="dropdown">
           <Link
             href="/services"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-500/30 text-xs font-mono text-cyan-300 hover:text-white transition-all shadow-md group"

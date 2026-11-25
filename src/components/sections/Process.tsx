@@ -41,12 +41,13 @@ export function Process() {
           subtitle={t('processSubtitle')}
         />
 
-        {/* 6-Stage Timeline Grid */}
+        {/* 6-Stage Timeline Grid — Stagger & Dropdown */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 relative">
           {stages.map((stage, idx) => (
             <Card
               key={stage.step}
-              style={{ transitionDelay: `${(idx % 3) * 50}ms` }}
+              data-reveal="dropdown"
+              style={{ '--reveal-delay': `${(idx % 3) * 70}ms` } as React.CSSProperties}
               className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between relative group hover:border-blue-500/30 active:scale-[0.98] transition-all dc-reveal"
             >
               <div>

@@ -102,7 +102,7 @@ export function CompaniesMarquee() {
   const marqueeItems = [...trustedCompanies, ...trustedCompanies];
 
   return (
-    <div className="w-full pt-8 sm:pt-16 pb-4 sm:pb-8 border-t border-white/5 relative">
+    <div className="w-full pt-8 sm:pt-16 pb-4 sm:pb-8 border-t border-white/5 relative dc-reveal" data-reveal="fade-scale">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4 sm:mb-6 text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-[11px] font-mono uppercase tracking-[0.22em] text-slate-400 mb-2">
           <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />

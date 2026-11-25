@@ -119,11 +119,11 @@ export default async function TeamMemberProfilePage({ params }: Props) {
         />
 
         {/* Profile Card Header */}
-        <div className="p-6 sm:p-10 rounded-3xl bg-slate-900/40 border border-white/10 mb-12">
+        <div className="p-6 sm:p-10 rounded-3xl bg-slate-900/40 border border-white/10 mb-12 dc-load-fade-scale">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
             {/* Avatar Column */}
             <div className="md:col-span-5 flex justify-center">
-              <div className="relative w-full max-w-[280px] sm:max-w-[320px] aspect-[4/5] rounded-2xl overflow-hidden bg-slate-950 border border-cyan-500/30 shadow-[0_0_35px_rgba(0,166,255,0.15)]">
+              <div className="relative w-full max-w-[280px] sm:max-w-[320px] aspect-[4/5] rounded-2xl overflow-hidden bg-slate-950 border border-cyan-500/30 shadow-[0_0_35px_rgba(0,166,255,0.15)] dc-load-zoom-in">
                 {member.slug === 'mohammed-imam' ? (
                   <Image
                     src={member.avatar || '/team/mohammed-imam.jpg'}

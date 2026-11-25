@@ -271,7 +271,11 @@ export function Contact() {
           </div>
 
           {/* Right Column: Contact Form */}
-          <div className="lg:col-span-7 dc-reveal" data-reveal="right" style={{ transitionDelay: '100ms' }}>
+          <div
+            className="lg:col-span-7 dc-reveal"
+            data-reveal="zoom-in"
+            style={{ '--reveal-delay': '80ms' } as React.CSSProperties}
+          >
             <Card className="p-5 sm:p-10 rounded-2xl sm:rounded-3xl border-white/15">
               <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                 {/* Name */}

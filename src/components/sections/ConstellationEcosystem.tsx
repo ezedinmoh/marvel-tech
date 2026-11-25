@@ -799,7 +799,10 @@ export function ConstellationEcosystem() {
         </div>
 
         {/* Constellation Container: 10 Orbiting Satellites + Central Dashboard */}
-        <div className="relative w-full max-w-6xl mx-auto min-h-0 md:min-h-[760px] lg:min-h-[840px] flex items-center justify-center pt-2 md:pt-8 pb-4 md:pb-12">
+        <div
+          className="relative w-full max-w-6xl mx-auto min-h-0 md:min-h-[760px] lg:min-h-[840px] flex items-center justify-center pt-2 md:pt-8 pb-4 md:pb-12 dc-reveal"
+          data-reveal="zoom-in"
+        >
           {/* SVG Curved Flowing Connector Lines */}
           <svg
             className="absolute inset-0 hidden md:block size-full pointer-events-none z-0"

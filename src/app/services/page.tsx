@@ -139,32 +139,40 @@ export default function ServicesDirectoryPage() {
 
         {/* Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-mono text-cyan-400 mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-mono text-cyan-400 mb-4 dc-load-dropdown">
             <Layers className="w-3.5 h-3.5" />
             <span>Full-Stack Engineering Spectrum</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-6">
+          <h1
+            className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-6 dc-load-zoom-out"
+            style={{ animationDelay: '80ms' }}
+          >
             Software Development &{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400">
               Digital Solutions
             </span>
           </h1>
 
-          <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
+          <p
+            className="text-base sm:text-lg text-slate-300 leading-relaxed dc-load-fade-scale"
+            style={{ animationDelay: '160ms' }}
+          >
             At <strong>Marvel Technologies</strong>, we architect resilient digital platforms, custom software, ERP platforms, and automation systems tailored for high-growth businesses in Ethiopia and worldwide.
           </p>
         </div>
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-16">
-          {serviceList.map((service) => {
+          {serviceList.map((service, idx) => {
             const Icon = service.icon;
 
             return (
               <Card
                 key={service.slug}
-                className="p-6 sm:p-8 rounded-2xl bg-slate-900/40 border-white/10 hover:border-cyan-500/30 transition-all flex flex-col justify-between group"
+                data-reveal="fade-scale"
+                style={{ '--reveal-delay': `${(idx % 2) * 75}ms` } as React.CSSProperties}
+                className="p-6 sm:p-8 rounded-2xl bg-slate-900/40 border-white/10 hover:border-cyan-500/30 transition-all flex flex-col justify-between group dc-reveal"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">

@@ -42,7 +42,10 @@ export function Projects() {
         />
 
         {/* Android Segmented Category Chips Carousel */}
-        <div className="flex overflow-x-auto no-scrollbar gap-2 mb-6 sm:mb-14 py-1 px-1 -mx-4 sm:mx-0 px-4 sm:px-0 snap-x scroll-smooth justify-start sm:justify-center">
+        <div
+          className="flex overflow-x-auto no-scrollbar gap-2 mb-6 sm:mb-14 py-1 px-1 -mx-4 sm:mx-0 px-4 sm:px-0 snap-x scroll-smooth justify-start sm:justify-center dc-reveal"
+          data-reveal="dropdown"
+        >
           {categories.map((cat) => (
             <button
               key={cat.key}
@@ -58,13 +61,14 @@ export function Projects() {
           ))}
         </div>
 
-        {/* Project Cards Grid */}
+        {/* Project Cards Grid — Stagger & Zoom-In */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
           {filteredProjects.map((project, index) => (
             <Card
               key={project.id}
               className="rounded-2xl sm:rounded-3xl flex flex-col justify-between group border-white/10 hover:border-blue-500/35 overflow-hidden active:scale-[0.99] transition-all dc-reveal"
-              style={{ transitionDelay: `${(index % 2) * 50}ms` }}
+              data-reveal="zoom-in"
+              style={{ '--reveal-delay': `${(index % 2) * 70}ms` } as React.CSSProperties}
             >
               <div>
                 {/* Project Screenshot Container */}
